@@ -1,0 +1,141 @@
+Supreme_Court
+    <- concept_law;
+    => nrel_main_idtf:
+        [Верховный Суд] (*<- lang_ru;;*);
+        [Supreme Court] (*<- lang_en;;*);
+    => rrel_judge:
+        Alexey_Bondar;
+        Petrov_Petr;
+    => nrel_located_in:
+        Belarus;
+    => nrel_case:
+        concept_criminal_case;
+        concept_civil_case;
+    => nrel_year:
+        concept_1997;;
+
+Minsk_Regional_Court
+    <- concept_law;
+    => nrel_main_idtf:
+        [Минский областной суд] (*<- lang_ru;;*);
+        [Minsk Regional Court] (*<- lang_en;;*);
+    => rrel_judge:
+        Sidorov_Sergey;
+    => nrel_located_in:
+        Minsk;
+    => nrel_case:
+        concept_administrative_case;
+        concept_family_case;
+    => nrel_year:
+        concept_2005;;
+
+Grodno_City_Court
+    <- concept_law;
+    => nrel_main_idtf:
+        [Гродненский городской суд] (*<- lang_ru;;*);
+        [Grodno City Court] (*<- lang_en;;*);
+    => rrel_judge:
+        Smirnova_Anna;
+    => nrel_located_in:
+        Grodno;
+    => nrel_case:
+        concept_economic_case;
+        concept_civil_case;
+    => nrel_year:
+        concept_2010;;
+
+
+Alexey_Bondar
+    <- concept_judge;
+    => nrel_main_idtf:
+        [Алексей Бондарь] (*<- lang_ru;;*);
+        [Alexey Bondar] (*<- lang_en;;*);;
+
+Petrov_Petr
+    <- concept_judge;
+    => nrel_main_idtf:
+        [Петров Петр] (*<- lang_ru;;*);
+        [Petrov Petr] (*<- lang_en;;*);;
+
+Sidorov_Sergey
+    <- concept_judge;
+    => nrel_main_idtf:
+        [Сидоров Сергей] (*<- lang_ru;;*);
+        [Sidorov Sergey] (*<- lang_en;;*);;
+
+Smirnova_Anna
+    <- concept_judge;
+    => nrel_main_idtf:
+        [Смирнова Анна] (*<- lang_ru;;*);
+        [Smirnova Anna] (*<- lang_en;;*);;
+
+
+concept_law <- sc_node_class;
+    => nrel_main_idtf:
+        [суд] (*<- lang_ru;;*);
+        [court] (*<- lang_en;;*);;
+
+concept_criminal_case <- sc_node_class;
+    <- concept_case;
+    => nrel_main_idtf:
+        [Уголовное дело] (*<- lang_ru;;*);
+        [Criminal Case] (*<- lang_en;;*);;
+
+concept_civil_case <- sc_node_class;
+    <- concept_case;
+    => nrel_main_idtf:
+        [Гражданское дело] (*<- lang_ru;;*);
+        [Civil Case] (*<- lang_en;;*);;
+
+concept_administrative_case <- sc_node_class;
+    <- concept_case;
+    => nrel_main_idtf:
+        [Административное дело] (*<- lang_ru;;*);
+        [Administrative Case] (*<- lang_en;;*);;
+
+concept_family_case <- sc_node_class;
+    <- concept_case;
+    => nrel_main_idtf:
+        [Семейное дело] (*<- lang_ru;;*);
+        [Family Case] (*<- lang_en;;*);;
+
+concept_economic_case <- sc_node_class;
+    <- concept_case;
+    => nrel_main_idtf:
+        [Экономическое дело] (*<- lang_ru;;*);
+        [Economic Case] (*<- lang_en;;*);;
+
+concept_1997 <- sc_node_class;
+    <- concept_year;
+    => nrel_main_idtf:
+        [1997] (*<- lang_ru;;*);
+        [1997] (*<- lang_en;;*);;
+
+concept_2005 <- sc_node_class;
+    <- concept_year;
+    => nrel_main_idtf:
+        [2005] (*<- lang_ru;;*);
+        [2005] (*<- lang_en;;*);;
+
+concept_2010 <- sc_node_class;
+    <- concept_year;
+    => nrel_main_idtf:
+        [2010] (*<- lang_ru;;*);
+        [2010] (*<- lang_en;;*);;
+
+
+
+nrel_located_in <- sc_node_norole_relation;
+    => nrel_main_idtf:
+        [расположен в*] (*<- lang_ru;;*);
+        [located in*] (*<- lang_en;;*);;
+
+nrel_case <- sc_node_norole_relation;
+    => nrel_main_idtf:
+        [дело*] (*<- lang_ru;;*);
+        [case*] (*<- lang_en;;*);;
+
+rrel_judge <- sc_node_role_relation;
+    => nrel_main_idtf:
+        [судья'] (*<- lang_ru;;*);
+        [judge'] (*<- lang_en;;*);;

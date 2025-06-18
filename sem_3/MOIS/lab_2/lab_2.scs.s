@@ -41,6 +41,10 @@ section_subject_domain_of_legislative_acts  => nrel_main_idtf:[Раздел. П�
                                                         nrel_public_discussion; 
                                                         nrel_law_revision; 
                                                         nrel_legal_analysis;
+							concept_laws_and_regulations; 
+							concept_constitutional_law; 
+							concept_civil_law;                
+                                                        concept_criminal_law;
                                 <- non_atomic_section;;
   
   
@@ -111,10 +115,10 @@ subject_domain_of_revision => nrel_main_idtf:[Предметная област�
                                                               
 
 
-concept_laws_and_regulations <- sc_node_class;
-                => nrel_main_idtf:[законы и нормативные акты] (*<- lang_ru;;*);[laws and regulations](*<- lang_en;;*);;  
+concept_legislative_acts <- sc_node_class;
+                => nrel_main_idtf:[законодательные акты] (*<- lang_ru;;*);[legislative acts](*<- lang_en;;*);;  
                 
-concept_constitutional_law<- sc_node_class;
+concept_constitutional_law <- sc_node_class;
                  => nrel_main_idtf:[конституционное право] (*<- lang_ru;;*);[constitutional law](*<- lang_en;;*);; 
                 
 concept_civil_law<- sc_node_class;

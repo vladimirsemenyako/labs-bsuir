@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GWF version="2.0">
+    <staticSector>
+        <node type="node/const/perm/role" idtf="rrel_judge" shapeColor="193" id="36249008" parent="33666048" left="0" top="0" right="66" bottom="25" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="481" y="320" haveBus="false" idtf_pos="3">
+            <content type="0" mime_type="" content_visibility="false" file_name=""/>
+        </node>
+        <node type="node/var/perm/general" idtf="_judge" shapeColor="0" id="36250256" parent="33666048" left="0" top="0" right="46" bottom="25" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="468" y="411" haveBus="false" idtf_pos="3">
+            <content type="0" mime_type="" content_visibility="false" file_name=""/>
+        </node>
+        <node type="node/const/perm/general" idtf="Minsk_Regional_Court" shapeColor="0" id="36249424" parent="33666048" left="0" top="0" right="141" bottom="25" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="232" y="409" haveBus="false" idtf_pos="3">
+            <content type="0" mime_type="" content_visibility="false" file_name=""/>
+        </node>
+        <node type="node/const/perm/group" idtf="concept_law" shapeColor="0" id="36249840" parent="33666048" left="0" top="0" right="78" bottom="25" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="194" y="269" haveBus="false" idtf_pos="0">
+            <content type="0" mime_type="" content_visibility="false" file_name=""/>
+        </node>
+        <pair type="pair/var/pos/perm/orient/membership" idtf="" shapeColor="0" id="36345552" parent="33666048" id_b="36249008" id_e="36345792" b_x="481" b_y="320" e_x="0" e_y="0" dotBBalance="0" dotEBalance="0.354511">
+            <points/>
+        </pair>
+        <pair type="pair/var/pos/perm/orient/membership" idtf="" shapeColor="0" id="36346512" parent="33666048" id_b="36249840" id_e="36249424" b_x="194" b_y="269" e_x="232" e_y="409" dotBBalance="0" dotEBalance="0">
+            <points/>
+        </pair>
+        <pair type="pair/var/-/perm/orient" idtf="" shapeColor="0" id="36345792" parent="33666048" id_b="36249424" id_e="36250256" b_x="232" b_y="409" e_x="468" e_y="411" dotBBalance="0" dotEBalance="0">
+            <points/>
+        </pair>
+        <contour type="contour/const/perm" idtf="template_2" shapeColor="0" id="33666048" parent="0" left="0" top="0" right="70" bottom="25" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" idtf_pos_x="175" idtf_pos_y="-131">
+            <points>
+                <point x="112" y="202"/>
+                <point x="112" y="490"/>
+                <point x="652" y="490"/>
+                <point x="652" y="202"/>
+            </points>
+        </contour>
+    </staticSector>
+</GWF>

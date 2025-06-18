@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GWF version="2.0">
+    <staticSector>
+        <node type="node/const/perm/group" idtf="concept_law" shapeColor="0" id="35605712" parent="33667200" left="0" top="0" right="78" bottom="25" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="130" y="461.158" haveBus="false" idtf_pos="0">
+            <content type="0" mime_type="" content_visibility="false" file_name=""/>
+        </node>
+        <node type="node/const/perm/role" idtf="rrel_judge" shapeColor="0" id="35606544" parent="33667200" left="0" top="0" right="66" bottom="25" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="308.737" y="605.842" haveBus="false" idtf_pos="0">
+            <content type="0" mime_type="" content_visibility="false" file_name=""/>
+        </node>
+        <node type="node/var/perm/general" idtf="_court" shapeColor="0" id="35607376" parent="33667200" left="0" top="0" right="45" bottom="25" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="304" y="495.158" haveBus="false" idtf_pos="2">
+            <content type="0" mime_type="" content_visibility="false" file_name=""/>
+        </node>
+        <node type="node/const/perm/relation" idtf="nrel_located_in" shapeColor="0" id="35606960" parent="33667200" left="0" top="0" right="96" bottom="25" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="304" y="321.158" haveBus="false" idtf_pos="3">
+            <content type="0" mime_type="" content_visibility="false" file_name=""/>
+        </node>
+        <node type="node/const/perm/general" idtf="Alexey_Bondar" shapeColor="0" id="35606128" parent="33667200" left="0" top="0" right="96" bottom="25" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="466.947" y="561.105" haveBus="false" idtf_pos="0">
+            <content type="0" mime_type="" content_visibility="false" file_name=""/>
+        </node>
+        <node type="node/const/perm/general" idtf="Belarus" shapeColor="0" id="35607792" parent="33667200" left="0" top="0" right="51" bottom="25" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="468" y="408.158" haveBus="false" idtf_pos="0">
+            <content type="0" mime_type="" content_visibility="false" file_name=""/>
+        </node>
+        <pair type="pair/const/pos/perm/orient/membership" idtf="" shapeColor="0" id="33253824" parent="33667200" id_b="35605712" id_e="35607376" b_x="130" b_y="461.158" e_x="304" e_y="495.158" dotBBalance="0" dotEBalance="0">
+            <points/>
+        </pair>
+        <pair type="pair/var/-/perm/orient" idtf="" shapeColor="0" id="33252864" parent="33667200" id_b="35607376" id_e="35607792" b_x="304" b_y="495.158" e_x="468" e_y="408.158" dotBBalance="0" dotEBalance="0">
+            <points/>
+        </pair>
+        <pair type="pair/var/pos/perm/orient/membership" idtf="" shapeColor="0" id="33252144" parent="33667200" id_b="35606544" id_e="33253104" b_x="308.737" b_y="605.842" e_x="0" e_y="0" dotBBalance="0" dotEBalance="0.389176">
+            <points/>
+        </pair>
+        <pair type="pair/var/pos/perm/orient/membership" idtf="" shapeColor="0" id="33252384" parent="33667200" id_b="35606960" id_e="33252864" b_x="304" b_y="321.158" e_x="0" e_y="0" dotBBalance="0" dotEBalance="0.389176">
+            <points/>
+        </pair>
+        <pair type="pair/var/pos/perm/orient/membership" idtf="" shapeColor="0" id="33253104" parent="33667200" id_b="35607376" id_e="35606128" b_x="304" b_y="495.158" e_x="466.947" e_y="561.105" dotBBalance="0" dotEBalance="0">
+            <points/>
+        </pair>
+        <contour type="contour/const/perm" idtf="template_3" shapeColor="0" id="33667200" parent="0" left="0" top="0" right="70" bottom="25" textColor="244" text_angle="0" text_font="Times New Roman" font_size="10" idtf_pos_x="261" idtf_pos_y="-194">
+            <points>
+                <point x="-44" y="234.158"/>
+                <point x="-44" y="669.158"/>
+                <point x="652" y="669.158"/>
+                <point x="652" y="234.158"/>
+            </points>
+        </contour>
+    </staticSector>
+</GWF>
