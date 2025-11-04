@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:14-alpine
+    container_name: park_db
+    environment:
+      POSTGRES_DB: park_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: .
+    container_name: park_app
+    ports:
+      - "8501:8501"
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: park_db
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+    depends_on:
+      db:
+        condition: service_healthy
+    command: >
+      sh -c "
+      export PGPASSWORD=postgres &&
+      until pg_isready -h db -U postgres; do
+        echo 'Waiting for database...'
+        sleep 2
+      done &&
+      echo 'Database is ready!' &&
+      psql -h db -U postgres -d park_db -f /app/db/schema.sql 2>&1 || echo 'Schema already exists or error' &&
+      psql -h db -U postgres -d park_db -f /app/db/functions.sql 2>&1 || echo 'Functions already exist or error' &&
+      psql -h db -U postgres -d park_db -f /app/db/triggers.sql 2>&1 || echo 'Triggers already exist or error' &&
+      psql -h db -U postgres -d park_db -f /app/db/views.sql 2>&1 || echo 'Views already exist or error' &&
+      psql -h db -U postgres -d park_db -f /app/db/test_data.sql 2>&1 || echo 'Test data already exists or error' &&
+      echo 'Starting Streamlit...' &&
+      streamlit run src/app_streamlit.py --server.port=8501 --server.address=0.0.0.0
+      "
+
+volumes:
+  postgres_data:
+

@@ -1,0 +1,68 @@
+erDiagram
+    firm {
+        INT firm_id PK
+        VARCHAR name 
+        VARCHAR legal_address
+    }
+    
+    parks {
+        INT park_id PK 
+        INT firm_id FK 
+        VARCHAR name 
+    }
+    
+    zones {
+        INT zone_id PK 
+        INT park_id FK 
+        VARCHAR name 
+    }
+    
+    plant_species {
+        INT species_id PK 
+        VARCHAR species_name 
+    }
+    
+    watering_regimes {
+        INT regime_id PK 
+        INT species_id FK 
+        INT min_age_months 
+        INT max_age_months 
+        VARCHAR periodicity 
+        TIME time_of_day 
+        DECIMAL water_liters 
+    }
+    
+    plants {
+        INT plant_id PK 
+        VARCHAR local_plant_number 
+        DATE date_planted 
+        INT age_at_planting_months 
+        INT zone_id FK 
+        INT species_id FK 
+    }
+    
+    employees {
+        INT employee_id PK 
+        VARCHAR full_name 
+        VARCHAR phone 
+        VARCHAR address 
+        VARCHAR employee_type 
+        VARCHAR education 
+        VARCHAR university 
+        VARCHAR category 
+    }
+    
+    schedule {
+        INT schedule_id PK 
+        INT plant_id FK 
+        INT employee_id FK 
+        DATE assignment_date 
+    }
+
+    firm ||--o{ parks : "управляет"
+    parks ||--o{ zones : "содержит"
+    zones ||--o{ plants : "содержит"
+    plant_species ||--o{ watering_regimes : "имеет"
+    plant_species ||--o{ plants : "принадлежит к"
+    employees ||--o{ schedule : "назначен на"
+    plants ||--o{ schedule : "включено в"

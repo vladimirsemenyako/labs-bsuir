@@ -1,101 +1,113 @@
-PRAGMA foreign_keys = ON;
+-- Включаем расширение для работы с диапазонами (нужно для сложного триггера)
+CREATE EXTENSION IF NOT EXISTS btree_gist;
 
--- Company providing services
-CREATE TABLE IF NOT EXISTS company (
-  id INTEGER PRIMARY KEY CHECK (id = 1),
-  name TEXT NOT NULL,
-  legal_address TEXT NOT NULL
+-- Создаем пользовательские типы ENUM для категориальных данных
+CREATE TYPE T_WATERING_PERIODICITY AS ENUM (
+    'ежедневно', 'раз в неделю',
+    'раз в 2 недели', 'раз в месяц'
 );
 
--- Parks
-CREATE TABLE IF NOT EXISTS park (
-  id INTEGER PRIMARY KEY,
-  name TEXT NOT NULL UNIQUE,
-  address TEXT NOT NULL
+CREATE TYPE T_DECORATOR_CATEGORY AS ENUM (
+    'высшая',
+    'первая', 'средняя',
+    'без категории'
 );
 
--- Zones within a park
-CREATE TABLE IF NOT EXISTS zone (
-  id INTEGER PRIMARY KEY,
-  park_id INTEGER NOT NULL REFERENCES park(id) ON DELETE CASCADE,
-  name TEXT NOT NULL,
-  UNIQUE(park_id, name)
+CREATE TYPE T_EMPLOYEE_TYPE AS ENUM (
+    'служитель',
+    'декоратор'
 );
 
--- Species (plant kinds)
-CREATE TABLE IF NOT EXISTS species (
-  id INTEGER PRIMARY KEY,
-  latin_name TEXT NOT NULL UNIQUE,
-  common_name TEXT
+-- Таблица 1: Фирма
+CREATE TABLE firm (
+    firm_id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL UNIQUE,
+    legal_address TEXT
 );
 
--- Plants planted in zones
-CREATE TABLE IF NOT EXISTS plant (
-  id INTEGER PRIMARY KEY,
-  zone_id INTEGER NOT NULL REFERENCES zone(id) ON DELETE CASCADE,
-  species_id INTEGER NOT NULL REFERENCES species(id),
-  plant_number INTEGER NOT NULL,
-  planting_date DATE NOT NULL,
-  age_years_at_planting INTEGER NOT NULL CHECK (age_years_at_planting >= 0),
-  UNIQUE(zone_id, plant_number)
+-- Таблица 2: Парки
+CREATE TABLE parks (
+    park_id SERIAL PRIMARY KEY,
+    firm_id INT NOT NULL,
+    name VARCHAR(255) NOT NULL UNIQUE,
+    CONSTRAINT fk_firm
+    FOREIGN KEY(firm_id) REFERENCES firm(firm_id) ON DELETE CASCADE
 );
 
--- Watering regime depends on species and age ranges
-CREATE TABLE IF NOT EXISTS watering_regime (
-  id INTEGER PRIMARY KEY,
-  species_id INTEGER NOT NULL REFERENCES species(id) ON DELETE CASCADE,
-  min_age_years INTEGER NOT NULL CHECK (min_age_years >= 0),
-  max_age_years INTEGER NOT NULL CHECK (max_age_years >= min_age_years),
-  day_pattern TEXT NOT NULL, -- e.g., 'daily', 'weekly:2' (Mon), 'odd_days', 'even_days'
-  time_of_day TEXT NOT NULL, -- 'HH:MM'
-  water_liters REAL NOT NULL CHECK (water_liters > 0)
-);
-CREATE UNIQUE INDEX IF NOT EXISTS ux_regime_species_age
-ON watering_regime(species_id, min_age_years, max_age_years, day_pattern, time_of_day);
-
--- Concrete waterings (at most once per plant per day)
-CREATE TABLE IF NOT EXISTS watering (
-  id INTEGER PRIMARY KEY,
-  plant_id INTEGER NOT NULL REFERENCES plant(id) ON DELETE CASCADE,
-  watering_date DATE NOT NULL,
-  time_of_day TEXT NOT NULL,
-  liters REAL NOT NULL CHECK (liters > 0),
-  UNIQUE(plant_id, watering_date)
+-- Таблица 3: Зоны
+CREATE TABLE zones (
+    zone_id SERIAL PRIMARY KEY,
+    park_id INT NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    CONSTRAINT fk_park
+    FOREIGN KEY(park_id) REFERENCES parks(park_id) ON DELETE CASCADE,
+    UNIQUE(park_id, name)
 );
 
--- Park attendants caring for plants
-CREATE TABLE IF NOT EXISTS attendant (
-  id INTEGER PRIMARY KEY,
-  full_name TEXT NOT NULL,
-  birth_date DATE,
-  phone TEXT,
-  address TEXT
+-- Таблица 4: Виды растений
+CREATE TABLE plant_species (
+    species_id SERIAL PRIMARY KEY,
+    species_name VARCHAR(100) NOT NULL UNIQUE
 );
 
--- Assignment of attendant to a plant for specific date (one per date)
-CREATE TABLE IF NOT EXISTS attendant_assignment (
-  id INTEGER PRIMARY KEY,
-  plant_id INTEGER NOT NULL REFERENCES plant(id) ON DELETE CASCADE,
-  assignment_date DATE NOT NULL,
-  attendant_id INTEGER NOT NULL REFERENCES attendant(id) ON DELETE RESTRICT,
-  UNIQUE(plant_id, assignment_date)
+-- Таблица 5: Режимы полива
+CREATE TABLE watering_regimes (
+    regime_id SERIAL PRIMARY KEY,
+    species_id INT NOT NULL,
+    min_age_months INT NOT NULL,
+    max_age_months INT,
+    periodicity T_WATERING_PERIODICITY NOT NULL,
+    time_of_day TIME,
+    water_liters DECIMAL(5, 2) NOT NULL,
+    CONSTRAINT fk_species FOREIGN KEY(species_id)
+    REFERENCES plant_species(species_id) ON DELETE RESTRICT,
+    CHECK (min_age_months >= 0),
+    CHECK (max_age_months IS NULL OR max_age_months > min_age_months),
+    CHECK (water_liters > 0),
+    CONSTRAINT prevent_overlapping_regimes EXCLUDE USING GIST (
+        species_id WITH =,
+        int4range(min_age_months, COALESCE(max_age_months, 2147483647), '[]') WITH &&
+    )
 );
 
--- Park decorators
-CREATE TABLE IF NOT EXISTS decorator (
-  id INTEGER PRIMARY KEY,
-  full_name TEXT NOT NULL,
-  birth_date DATE,
-  phone TEXT,
-  address TEXT,
-  education TEXT,
-  institution TEXT,
-  category TEXT
+-- Таблица 6: Растения
+CREATE TABLE plants (
+    plant_id SERIAL PRIMARY KEY,
+    local_plant_number VARCHAR(50) NOT NULL,
+    zone_id INT NOT NULL,
+    species_id INT NOT NULL,
+    date_planted DATE NOT NULL DEFAULT CURRENT_DATE,
+    age_at_planting_months INT NOT NULL,
+    CONSTRAINT fk_zone FOREIGN KEY(zone_id)
+    REFERENCES zones(zone_id) ON DELETE RESTRICT,
+    CONSTRAINT fk_species FOREIGN KEY(species_id)
+    REFERENCES plant_species(species_id) ON DELETE RESTRICT,
+    UNIQUE(zone_id, local_plant_number),
+    CHECK (age_at_planting_months >= 0)
 );
 
--- Seed data for convenience
-INSERT INTO company(id, name, legal_address)
-  VALUES (1, 'ООО "Зелёный Город"', 'г. Минск, ул. Примерная, 1')
-  ON CONFLICT(id) DO NOTHING;
+-- Таблица 7: Сотрудники (единая таблица)
+CREATE TABLE employees (
+    employee_id SERIAL PRIMARY KEY,
+    full_name VARCHAR(255) NOT NULL,
+    phone VARCHAR(50) UNIQUE,
+    address TEXT,
+    employee_type T_EMPLOYEE_TYPE NOT NULL,
+    education TEXT,
+    university VARCHAR(255),
+    category T_DECORATOR_CATEGORY
+);
 
+-- Таблица 8: График работ
+CREATE TABLE schedule (
+    schedule_id SERIAL PRIMARY KEY,
+    plant_id INT NOT NULL,
+    employee_id INT NOT NULL,
+    assignment_date DATE NOT NULL,
+    CONSTRAINT fk_plant FOREIGN KEY(plant_id)
+    REFERENCES plants(plant_id) ON DELETE CASCADE,
+    CONSTRAINT fk_employee FOREIGN KEY(employee_id)
+    REFERENCES employees(employee_id) ON DELETE RESTRICT,
+    UNIQUE(plant_id, assignment_date)
+);
 
