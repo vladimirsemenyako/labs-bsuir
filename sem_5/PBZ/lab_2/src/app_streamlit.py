@@ -72,12 +72,12 @@ def execute_query(query, params=None, fetch=True, show_error=True):
         conn.close()
 
 def call_procedure(procedure_name, params=None, has_out_param=False, show_error=True):
-    """Вызов хранимой процедуры PostgreSQL
+    """Вызов хранимой процедуры или функции PostgreSQL
     
     Args:
-        procedure_name: имя процедуры
-        params: список параметров (без OUT параметра)
-        has_out_param: если True, возвращает OUT параметр через SELECT
+        procedure_name: имя процедуры или функции
+        params: список параметров
+        has_out_param: если True, функция возвращает значение (используется SELECT)
         show_error: показывать ли ошибки пользователю
     """
     conn = get_db_connection()
@@ -87,15 +87,16 @@ def call_procedure(procedure_name, params=None, has_out_param=False, show_error=
     try:
         with conn.cursor(cursor_factory=RealDictCursor) as cur:
             if has_out_param:
-                # Для процедур с OUT параметром используем SELECT
+                # Для функций используем SELECT
                 if params:
                     placeholders = ', '.join(['%s'] * len(params))
-                    query = f"SELECT * FROM {procedure_name}({placeholders})"
+                    query = f"SELECT {procedure_name}({placeholders}) as result"
                     cur.execute(query, params)
                 else:
-                    query = f"SELECT * FROM {procedure_name}()"
+                    query = f"SELECT {procedure_name}() as result"
                     cur.execute(query)
-                result = cur.fetchone()
+                result_row = cur.fetchone()
+                result = result_row['result'] if result_row else None
             else:
                 # Для обычных процедур используем CALL
                 if params:
@@ -171,8 +172,7 @@ def page_firm():
                         has_out_param=True
                     )
                     if result:
-                        firm_id = result.get('p_firm_id') if result else None
-                        st.success(f"Фирма '{name}' успешно добавлена!" + (f" ID: {firm_id}" if firm_id else ""))
+                        st.success(f"Фирма '{name}' успешно добавлена!" + (f" ID: {result}" if result else ""))
                         st.rerun()
                 else:
                     st.error("Название фирмы обязательно")

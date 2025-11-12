@@ -1,4 +1,3 @@
--- Функция для расчета текущего возраста растения в месяцах
 CREATE OR REPLACE FUNCTION fn_get_plant_current_age(p_plant_id INT) 
 RETURNS INT AS $$
 DECLARE
@@ -13,23 +12,19 @@ BEGIN
         RAISE EXCEPTION 'Растение с ID=% не найдено', p_plant_id;
     END IF;
     
-    -- Разница в месяцах между датой посадки и СЕГОДНЯ
+    
     v_current_age_months := (
         EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM v_plant_record.date_planted)
     ) * 12 + (
         EXTRACT(MONTH FROM CURRENT_DATE) - EXTRACT(MONTH FROM v_plant_record.date_planted)
     );
     
-    -- Возвращаем (возраст при посадке) + (прошедшие месяцы)
+    
     RETURN v_plant_record.age_at_planting_months + v_current_age_months;
 END;
 $$ LANGUAGE plpgsql;
 
--- ============================================================================
--- ПРОЦЕДУРЫ И ФУНКЦИИ ДЛЯ УПРАВЛЕНИЯ ФИРМАМИ
--- ============================================================================
 
--- Функция: Получить все фирмы
 CREATE OR REPLACE FUNCTION fn_get_all_firms()
 RETURNS TABLE (
     firm_id INT,
@@ -44,7 +39,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Функция: Получить фирму по ID
 CREATE OR REPLACE FUNCTION fn_get_firm_by_id(p_firm_id INT)
 RETURNS TABLE (
     firm_id INT,
@@ -59,20 +53,20 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Процедура: Добавить фирму
-CREATE OR REPLACE PROCEDURE sp_add_firm(
+CREATE OR REPLACE FUNCTION sp_add_firm(
     p_name VARCHAR(255),
-    p_legal_address TEXT,
-    OUT p_firm_id INT
-) AS $$
+    p_legal_address TEXT
+) RETURNS INT AS $$
+DECLARE
+    v_firm_id INT;
 BEGIN
     INSERT INTO firm (name, legal_address)
     VALUES (p_name, p_legal_address)
-    RETURNING firm_id INTO p_firm_id;
+    RETURNING firm_id INTO v_firm_id;
+    RETURN v_firm_id;
 END;
 $$ LANGUAGE plpgsql;
 
--- Процедура: Обновить фирму
 CREATE OR REPLACE PROCEDURE sp_update_firm(
     p_firm_id INT,
     p_name VARCHAR(255),
@@ -89,7 +83,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Процедура: Удалить фирму
 CREATE OR REPLACE PROCEDURE sp_delete_firm(p_firm_id INT) AS $$
 BEGIN
     DELETE FROM firm WHERE firm_id = p_firm_id;
@@ -100,11 +93,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- ============================================================================
--- ПРОЦЕДУРЫ И ФУНКЦИИ ДЛЯ УПРАВЛЕНИЯ ПАРКАМИ
--- ============================================================================
 
--- Функция: Получить все парки
 CREATE OR REPLACE FUNCTION fn_get_all_parks()
 RETURNS TABLE (
     park_id INT,
@@ -121,7 +110,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Функция: Получить парк по ID
 CREATE OR REPLACE FUNCTION fn_get_park_by_id(p_park_id INT)
 RETURNS TABLE (
     park_id INT,
@@ -136,20 +124,20 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Процедура: Добавить парк
-CREATE OR REPLACE PROCEDURE sp_add_park(
+CREATE OR REPLACE FUNCTION sp_add_park(
     p_firm_id INT,
-    p_name VARCHAR(255),
-    OUT p_park_id INT
-) AS $$
+    p_name VARCHAR(255)
+) RETURNS INT AS $$
+DECLARE
+    v_park_id INT;
 BEGIN
     INSERT INTO parks (firm_id, name)
     VALUES (p_firm_id, p_name)
-    RETURNING park_id INTO p_park_id;
+    RETURNING park_id INTO v_park_id;
+    RETURN v_park_id;
 END;
 $$ LANGUAGE plpgsql;
 
--- Процедура: Обновить парк
 CREATE OR REPLACE PROCEDURE sp_update_park(
     p_park_id INT,
     p_name VARCHAR(255)
@@ -165,7 +153,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Процедура: Удалить парк
 CREATE OR REPLACE PROCEDURE sp_delete_park(p_park_id INT) AS $$
 BEGIN
     DELETE FROM parks WHERE park_id = p_park_id;
@@ -176,11 +163,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- ============================================================================
--- ПРОЦЕДУРЫ И ФУНКЦИИ ДЛЯ УПРАВЛЕНИЯ ЗОНАМИ
--- ============================================================================
 
--- Функция: Получить все зоны
 CREATE OR REPLACE FUNCTION fn_get_all_zones()
 RETURNS TABLE (
     zone_id INT,
@@ -197,7 +180,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Функция: Получить зону по ID
 CREATE OR REPLACE FUNCTION fn_get_zone_by_id(p_zone_id INT)
 RETURNS TABLE (
     zone_id INT,
@@ -212,20 +194,20 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Процедура: Добавить зону
-CREATE OR REPLACE PROCEDURE sp_add_zone(
+CREATE OR REPLACE FUNCTION sp_add_zone(
     p_park_id INT,
-    p_name VARCHAR(100),
-    OUT p_zone_id INT
-) AS $$
+    p_name VARCHAR(100)
+) RETURNS INT AS $$
+DECLARE
+    v_zone_id INT;
 BEGIN
     INSERT INTO zones (park_id, name)
     VALUES (p_park_id, p_name)
-    RETURNING zone_id INTO p_zone_id;
+    RETURNING zone_id INTO v_zone_id;
+    RETURN v_zone_id;
 END;
 $$ LANGUAGE plpgsql;
 
--- Процедура: Обновить зону
 CREATE OR REPLACE PROCEDURE sp_update_zone(
     p_zone_id INT,
     p_name VARCHAR(100)
@@ -241,7 +223,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Процедура: Удалить зону
 CREATE OR REPLACE PROCEDURE sp_delete_zone(p_zone_id INT) AS $$
 BEGIN
     DELETE FROM zones WHERE zone_id = p_zone_id;
@@ -252,11 +233,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- ============================================================================
--- ПРОЦЕДУРЫ И ФУНКЦИИ ДЛЯ УПРАВЛЕНИЯ ВИДАМИ РАСТЕНИЙ
--- ============================================================================
 
--- Функция: Получить все виды растений
 CREATE OR REPLACE FUNCTION fn_get_all_species()
 RETURNS TABLE (
     species_id INT,
@@ -270,7 +247,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Функция: Получить вид по ID
 CREATE OR REPLACE FUNCTION fn_get_species_by_id(p_species_id INT)
 RETURNS TABLE (
     species_id INT,
@@ -284,19 +260,19 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Процедура: Добавить вид растения
-CREATE OR REPLACE PROCEDURE sp_add_species(
-    p_species_name VARCHAR(100),
-    OUT p_species_id INT
-) AS $$
+CREATE OR REPLACE FUNCTION sp_add_species(
+    p_species_name VARCHAR(100)
+) RETURNS INT AS $$
+DECLARE
+    v_species_id INT;
 BEGIN
     INSERT INTO plant_species (species_name)
     VALUES (p_species_name)
-    RETURNING species_id INTO p_species_id;
+    RETURNING species_id INTO v_species_id;
+    RETURN v_species_id;
 END;
 $$ LANGUAGE plpgsql;
 
--- Процедура: Обновить вид растения
 CREATE OR REPLACE PROCEDURE sp_update_species(
     p_species_id INT,
     p_species_name VARCHAR(100)
@@ -312,7 +288,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Процедура: Удалить вид растения
 CREATE OR REPLACE PROCEDURE sp_delete_species(p_species_id INT) AS $$
 BEGIN
     DELETE FROM plant_species WHERE species_id = p_species_id;
@@ -323,11 +298,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- ============================================================================
--- ПРОЦЕДУРЫ И ФУНКЦИИ ДЛЯ УПРАВЛЕНИЯ РАСТЕНИЯМИ
--- ============================================================================
 
--- Функция: Получить все растения (используя представление)
 CREATE OR REPLACE FUNCTION fn_get_all_plants()
 RETURNS TABLE (
     plant_id INT,
@@ -351,7 +322,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Функция: Получить растение по ID
 CREATE OR REPLACE FUNCTION fn_get_plant_by_id(p_plant_id INT)
 RETURNS TABLE (
     plant_id INT,
@@ -370,7 +340,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Функция: Получить растения по виду
 CREATE OR REPLACE FUNCTION fn_get_plants_by_species(p_species_name VARCHAR(100))
 RETURNS TABLE (
     plant_id INT,
@@ -395,23 +364,23 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Процедура: Добавить растение
-CREATE OR REPLACE PROCEDURE sp_add_plant(
+CREATE OR REPLACE FUNCTION sp_add_plant(
     p_local_plant_number VARCHAR(50),
     p_zone_id INT,
     p_species_id INT,
     p_date_planted DATE,
-    p_age_at_planting_months INT,
-    OUT p_plant_id INT
-) AS $$
+    p_age_at_planting_months INT
+) RETURNS INT AS $$
+DECLARE
+    v_plant_id INT;
 BEGIN
     INSERT INTO plants (local_plant_number, zone_id, species_id, date_planted, age_at_planting_months)
     VALUES (p_local_plant_number, p_zone_id, p_species_id, p_date_planted, p_age_at_planting_months)
-    RETURNING plant_id INTO p_plant_id;
+    RETURNING plant_id INTO v_plant_id;
+    RETURN v_plant_id;
 END;
 $$ LANGUAGE plpgsql;
 
--- Процедура: Обновить растение
 CREATE OR REPLACE PROCEDURE sp_update_plant(
     p_plant_id INT,
     p_local_plant_number VARCHAR(50),
@@ -435,7 +404,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Процедура: Удалить растение
 CREATE OR REPLACE PROCEDURE sp_delete_plant(p_plant_id INT) AS $$
 BEGIN
     DELETE FROM plants WHERE plant_id = p_plant_id;
@@ -446,11 +414,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- ============================================================================
--- ПРОЦЕДУРЫ И ФУНКЦИИ ДЛЯ УПРАВЛЕНИЯ СОТРУДНИКАМИ
--- ============================================================================
 
--- Функция: Получить всех служителей
 CREATE OR REPLACE FUNCTION fn_get_all_caretakers()
 RETURNS TABLE (
     employee_id INT,
@@ -467,7 +431,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Функция: Получить всех декораторов
 CREATE OR REPLACE FUNCTION fn_get_all_decorators()
 RETURNS TABLE (
     employee_id INT,
@@ -488,7 +451,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Функция: Получить сотрудника по ID
 CREATE OR REPLACE FUNCTION fn_get_employee_by_id(p_employee_id INT)
 RETURNS TABLE (
     employee_id INT,
@@ -509,38 +471,39 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Процедура: Добавить служителя
-CREATE OR REPLACE PROCEDURE sp_add_caretaker(
+CREATE OR REPLACE FUNCTION sp_add_caretaker(
     p_full_name VARCHAR(255),
     p_phone VARCHAR(50),
-    p_address TEXT,
-    OUT p_employee_id INT
-) AS $$
+    p_address TEXT
+) RETURNS INT AS $$
+DECLARE
+    v_employee_id INT;
 BEGIN
     INSERT INTO employees (full_name, phone, address, employee_type)
     VALUES (p_full_name, p_phone, p_address, 'служитель')
-    RETURNING employee_id INTO p_employee_id;
+    RETURNING employee_id INTO v_employee_id;
+    RETURN v_employee_id;
 END;
 $$ LANGUAGE plpgsql;
 
--- Процедура: Добавить декоратора
-CREATE OR REPLACE PROCEDURE sp_add_decorator(
+CREATE OR REPLACE FUNCTION sp_add_decorator(
     p_full_name VARCHAR(255),
     p_phone VARCHAR(50),
     p_address TEXT,
     p_education TEXT,
     p_university VARCHAR(255),
-    p_category T_DECORATOR_CATEGORY,
-    OUT p_employee_id INT
-) AS $$
+    p_category T_DECORATOR_CATEGORY
+) RETURNS INT AS $$
+DECLARE
+    v_employee_id INT;
 BEGIN
     INSERT INTO employees (full_name, phone, address, employee_type, education, university, category)
     VALUES (p_full_name, p_phone, p_address, 'декоратор', p_education, p_university, p_category)
-    RETURNING employee_id INTO p_employee_id;
+    RETURNING employee_id INTO v_employee_id;
+    RETURN v_employee_id;
 END;
 $$ LANGUAGE plpgsql;
 
--- Процедура: Обновить служителя
 CREATE OR REPLACE PROCEDURE sp_update_caretaker(
     p_employee_id INT,
     p_full_name VARCHAR(255),
@@ -558,7 +521,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Процедура: Обновить декоратора
 CREATE OR REPLACE PROCEDURE sp_update_decorator(
     p_employee_id INT,
     p_full_name VARCHAR(255),
@@ -580,7 +542,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Процедура: Удалить сотрудника
 CREATE OR REPLACE PROCEDURE sp_delete_employee(p_employee_id INT) AS $$
 BEGIN
     DELETE FROM employees WHERE employee_id = p_employee_id;
@@ -591,11 +552,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- ============================================================================
--- ПРОЦЕДУРЫ И ФУНКЦИИ ДЛЯ УПРАВЛЕНИЯ ГРАФИКОМ РАБОТ
--- ============================================================================
 
--- Функция: Получить график на дату
 CREATE OR REPLACE FUNCTION fn_get_schedule_by_date(p_date DATE)
 RETURNS TABLE (
     schedule_id INT,
@@ -611,13 +568,12 @@ RETURNS TABLE (
 ) AS $$
 BEGIN
     RETURN QUERY
-    SELECT * FROM v_employee_schedule
-    WHERE assignment_date = p_date
-    ORDER BY assignment_date, full_name;
+    SELECT * FROM v_employee_schedule v
+    WHERE v.assignment_date = p_date
+    ORDER BY v.assignment_date, v.full_name;
 END;
 $$ LANGUAGE plpgsql;
 
--- Функция: Получить сотрудников, работающих на дату
 CREATE OR REPLACE FUNCTION fn_get_employees_by_date(p_date DATE)
 RETURNS TABLE (
     full_name VARCHAR(255),
@@ -633,25 +589,22 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Процедура: Добавить назначение в график
-CREATE OR REPLACE PROCEDURE sp_add_schedule(
+CREATE OR REPLACE FUNCTION sp_add_schedule(
     p_plant_id INT,
     p_employee_id INT,
-    p_assignment_date DATE,
-    OUT p_schedule_id INT
-) AS $$
+    p_assignment_date DATE
+) RETURNS INT AS $$
+DECLARE
+    v_schedule_id INT;
 BEGIN
     INSERT INTO schedule (plant_id, employee_id, assignment_date)
     VALUES (p_plant_id, p_employee_id, p_assignment_date)
-    RETURNING schedule_id INTO p_schedule_id;
+    RETURNING schedule_id INTO v_schedule_id;
+    RETURN v_schedule_id;
 END;
 $$ LANGUAGE plpgsql;
 
--- ============================================================================
--- ПРОЦЕДУРЫ И ФУНКЦИИ ДЛЯ УПРАВЛЕНИЯ РЕЖИМАМИ ПОЛИВА
--- ============================================================================
 
--- Функция: Получить все режимы полива
 CREATE OR REPLACE FUNCTION fn_get_all_watering_regimes()
 RETURNS TABLE (
     regime_id INT,
@@ -673,7 +626,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Функция: Получить режимы полива для вида растения
 CREATE OR REPLACE FUNCTION fn_get_plant_regimes_by_species(p_species_name VARCHAR(100))
 RETURNS TABLE (
     plant_id INT,
@@ -695,30 +647,27 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Процедура: Добавить режим полива
-CREATE OR REPLACE PROCEDURE sp_add_watering_regime(
+CREATE OR REPLACE FUNCTION sp_add_watering_regime(
     p_species_id INT,
     p_min_age_months INT,
     p_max_age_months INT,
     p_periodicity T_WATERING_PERIODICITY,
     p_time_of_day TIME,
-    p_water_liters DECIMAL(5, 2),
-    OUT p_regime_id INT
-) AS $$
+    p_water_liters DECIMAL(5, 2)
+) RETURNS INT AS $$
+DECLARE
+    v_regime_id INT;
 BEGIN
     INSERT INTO watering_regimes (species_id, min_age_months, max_age_months, 
                                   periodicity, time_of_day, water_liters)
     VALUES (p_species_id, p_min_age_months, p_max_age_months, 
             p_periodicity, p_time_of_day, p_water_liters)
-    RETURNING regime_id INTO p_regime_id;
+    RETURNING regime_id INTO v_regime_id;
+    RETURN v_regime_id;
 END;
 $$ LANGUAGE plpgsql;
 
--- ============================================================================
--- ФУНКЦИИ ДЛЯ СТАТИСТИКИ
--- ============================================================================
 
--- Функция: Получить количество фирм
 CREATE OR REPLACE FUNCTION fn_get_firms_count()
 RETURNS INT AS $$
 DECLARE
@@ -729,7 +678,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Функция: Получить количество парков
 CREATE OR REPLACE FUNCTION fn_get_parks_count()
 RETURNS INT AS $$
 DECLARE
@@ -740,7 +688,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Функция: Получить количество растений
 CREATE OR REPLACE FUNCTION fn_get_plants_count()
 RETURNS INT AS $$
 DECLARE
@@ -751,7 +698,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Функция: Получить количество сотрудников
 CREATE OR REPLACE FUNCTION fn_get_employees_count()
 RETURNS INT AS $$
 DECLARE
@@ -762,11 +708,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- ============================================================================
--- ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ДЛЯ ВЫПАДАЮЩИХ СПИСКОВ
--- ============================================================================
 
--- Функция: Получить список фирм для выбора (ID и название)
 CREATE OR REPLACE FUNCTION fn_get_firms_list()
 RETURNS TABLE (
     firm_id INT,
@@ -780,7 +722,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Функция: Получить список парков для выбора
 CREATE OR REPLACE FUNCTION fn_get_parks_list()
 RETURNS TABLE (
     park_id INT,
@@ -794,7 +735,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Функция: Получить список зон для выбора
 CREATE OR REPLACE FUNCTION fn_get_zones_list()
 RETURNS TABLE (
     zone_id INT,
@@ -811,7 +751,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Функция: Получить список видов растений для выбора
 CREATE OR REPLACE FUNCTION fn_get_species_list()
 RETURNS TABLE (
     species_id INT,
@@ -825,7 +764,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Функция: Получить список растений для выбора
 CREATE OR REPLACE FUNCTION fn_get_plants_list()
 RETURNS TABLE (
     plant_id INT,
@@ -841,7 +779,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Функция: Получить список служителей для выбора
 CREATE OR REPLACE FUNCTION fn_get_caretakers_list()
 RETURNS TABLE (
     employee_id INT,
@@ -856,7 +793,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Функция: Получить список названий видов растений (для отчетов)
 CREATE OR REPLACE FUNCTION fn_get_species_names()
 RETURNS TABLE (
     species_name VARCHAR(100)
