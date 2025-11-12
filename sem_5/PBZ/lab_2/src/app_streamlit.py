@@ -71,6 +71,77 @@ def execute_query(query, params=None, fetch=True, show_error=True):
     finally:
         conn.close()
 
+def call_procedure(procedure_name, params=None, has_out_param=False, show_error=True):
+    """Вызов хранимой процедуры PostgreSQL
+    
+    Args:
+        procedure_name: имя процедуры
+        params: список параметров (без OUT параметра)
+        has_out_param: если True, возвращает OUT параметр через SELECT
+        show_error: показывать ли ошибки пользователю
+    """
+    conn = get_db_connection()
+    if not conn:
+        return None
+    
+    try:
+        with conn.cursor(cursor_factory=RealDictCursor) as cur:
+            if has_out_param:
+                # Для процедур с OUT параметром используем SELECT
+                if params:
+                    placeholders = ', '.join(['%s'] * len(params))
+                    query = f"SELECT * FROM {procedure_name}({placeholders})"
+                    cur.execute(query, params)
+                else:
+                    query = f"SELECT * FROM {procedure_name}()"
+                    cur.execute(query)
+                result = cur.fetchone()
+            else:
+                # Для обычных процедур используем CALL
+                if params:
+                    placeholders = ', '.join(['%s'] * len(params))
+                    query = f"CALL {procedure_name}({placeholders})"
+                    cur.execute(query, params)
+                else:
+                    query = f"CALL {procedure_name}()"
+                    cur.execute(query)
+                result = True
+            
+            conn.commit()
+            return result
+    except psycopg2.errors.UniqueViolation as e:
+        conn.rollback()
+        if show_error:
+            error_msg = str(e)
+            if 'firm' in error_msg.lower() and 'name' in error_msg.lower():
+                st.error("Фирма с таким названием уже существует!")
+            elif 'plants' in error_msg.lower() and 'local_plant_number' in error_msg.lower():
+                st.error("Растение с таким номером уже существует в этой зоне!")
+            elif 'employees' in error_msg.lower() and 'phone' in error_msg.lower():
+                st.error("Сотрудник с таким телефоном уже существует!")
+            elif 'schedule' in error_msg.lower():
+                st.error("На эту дату уже назначен служитель для этого растения!")
+            else:
+                st.error(f"Ошибка: запись с такими данными уже существует!")
+        return None
+    except psycopg2.errors.NotNullViolation as e:
+        conn.rollback()
+        if show_error:
+            st.error("Ошибка: не заполнены обязательные поля!")
+        return None
+    except psycopg2.errors.ForeignKeyViolation as e:
+        conn.rollback()
+        if show_error:
+            st.error("Ошибка: ссылка на несуществующую запись!")
+        return None
+    except Exception as e:
+        conn.rollback()
+        if show_error:
+            st.error(f"Ошибка выполнения процедуры: {e}")
+        return None
+    finally:
+        conn.close()
+
 def init_session_state():
     if 'page' not in st.session_state:
         st.session_state.page = 'Главная'
@@ -81,7 +152,7 @@ def page_firm():
     tab1, tab2, tab3, tab4 = st.tabs(["Просмотр", "Добавить", "Редактировать", "Удалить"])
     
     with tab1:
-        firms = execute_query("SELECT * FROM firm ORDER BY firm_id")
+        firms = execute_query("SELECT * FROM fn_get_all_firms()")
         if firms:
             st.dataframe(firms, use_container_width=True)
         else:
@@ -94,26 +165,27 @@ def page_firm():
             
             if st.form_submit_button("Добавить"):
                 if name:
-                    result = execute_query(
-                        "INSERT INTO firm (name, legal_address) VALUES (%s, %s) RETURNING firm_id",
+                    result = call_procedure(
+                        "sp_add_firm",
                         (name, legal_address or None),
-                        fetch=True
+                        has_out_param=True
                     )
                     if result:
-                        st.success(f"Фирма '{name}' успешно добавлена!")
+                        firm_id = result.get('p_firm_id') if result else None
+                        st.success(f"Фирма '{name}' успешно добавлена!" + (f" ID: {firm_id}" if firm_id else ""))
                         st.rerun()
                 else:
                     st.error("Название фирмы обязательно")
     
     with tab3:
-        firms = execute_query("SELECT firm_id, name FROM firm ORDER BY firm_id")
+        firms = execute_query("SELECT * FROM fn_get_firms_list()")
         if firms:
             firm_options = {f"{f['name']} (ID: {f['firm_id']})": f['firm_id'] for f in firms}
             selected = st.selectbox("Выберите фирму", list(firm_options.keys()), key="edit_firm_select")
             
             if selected:
                 firm_id = firm_options[selected]
-                firm_data = execute_query("SELECT * FROM firm WHERE firm_id = %s", (firm_id,))
+                firm_data = execute_query("SELECT * FROM fn_get_firm_by_id(%s)", (firm_id,))
                 
                 if firm_data:
                     with st.form("edit_firm"):
@@ -121,10 +193,10 @@ def page_firm():
                         legal_address = st.text_area("Юридический адрес", value=firm_data[0]['legal_address'] or "", key="edit_firm_address")
                         
                         if st.form_submit_button("Обновить"):
-                            result = execute_query(
-                                "UPDATE firm SET name = %s, legal_address = %s WHERE firm_id = %s",
-                                (name, legal_address or None, firm_id),
-                                fetch=False
+                            result = call_procedure(
+                                "sp_update_firm",
+                                (firm_id, name, legal_address or None),
+                                has_out_param=False
                             )
                             if result:
                                 st.success("Фирма обновлена!")
@@ -133,7 +205,7 @@ def page_firm():
             st.info("Нет фирм для редактирования")
     
     with tab4:
-        firms = execute_query("SELECT firm_id, name FROM firm ORDER BY firm_id")
+        firms = execute_query("SELECT * FROM fn_get_firms_list()")
         if firms:
             firm_options = {f"{f['name']} (ID: {f['firm_id']})": f['firm_id'] for f in firms}
             selected = st.selectbox("Выберите фирму для удаления", list(firm_options.keys()), key="delete_firm_select")
@@ -144,7 +216,7 @@ def page_firm():
                 with st.form("delete_firm"):
                     st.warning(f"Вы уверены, что хотите удалить эту фирму? Это действие нельзя отменить!")
                     if st.form_submit_button("Удалить", type="primary"):
-                        result = execute_query("DELETE FROM firm WHERE firm_id = %s", (firm_id,), fetch=False)
+                        result = call_procedure("sp_delete_firm", (firm_id,), has_out_param=False)
                         if result:
                             st.success("Фирма удалена!")
                             st.rerun()
@@ -157,12 +229,7 @@ def page_parks_zones():
     tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["Парки", "Добавить парк", "Редактировать парк", "Удалить парк", "Зоны", "Добавить зону"])
     
     with tab1:
-        parks = execute_query("""
-            SELECT p.park_id, p.name, f.name as firm_name 
-            FROM parks p 
-            JOIN firm f ON p.firm_id = f.firm_id 
-            ORDER BY p.park_id
-        """)
+        parks = execute_query("SELECT * FROM fn_get_all_parks()")
         
         if parks:
             st.dataframe(parks, use_container_width=True)
@@ -170,7 +237,7 @@ def page_parks_zones():
             st.info("Парки не найдены")
     
     with tab2:
-        firms = execute_query("SELECT firm_id, name FROM firm ORDER BY firm_id")
+        firms = execute_query("SELECT * FROM fn_get_firms_list()")
         if firms:
             firm_options = {f['name']: f['firm_id'] for f in firms}
             selected_firm = st.selectbox("Выберите фирму", list(firm_options.keys()), key="add_park_firm")
@@ -180,10 +247,10 @@ def page_parks_zones():
                 
                 if st.form_submit_button("Добавить парк"):
                     if park_name:
-                        result = execute_query(
-                            "INSERT INTO parks (firm_id, name) VALUES (%s, %s)",
+                        result = call_procedure(
+                            "sp_add_park",
                             (firm_options[selected_firm], park_name),
-                            fetch=False
+                            has_out_param=True
                         )
                         if result:
                             st.success("Парк добавлен!")
@@ -194,12 +261,7 @@ def page_parks_zones():
             st.warning("Сначала добавьте фирму")
     
     with tab3:
-        parks = execute_query("""
-            SELECT p.park_id, p.name, f.name as firm_name 
-            FROM parks p 
-            JOIN firm f ON p.firm_id = f.firm_id 
-            ORDER BY p.park_id
-        """)
+        parks = execute_query("SELECT * FROM fn_get_all_parks()")
         
         if parks:
             park_options = {f"{p['name']} ({p['firm_name']})": p['park_id'] for p in parks}
@@ -207,17 +269,17 @@ def page_parks_zones():
             
             if selected:
                 park_id = park_options[selected]
-                park_data = execute_query("SELECT * FROM parks WHERE park_id = %s", (park_id,))
+                park_data = execute_query("SELECT * FROM fn_get_park_by_id(%s)", (park_id,))
                 
                 if park_data:
                     with st.form("edit_park"):
                         new_name = st.text_input("Название", value=park_data[0]['name'], key="edit_park_name")
                         
                         if st.form_submit_button("Обновить"):
-                            result = execute_query(
-                                "UPDATE parks SET name = %s WHERE park_id = %s",
-                                (new_name, park_id),
-                                fetch=False
+                            result = call_procedure(
+                                "sp_update_park",
+                                (park_id, new_name),
+                                has_out_param=False
                             )
                             if result:
                                 st.success("Парк обновлен!")
@@ -226,12 +288,7 @@ def page_parks_zones():
             st.info("Нет парков для редактирования")
     
     with tab4:
-        parks = execute_query("""
-            SELECT p.park_id, p.name, f.name as firm_name 
-            FROM parks p 
-            JOIN firm f ON p.firm_id = f.firm_id 
-            ORDER BY p.park_id
-        """)
+        parks = execute_query("SELECT * FROM fn_get_all_parks()")
         
         if parks:
             park_options = {f"{p['name']} ({p['firm_name']})": p['park_id'] for p in parks}
@@ -243,7 +300,7 @@ def page_parks_zones():
                 with st.form("delete_park"):
                     st.warning(f"Вы уверены, что хотите удалить этот парк? Это действие нельзя отменить!")
                     if st.form_submit_button("Удалить", type="primary"):
-                        result = execute_query("DELETE FROM parks WHERE park_id = %s", (park_id,), fetch=False)
+                        result = call_procedure("sp_delete_park", (park_id,), has_out_param=False)
                         if result:
                             st.success("Парк удален!")
                             st.rerun()
@@ -251,12 +308,7 @@ def page_parks_zones():
             st.info("Нет парков для удаления")
     
     with tab5:
-        zones = execute_query("""
-            SELECT z.zone_id, z.name, p.name as park_name 
-            FROM zones z 
-            JOIN parks p ON z.park_id = p.park_id 
-            ORDER BY z.zone_id
-        """)
+        zones = execute_query("SELECT * FROM fn_get_all_zones()")
         
         if zones:
             st.dataframe(zones, use_container_width=True)
@@ -264,7 +316,7 @@ def page_parks_zones():
             st.info("Зоны не найдены")
     
     with tab6:
-        parks = execute_query("SELECT park_id, name FROM parks ORDER BY park_id")
+        parks = execute_query("SELECT * FROM fn_get_parks_list()")
         if parks:
             park_options = {p['name']: p['park_id'] for p in parks}
             selected_park = st.selectbox("Выберите парк", list(park_options.keys()), key="add_zone_park")
@@ -274,10 +326,10 @@ def page_parks_zones():
                 
                 if st.form_submit_button("Добавить зону"):
                     if zone_name:
-                        result = execute_query(
-                            "INSERT INTO zones (park_id, name) VALUES (%s, %s)",
+                        result = call_procedure(
+                            "sp_add_zone",
                             (park_options[selected_park], zone_name),
-                            fetch=False
+                            has_out_param=True
                         )
                         if result:
                             st.success("Зона добавлена!")
@@ -287,12 +339,7 @@ def page_parks_zones():
         else:
             st.warning("Сначала добавьте парк")
         
-        zones = execute_query("""
-            SELECT z.zone_id, z.name, p.name as park_name 
-            FROM zones z 
-            JOIN parks p ON z.park_id = p.park_id 
-            ORDER BY z.zone_id
-        """)
+        zones = execute_query("SELECT * FROM fn_get_all_zones()")
         
         if zones:
             st.markdown("---")
@@ -306,17 +353,17 @@ def page_parks_zones():
                 
                 if selected:
                     zone_id = zone_options[selected]
-                    zone_data = execute_query("SELECT * FROM zones WHERE zone_id = %s", (zone_id,))
+                    zone_data = execute_query("SELECT * FROM fn_get_zone_by_id(%s)", (zone_id,))
                     
                     if zone_data:
                         with st.form("edit_zone"):
                             new_name = st.text_input("Название", value=zone_data[0]['name'], key="edit_zone_name")
                             
                             if st.form_submit_button("Обновить"):
-                                result = execute_query(
-                                    "UPDATE zones SET name = %s WHERE zone_id = %s",
-                                    (new_name, zone_id),
-                                    fetch=False
+                                result = call_procedure(
+                                    "sp_update_zone",
+                                    (zone_id, new_name),
+                                    has_out_param=False
                                 )
                                 if result:
                                     st.success("Зона обновлена!")
@@ -332,7 +379,7 @@ def page_parks_zones():
                     with st.form("delete_zone"):
                         st.warning(f"Вы уверены, что хотите удалить эту зону? Это действие нельзя отменить!")
                         if st.form_submit_button("Удалить", type="primary"):
-                            result = execute_query("DELETE FROM zones WHERE zone_id = %s", (zone_id,), fetch=False)
+                            result = call_procedure("sp_delete_zone", (zone_id,), has_out_param=False)
                             if result:
                                 st.success("Зона удалена!")
                                 st.rerun()
@@ -343,21 +390,15 @@ def page_plants():
     tab1, tab2, tab3, tab4 = st.tabs(["Просмотр", "Добавить", "Редактировать", "Удалить"])
     
     with tab1:
-        plants = execute_query("SELECT * FROM v_all_plants_info ORDER BY plant_id")
+        plants = execute_query("SELECT * FROM fn_get_all_plants()")
         if plants:
             st.dataframe(plants, use_container_width=True)
         else:
             st.info("Растения не найдены")
     
     with tab2:
-        zones = execute_query("""
-            SELECT z.zone_id, z.name, p.name as park_name 
-            FROM zones z 
-            JOIN parks p ON z.park_id = p.park_id 
-            ORDER BY z.zone_id
-        """)
-        
-        species = execute_query("SELECT species_id, species_name FROM plant_species ORDER BY species_name")
+        zones = execute_query("SELECT * FROM fn_get_zones_list()")
+        species = execute_query("SELECT * FROM fn_get_species_list()")
         
         if not zones:
             st.warning("Сначала добавьте зону")
@@ -377,12 +418,11 @@ def page_plants():
                 
                 if st.form_submit_button("Добавить растение"):
                     if local_number:
-                        result = execute_query(
-                            """INSERT INTO plants (local_plant_number, zone_id, species_id, date_planted, age_at_planting_months) 
-                               VALUES (%s, %s, %s, %s, %s)""",
+                        result = call_procedure(
+                            "sp_add_plant",
                             (local_number, zone_options[selected_zone], species_options[selected_species], 
                              date_planted, age_months),
-                            fetch=False
+                            has_out_param=True
                         )
                         if result:
                             st.success("Растение добавлено!")
@@ -391,29 +431,29 @@ def page_plants():
                         st.error("Уникальный номер обязателен")
     
     with tab3:
-        plants = execute_query("SELECT plant_id, local_plant_number, species_name FROM v_all_plants_info ORDER BY plant_id")
+        plants = execute_query("SELECT * FROM fn_get_plants_list()")
         if plants:
             plant_options = {f"{p['local_plant_number']} ({p['species_name']})": p['plant_id'] for p in plants}
             selected = st.selectbox("Выберите растение", list(plant_options.keys()), key="edit_plant_select")
             
             if selected:
                 plant_id = plant_options[selected]
-                plant_data = execute_query("SELECT * FROM plants WHERE plant_id = %s", (plant_id,))
+                plant_data = execute_query("SELECT * FROM fn_get_plant_by_id(%s)", (plant_id,))
                 
                 if plant_data:
                     with st.form("edit_plant"):
-                        zones = execute_query("SELECT zone_id, name FROM zones ORDER BY zone_id")
-                        zone_options = {z['name']: z['zone_id'] for z in zones}
-                        current_zone = next((z['zone_id'] for z in zones if z['zone_id'] == plant_data[0]['zone_id']), None)
+                        zones = execute_query("SELECT * FROM fn_get_zones_list()")
+                        zone_options = {f"{z['name']} ({z['park_name']})": z['zone_id'] for z in zones}
+                        current_zone = plant_data[0]['zone_id']
                         selected_zone = st.selectbox("Зона", list(zone_options.keys()), 
-                                                     index=list(zone_options.values()).index(current_zone) if current_zone else 0,
+                                                     index=list(zone_options.values()).index(current_zone) if current_zone in zone_options.values() else 0,
                                                      key="edit_plant_zone")
                         
-                        species = execute_query("SELECT species_id, species_name FROM plant_species ORDER BY species_name")
+                        species = execute_query("SELECT * FROM fn_get_species_list()")
                         species_options = {s['species_name']: s['species_id'] for s in species}
-                        current_species = next((s['species_id'] for s in species if s['species_id'] == plant_data[0]['species_id']), None)
+                        current_species = plant_data[0]['species_id']
                         selected_species = st.selectbox("Вид", list(species_options.keys()),
-                                                         index=list(species_options.values()).index(current_species) if current_species else 0,
+                                                         index=list(species_options.values()).index(current_species) if current_species in species_options.values() else 0,
                                                          key="edit_plant_species")
                         
                         local_number = st.text_input("Номер в зоне", value=plant_data[0]['local_plant_number'], key="edit_plant_number")
@@ -422,12 +462,11 @@ def page_plants():
                                                     value=int(plant_data[0]['age_at_planting_months']), key="edit_plant_age")
                         
                         if st.form_submit_button("Обновить"):
-                            result = execute_query(
-                                """UPDATE plants SET local_plant_number = %s, zone_id = %s, species_id = %s, 
-                                   date_planted = %s, age_at_planting_months = %s WHERE plant_id = %s""",
-                                (local_number, zone_options[selected_zone], species_options[selected_species],
-                                 date_planted, age_months, plant_id),
-                                fetch=False
+                            result = call_procedure(
+                                "sp_update_plant",
+                                (plant_id, local_number, zone_options[selected_zone], species_options[selected_species],
+                                 date_planted, age_months),
+                                has_out_param=False
                             )
                             if result:
                                 st.success("Растение обновлено!")
@@ -436,7 +475,7 @@ def page_plants():
             st.info("Нет растений для редактирования")
     
     with tab4:
-        plants = execute_query("SELECT plant_id, local_plant_number, species_name FROM v_all_plants_info ORDER BY plant_id")
+        plants = execute_query("SELECT * FROM fn_get_plants_list()")
         if plants:
             plant_options = {f"{p['local_plant_number']} ({p['species_name']})": p['plant_id'] for p in plants}
             selected = st.selectbox("Выберите растение для удаления", list(plant_options.keys()), key="delete_plant_select")
@@ -447,7 +486,7 @@ def page_plants():
                 with st.form("delete_plant"):
                     st.warning(f"Вы уверены, что хотите удалить это растение? Это действие нельзя отменить!")
                     if st.form_submit_button("Удалить", type="primary"):
-                        result = execute_query("DELETE FROM plants WHERE plant_id = %s", (plant_id,), fetch=False)
+                        result = call_procedure("sp_delete_plant", (plant_id,), has_out_param=False)
                         if result:
                             st.success("Растение удалено!")
                             st.rerun()
@@ -460,12 +499,7 @@ def page_employees():
     tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["Служители", "Добавить служителя", "Редактировать служителя", "Удалить служителя", "Декораторы", "Добавить декоратора"])
     
     with tab1:
-        caretakers = execute_query("""
-            SELECT employee_id, full_name, phone, address 
-            FROM employees 
-            WHERE employee_type = 'служитель' 
-            ORDER BY employee_id
-        """)
+        caretakers = execute_query("SELECT * FROM fn_get_all_caretakers()")
         
         if caretakers:
             st.dataframe(caretakers, use_container_width=True)
@@ -480,10 +514,10 @@ def page_employees():
             
             if st.form_submit_button("Добавить служителя"):
                 if full_name:
-                    result = execute_query(
-                        "INSERT INTO employees (full_name, phone, address, employee_type) VALUES (%s, %s, %s, 'служитель')",
+                    result = call_procedure(
+                        "sp_add_caretaker",
                         (full_name, phone or None, address or None),
-                        fetch=False
+                        has_out_param=True
                     )
                     if result:
                         st.success("Служитель добавлен!")
@@ -492,12 +526,7 @@ def page_employees():
                     st.error("ФИО обязательно")
     
     with tab3:
-        caretakers = execute_query("""
-            SELECT employee_id, full_name, phone, address 
-            FROM employees 
-            WHERE employee_type = 'служитель' 
-            ORDER BY employee_id
-        """)
+        caretakers = execute_query("SELECT * FROM fn_get_all_caretakers()")
         
         if caretakers:
             caretaker_options = {f"{c['full_name']}": c['employee_id'] for c in caretakers}
@@ -505,7 +534,7 @@ def page_employees():
             
             if selected:
                 emp_id = caretaker_options[selected]
-                emp_data = execute_query("SELECT * FROM employees WHERE employee_id = %s", (emp_id,))
+                emp_data = execute_query("SELECT * FROM fn_get_employee_by_id(%s)", (emp_id,))
                 
                 if emp_data:
                     with st.form("edit_caretaker"):
@@ -514,10 +543,10 @@ def page_employees():
                         address = st.text_area("Адрес", value=emp_data[0]['address'] or "", key="edit_caretaker_address")
                         
                         if st.form_submit_button("Обновить"):
-                            result = execute_query(
-                                "UPDATE employees SET full_name = %s, phone = %s, address = %s WHERE employee_id = %s",
-                                (full_name, phone or None, address or None, emp_id),
-                                fetch=False
+                            result = call_procedure(
+                                "sp_update_caretaker",
+                                (emp_id, full_name, phone or None, address or None),
+                                has_out_param=False
                             )
                             if result:
                                 st.success("Служитель обновлен!")
@@ -526,12 +555,7 @@ def page_employees():
             st.info("Нет служителей для редактирования")
     
     with tab4:
-        caretakers = execute_query("""
-            SELECT employee_id, full_name 
-            FROM employees 
-            WHERE employee_type = 'служитель' 
-            ORDER BY employee_id
-        """)
+        caretakers = execute_query("SELECT * FROM fn_get_all_caretakers()")
         
         if caretakers:
             caretaker_options = {f"{c['full_name']}": c['employee_id'] for c in caretakers}
@@ -543,7 +567,7 @@ def page_employees():
                 with st.form("delete_caretaker"):
                     st.warning(f"Вы уверены, что хотите удалить этого служителя? Это действие нельзя отменить!")
                     if st.form_submit_button("Удалить", type="primary"):
-                        result = execute_query("DELETE FROM employees WHERE employee_id = %s", (emp_id,), fetch=False)
+                        result = call_procedure("sp_delete_employee", (emp_id,), has_out_param=False)
                         if result:
                             st.success("Служитель удален!")
                             st.rerun()
@@ -551,12 +575,7 @@ def page_employees():
             st.info("Нет служителей для удаления")
     
     with tab5:
-        decorators = execute_query("""
-            SELECT employee_id, full_name, phone, address, education, university, category 
-            FROM employees 
-            WHERE employee_type = 'декоратор' 
-            ORDER BY employee_id
-        """)
+        decorators = execute_query("SELECT * FROM fn_get_all_decorators()")
         
         if decorators:
             st.dataframe(decorators, use_container_width=True)
@@ -574,11 +593,10 @@ def page_employees():
             
             if st.form_submit_button("Добавить декоратора"):
                 if full_name:
-                    result = execute_query(
-                        """INSERT INTO employees (full_name, phone, address, employee_type, education, university, category) 
-                           VALUES (%s, %s, %s, 'декоратор', %s, %s, %s)""",
+                    result = call_procedure(
+                        "sp_add_decorator",
                         (full_name, phone or None, address or None, education or None, university or None, category),
-                        fetch=False
+                        has_out_param=True
                     )
                     if result:
                         st.success("Декоратор добавлен!")
@@ -586,12 +604,7 @@ def page_employees():
                 else:
                     st.error("ФИО обязательно")
         
-        decorators = execute_query("""
-            SELECT employee_id, full_name, phone, address, education, university, category 
-            FROM employees 
-            WHERE employee_type = 'декоратор' 
-            ORDER BY employee_id
-        """)
+        decorators = execute_query("SELECT * FROM fn_get_all_decorators()")
         
         if decorators:
             st.markdown("---")
@@ -605,7 +618,7 @@ def page_employees():
                 
                 if selected:
                     emp_id = decorator_options[selected]
-                    emp_data = execute_query("SELECT * FROM employees WHERE employee_id = %s", (emp_id,))
+                    emp_data = execute_query("SELECT * FROM fn_get_employee_by_id(%s)", (emp_id,))
                     
                     if emp_data:
                         with st.form("edit_decorator"):
@@ -619,12 +632,11 @@ def page_employees():
                                                    if emp_data[0]['category'] else 3, key="edit_decorator_category")
                             
                             if st.form_submit_button("Обновить"):
-                                result = execute_query(
-                                    """UPDATE employees SET full_name = %s, phone = %s, address = %s, 
-                                       education = %s, university = %s, category = %s WHERE employee_id = %s""",
-                                    (full_name, phone or None, address or None, education or None, 
-                                     university or None, category, emp_id),
-                                    fetch=False
+                                result = call_procedure(
+                                    "sp_update_decorator",
+                                    (emp_id, full_name, phone or None, address or None, education or None, 
+                                     university or None, category),
+                                    has_out_param=False
                                 )
                                 if result:
                                     st.success("Декоратор обновлен!")
@@ -640,7 +652,7 @@ def page_employees():
                     with st.form("delete_decorator"):
                         st.warning(f"Вы уверены, что хотите удалить этого декоратора? Это действие нельзя отменить!")
                         if st.form_submit_button("Удалить", type="primary"):
-                            result = execute_query("DELETE FROM employees WHERE employee_id = %s", (emp_id,), fetch=False)
+                            result = call_procedure("sp_delete_employee", (emp_id,), has_out_param=False)
                             if result:
                                 st.success("Декоратор удален!")
                                 st.rerun()
@@ -651,13 +663,8 @@ def page_schedule():
     tab1, tab2 = st.tabs(["Добавить назначение", "Просмотр графика"])
     
     with tab1:
-        plants = execute_query("SELECT plant_id, local_plant_number, species_name FROM v_all_plants_info ORDER BY plant_id")
-        caretakers = execute_query("""
-            SELECT employee_id, full_name 
-            FROM employees 
-            WHERE employee_type = 'служитель' 
-            ORDER BY full_name
-        """)
+        plants = execute_query("SELECT * FROM fn_get_plants_list()")
+        caretakers = execute_query("SELECT * FROM fn_get_caretakers_list()")
         
         if not plants:
             st.warning("Сначала добавьте растение")
@@ -674,10 +681,10 @@ def page_schedule():
                 assignment_date = st.date_input("Дата назначения *", value=date.today(), key="add_schedule_date")
                 
                 if st.form_submit_button("Добавить в график"):
-                    result = execute_query(
-                        "INSERT INTO schedule (plant_id, employee_id, assignment_date) VALUES (%s, %s, %s)",
+                    result = call_procedure(
+                        "sp_add_schedule",
                         (plant_options[selected_plant], caretaker_options[selected_caretaker], assignment_date),
-                        fetch=False
+                        has_out_param=True
                     )
                     if result:
                         st.success("Назначение добавлено в график!")
@@ -688,11 +695,7 @@ def page_schedule():
         
         view_date = st.date_input("Выберите дату для просмотра", value=date.today(), key="view_schedule_date")
         
-        schedule = execute_query("""
-            SELECT * FROM v_employee_schedule 
-            WHERE assignment_date = %s 
-            ORDER BY assignment_date, full_name
-        """, (view_date,))
+        schedule = execute_query("SELECT * FROM fn_get_schedule_by_date(%s)", (view_date,))
         
         if schedule:
             st.dataframe(schedule, use_container_width=True)
@@ -711,16 +714,13 @@ def page_reports():
     with tab1:
         st.subheader("Просмотр полной информации по насаждениям заданного вида")
         
-        species = execute_query("SELECT species_name FROM plant_species ORDER BY species_name")
+        species = execute_query("SELECT * FROM fn_get_species_names()")
         if species:
             species_options = [s['species_name'] for s in species]
             selected_species = st.selectbox("Выберите вид растения", species_options, key="report_species_select")
             
             if st.button("Показать", key="report_species_btn"):
-                plants = execute_query(
-                    "SELECT * FROM v_all_plants_info WHERE species_name = %s ORDER BY plant_id",
-                    (selected_species,)
-                )
+                plants = execute_query("SELECT * FROM fn_get_plants_by_species(%s)", (selected_species,))
                 
                 if plants:
                     st.dataframe(plants, use_container_width=True)
@@ -735,10 +735,7 @@ def page_reports():
         report_date = st.date_input("Выберите дату", value=date.today(), key="report_date_select")
         
         if st.button("Показать", key="report_date_btn"):
-            employees = execute_query(
-                "SELECT full_name, phone, address FROM v_employee_schedule WHERE assignment_date = %s ORDER BY full_name",
-                (report_date,)
-            )
+            employees = execute_query("SELECT * FROM fn_get_employees_by_date(%s)", (report_date,))
             
             if employees:
                 st.dataframe(employees, use_container_width=True)
@@ -748,16 +745,13 @@ def page_reports():
     with tab3:
         st.subheader("Просмотр перечня всех растений заданного вида и режимы их полива")
         
-        species = execute_query("SELECT species_name FROM plant_species ORDER BY species_name")
+        species = execute_query("SELECT * FROM fn_get_species_names()")
         if species:
             species_options = [s['species_name'] for s in species]
             selected_species = st.selectbox("Выберите вид растения", species_options, key="report_regime_select")
             
             if st.button("Показать", key="report_regime_btn"):
-                plants = execute_query(
-                    "SELECT * FROM v_plant_current_regimes WHERE species_name = %s ORDER BY plant_id",
-                    (selected_species,)
-                )
+                plants = execute_query("SELECT * FROM fn_get_plant_regimes_by_species(%s)", (selected_species,))
                 
                 if plants:
                     st.dataframe(plants, use_container_width=True)
@@ -772,7 +766,7 @@ def page_species():
     tab1, tab2, tab3, tab4 = st.tabs(["Просмотр", "Добавить", "Редактировать", "Удалить"])
     
     with tab1:
-        species = execute_query("SELECT * FROM plant_species ORDER BY species_name")
+        species = execute_query("SELECT * FROM fn_get_all_species()")
         if species:
             st.dataframe(species, use_container_width=True)
         else:
@@ -784,10 +778,10 @@ def page_species():
             
             if st.form_submit_button("Добавить"):
                 if species_name:
-                    result = execute_query(
-                        "INSERT INTO plant_species (species_name) VALUES (%s)",
+                    result = call_procedure(
+                        "sp_add_species",
                         (species_name,),
-                        fetch=False
+                        has_out_param=True
                     )
                     if result:
                         st.success("Вид добавлен!")
@@ -796,24 +790,24 @@ def page_species():
                     st.error("Название вида обязательно")
     
     with tab3:
-        species = execute_query("SELECT * FROM plant_species ORDER BY species_name")
+        species = execute_query("SELECT * FROM fn_get_all_species()")
         if species:
             species_options = {f"{s['species_name']}": s['species_id'] for s in species}
             selected = st.selectbox("Выберите вид для редактирования", list(species_options.keys()), key="edit_species_select")
             
             if selected:
                 species_id = species_options[selected]
-                species_data = execute_query("SELECT * FROM plant_species WHERE species_id = %s", (species_id,))
+                species_data = execute_query("SELECT * FROM fn_get_species_by_id(%s)", (species_id,))
                 
                 if species_data:
                     with st.form("edit_species"):
                         new_name = st.text_input("Название вида", value=species_data[0]['species_name'], key="edit_species_name")
                         
                         if st.form_submit_button("Обновить"):
-                            result = execute_query(
-                                "UPDATE plant_species SET species_name = %s WHERE species_id = %s",
-                                (new_name, species_id),
-                                fetch=False
+                            result = call_procedure(
+                                "sp_update_species",
+                                (species_id, new_name),
+                                has_out_param=False
                             )
                             if result:
                                 st.success("Вид обновлен!")
@@ -822,7 +816,7 @@ def page_species():
             st.info("Нет видов для редактирования")
     
     with tab4:
-        species = execute_query("SELECT * FROM plant_species ORDER BY species_name")
+        species = execute_query("SELECT * FROM fn_get_all_species()")
         if species:
             species_options = {f"{s['species_name']}": s['species_id'] for s in species}
             selected = st.selectbox("Выберите вид для удаления", list(species_options.keys()), key="delete_species_select")
@@ -833,11 +827,7 @@ def page_species():
                 with st.form("delete_species"):
                     st.warning(f"Вы уверены, что хотите удалить этот вид? Это действие нельзя отменить!")
                     if st.form_submit_button("Удалить", type="primary"):
-                        result = execute_query(
-                            "DELETE FROM plant_species WHERE species_id = %s",
-                            (species_id,),
-                            fetch=False
-                        )
+                        result = call_procedure("sp_delete_species", (species_id,), has_out_param=False)
                         if result:
                             st.success("Вид удален!")
                             st.rerun()
@@ -849,7 +839,7 @@ def page_reference():
     
     st.subheader("Режимы полива")
     
-    species = execute_query("SELECT species_id, species_name FROM plant_species ORDER BY species_name")
+    species = execute_query("SELECT * FROM fn_get_species_list()")
     
     if not species:
         st.warning("Сначала добавьте вид растения")
@@ -866,24 +856,17 @@ def page_reference():
                 water_liters = st.number_input("Норма воды (литры) *", min_value=0.01, value=1.0, step=0.1, key="add_regime_liters")
                 
                 if st.form_submit_button("Добавить режим"):
-                    result = execute_query(
-                        """INSERT INTO watering_regimes (species_id, min_age_months, max_age_months, 
-                           periodicity, time_of_day, water_liters) VALUES (%s, %s, %s, %s, %s, %s)""",
+                    result = call_procedure(
+                        "sp_add_watering_regime",
                         (species_options[selected_species], min_age, max_age if max_age else None, 
                          periodicity, time_of_day, water_liters),
-                        fetch=False
+                        has_out_param=True
                     )
                     if result:
                         st.success("Режим полива добавлен!")
                         st.rerun()
     
-    regimes = execute_query("""
-        SELECT wr.regime_id, ps.species_name, wr.min_age_months, wr.max_age_months, 
-               wr.periodicity, wr.time_of_day, wr.water_liters
-        FROM watering_regimes wr
-        JOIN plant_species ps ON wr.species_id = ps.species_id
-        ORDER BY ps.species_name, wr.min_age_months
-    """)
+    regimes = execute_query("SELECT * FROM fn_get_all_watering_regimes()")
     
     if regimes:
         st.dataframe(regimes, use_container_width=True)
@@ -923,10 +906,10 @@ def page_main():
     
     col1, col2, col3, col4 = st.columns(4)
     
-    firms_count = execute_query("SELECT COUNT(*) as count FROM firm")
-    parks_count = execute_query("SELECT COUNT(*) as count FROM parks")
-    plants_count = execute_query("SELECT COUNT(*) as count FROM plants")
-    employees_count = execute_query("SELECT COUNT(*) as count FROM employees")
+    firms_count = execute_query("SELECT fn_get_firms_count() as count")
+    parks_count = execute_query("SELECT fn_get_parks_count() as count")
+    plants_count = execute_query("SELECT fn_get_plants_count() as count")
+    employees_count = execute_query("SELECT fn_get_employees_count() as count")
     
     with col1:
         st.metric("Фирм", firms_count[0]['count'] if firms_count else 0)
