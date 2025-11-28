@@ -702,6 +702,375 @@ def page_schedule():
         else:
             st.info(f"На {view_date} нет назначений")
 
+def page_watering_regimes():
+    st.header("Управление режимами полива")
+    
+    st.info("""
+    ℹ️ **Правило системы:** Для одного вида растения с одинаковым возрастом может быть только один режим полива.
+    
+    Растения разного возраста имеют разные режимы полива.
+    """)
+    
+    tab1, tab2, tab3, tab4, tab5 = st.tabs([
+        "Просмотр всех режимов", 
+        "Добавить режим", 
+        "Редактировать режим", 
+        "Удалить режим",
+        "Проверка пересечений"
+    ])
+    
+    with tab1:
+        st.subheader("Все режимы полива")
+        
+        regimes = execute_query("SELECT * FROM fn_get_all_watering_regimes()")
+        if regimes:
+            # Форматируем данные для отображения
+            formatted_regimes = []
+            for r in regimes:
+                formatted_regimes.append({
+                    'ID режима': r['regime_id'],
+                    'Вид растения': r['species_name'],
+                    'Возраст от (мес)': r['min_age_months'],
+                    'Возраст до (мес)': r['max_age_months'] if r['max_age_months'] else '∞',
+                    'Периодичность': r['periodicity'],
+                    'Время': str(r['time_of_day']) if r['time_of_day'] else '-',
+                    'Вода (л)': r['water_liters']
+                })
+            st.dataframe(formatted_regimes, use_container_width=True)
+            
+            # Группировка по видам
+            st.markdown("---")
+            st.subheader("Режимы по видам растений")
+            
+            species_list = execute_query("SELECT * FROM fn_get_species_list()")
+            if species_list:
+                selected_species = st.selectbox(
+                    "Выберите вид для просмотра его режимов",
+                    [s['species_name'] for s in species_list],
+                    key="view_regimes_species"
+                )
+                
+                species_regimes = [r for r in formatted_regimes if r['Вид растения'] == selected_species]
+                if species_regimes:
+                    st.dataframe(species_regimes, use_container_width=True)
+                    
+                    # Визуализация диапазонов
+                    st.markdown("**Возрастные диапазоны:**")
+                    for regime in species_regimes:
+                        max_age = regime['Возраст до (мес)']
+                        if max_age == '∞':
+                            st.write(f"🌱 {regime['Возраст от (мес)']}+ месяцев → {regime['Периодичность']}, {regime['Вода (л)']} л")
+                        else:
+                            st.write(f"🌱 {regime['Возраст от (мес)']}-{max_age} месяцев → {regime['Периодичность']}, {regime['Вода (л)']} л")
+                else:
+                    st.info(f"Для вида '{selected_species}' нет режимов полива")
+        else:
+            st.info("Режимы полива не найдены")
+    
+    with tab2:
+        st.subheader("Добавить новый режим полива")
+        
+        with st.form("add_watering_regime"):
+            species_list = execute_query("SELECT * FROM fn_get_species_list()")
+            
+            if species_list:
+                species_options = {s['species_name']: s['species_id'] for s in species_list}
+                selected_species = st.selectbox("Вид растения *", list(species_options.keys()), key="add_regime_species")
+                
+                col1, col2 = st.columns(2)
+                with col1:
+                    min_age = st.number_input("Минимальный возраст (месяцы) *", min_value=0, value=0, key="add_min_age")
+                with col2:
+                    use_max_age = st.checkbox("Указать максимальный возраст", value=True, key="add_use_max_age")
+                    if use_max_age:
+                        max_age = st.number_input("Максимальный возраст (месяцы)", min_value=min_age+1, value=min_age+12, key="add_max_age")
+                    else:
+                        max_age = None
+                        st.info("Режим будет применяться для всех растений старше минимального возраста")
+                
+                periodicity = st.selectbox(
+                    "Периодичность полива *",
+                    ["ежедневно", "раз в неделю", "раз в 2 недели", "раз в месяц"],
+                    key="add_periodicity"
+                )
+                
+                col3, col4 = st.columns(2)
+                with col3:
+                    time_of_day = st.time_input("Время полива", key="add_time")
+                with col4:
+                    water_liters = st.number_input("Количество воды (литры) *", min_value=0.1, value=5.0, step=0.5, key="add_water")
+                
+                st.markdown("---")
+                st.markdown("**Предпросмотр:**")
+                if max_age:
+                    st.write(f"🌱 {selected_species}: {min_age}-{max_age} месяцев → {periodicity}, {water_liters} л, время: {time_of_day}")
+                else:
+                    st.write(f"🌱 {selected_species}: {min_age}+ месяцев → {periodicity}, {water_liters} л, время: {time_of_day}")
+                
+                if st.form_submit_button("Добавить режим"):
+                    species_id = species_options[selected_species]
+                    
+                    # Сначала проверяем пересечение
+                    overlap_check = execute_query(
+                        "SELECT * FROM fn_check_watering_regime_overlap(%s, %s, %s, NULL)",
+                        (species_id, min_age, max_age)
+                    )
+                    
+                    if overlap_check and overlap_check[0]['has_overlap']:
+                        overlap = overlap_check[0]
+                        max_age_str = str(overlap['overlapping_max_age']) if overlap['overlapping_max_age'] else '∞'
+                        st.error(f"""
+                        ❌ **Невозможно добавить режим!**
+                        
+                        Возрастной диапазон {min_age}-{max_age if max_age else '∞'} месяцев пересекается 
+                        с существующим режимом (ID={overlap['overlapping_regime_id']}, 
+                        диапазон {overlap['overlapping_min_age']}-{max_age_str} месяцев).
+                        
+                        **Правило:** Для растений одного вида с одинаковым возрастом может быть только один режим полива.
+                        """)
+                    else:
+                        # Добавляем режим
+                        result = call_procedure(
+                            "sp_add_watering_regime",
+                            (species_id, min_age, max_age, periodicity, time_of_day, water_liters),
+                            has_out_param=True
+                        )
+                        if result:
+                            st.success(f"✅ Режим полива успешно добавлен! (ID={result})")
+                            st.rerun()
+            else:
+                st.warning("Сначала добавьте виды растений")
+    
+    with tab3:
+        st.subheader("Редактировать режим полива")
+        
+        regimes = execute_query("SELECT * FROM fn_get_all_watering_regimes()")
+        if regimes:
+            regime_options = {
+                f"{r['species_name']} ({r['min_age_months']}-{r['max_age_months'] if r['max_age_months'] else '∞'} мес)": r
+                for r in regimes
+            }
+            
+            selected_regime_str = st.selectbox(
+                "Выберите режим для редактирования",
+                list(regime_options.keys()),
+                key="edit_regime_select"
+            )
+            
+            if selected_regime_str:
+                regime = regime_options[selected_regime_str]
+                
+                with st.form("edit_watering_regime"):
+                    st.info(f"Редактирование режима ID={regime['regime_id']}")
+                    
+                    species_list = execute_query("SELECT * FROM fn_get_species_list()")
+                    species_options = {s['species_name']: s['species_id'] for s in species_list}
+                    
+                    selected_species = st.selectbox(
+                        "Вид растения *",
+                        list(species_options.keys()),
+                        index=list(species_options.keys()).index(regime['species_name']),
+                        key="edit_regime_species"
+                    )
+                    
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        min_age = st.number_input(
+                            "Минимальный возраст (месяцы) *",
+                            min_value=0,
+                            value=regime['min_age_months'],
+                            key="edit_min_age"
+                        )
+                    with col2:
+                        use_max_age = st.checkbox(
+                            "Указать максимальный возраст",
+                            value=regime['max_age_months'] is not None,
+                            key="edit_use_max_age"
+                        )
+                        if use_max_age:
+                            max_age = st.number_input(
+                                "Максимальный возраст (месяцы)",
+                                min_value=min_age+1,
+                                value=regime['max_age_months'] if regime['max_age_months'] else min_age+12,
+                                key="edit_max_age"
+                            )
+                        else:
+                            max_age = None
+                    
+                    periodicity = st.selectbox(
+                        "Периодичность полива *",
+                        ["ежедневно", "раз в неделю", "раз в 2 недели", "раз в месяц"],
+                        index=["ежедневно", "раз в неделю", "раз в 2 недели", "раз в месяц"].index(regime['periodicity']),
+                        key="edit_periodicity"
+                    )
+                    
+                    col3, col4 = st.columns(2)
+                    with col3:
+                        time_of_day = st.time_input(
+                            "Время полива",
+                            value=regime['time_of_day'],
+                            key="edit_time"
+                        )
+                    with col4:
+                        water_liters = st.number_input(
+                            "Количество воды (литры) *",
+                            min_value=0.1,
+                            value=float(regime['water_liters']),
+                            step=0.5,
+                            key="edit_water"
+                        )
+                    
+                    if st.form_submit_button("Сохранить изменения"):
+                        species_id = species_options[selected_species]
+                        
+                        # Проверяем пересечение (исключая текущий режим)
+                        overlap_check = execute_query(
+                            "SELECT * FROM fn_check_watering_regime_overlap(%s, %s, %s, %s)",
+                            (species_id, min_age, max_age, regime['regime_id'])
+                        )
+                        
+                        if overlap_check and overlap_check[0]['has_overlap']:
+                            overlap = overlap_check[0]
+                            max_age_str = str(overlap['overlapping_max_age']) if overlap['overlapping_max_age'] else '∞'
+                            st.error(f"""
+                            ❌ **Невозможно обновить режим!**
+                            
+                            Возрастной диапазон {min_age}-{max_age if max_age else '∞'} месяцев пересекается 
+                            с существующим режимом (ID={overlap['overlapping_regime_id']}, 
+                            диапазон {overlap['overlapping_min_age']}-{max_age_str} месяцев).
+                            """)
+                        else:
+                            result = call_procedure(
+                                "sp_update_watering_regime",
+                                (regime['regime_id'], species_id, min_age, max_age, periodicity, time_of_day, water_liters),
+                                has_out_param=False
+                            )
+                            if result:
+                                st.success("✅ Режим полива успешно обновлен!")
+                                st.rerun()
+        else:
+            st.info("Режимы полива не найдены")
+    
+    with tab4:
+        st.subheader("Удалить режим полива")
+        
+        regimes = execute_query("SELECT * FROM fn_get_all_watering_regimes()")
+        if regimes:
+            regime_options = {
+                f"ID={r['regime_id']}: {r['species_name']} ({r['min_age_months']}-{r['max_age_months'] if r['max_age_months'] else '∞'} мес, {r['periodicity']})": r['regime_id']
+                for r in regimes
+            }
+            
+            selected_regime = st.selectbox(
+                "Выберите режим для удаления",
+                list(regime_options.keys()),
+                key="delete_regime_select"
+            )
+            
+            if selected_regime:
+                regime_id = regime_options[selected_regime]
+                
+                st.warning(f"⚠️ Вы уверены, что хотите удалить режим {selected_regime}?")
+                
+                if st.button("Удалить", key="delete_regime_btn", type="primary"):
+                    result = call_procedure("sp_delete_watering_regime", (regime_id,), has_out_param=False)
+                    if result:
+                        st.success("✅ Режим полива успешно удален!")
+                        st.rerun()
+        else:
+            st.info("Режимы полива не найдены")
+    
+    with tab5:
+        st.subheader("Проверка пересечений возрастных диапазонов")
+        
+        st.info("""
+        Используйте эту вкладку для проверки, будет ли новый возрастной диапазон 
+        пересекаться с существующими режимами полива для выбранного вида.
+        """)
+        
+        species_list = execute_query("SELECT * FROM fn_get_species_list()")
+        
+        if species_list:
+            species_options = {s['species_name']: s['species_id'] for s in species_list}
+            selected_species = st.selectbox(
+                "Вид растения",
+                list(species_options.keys()),
+                key="check_species"
+            )
+            
+            col1, col2 = st.columns(2)
+            with col1:
+                check_min_age = st.number_input("Минимальный возраст (месяцы)", min_value=0, value=0, key="check_min_age")
+            with col2:
+                use_check_max = st.checkbox("Указать максимальный возраст", value=True, key="check_use_max")
+                if use_check_max:
+                    check_max_age = st.number_input("Максимальный возраст (месяцы)", min_value=check_min_age+1, value=check_min_age+12, key="check_max_age")
+                else:
+                    check_max_age = None
+            
+            if st.button("Проверить пересечение", key="check_overlap_btn"):
+                species_id = species_options[selected_species]
+                
+                overlap_check = execute_query(
+                    "SELECT * FROM fn_check_watering_regime_overlap(%s, %s, %s, NULL)",
+                    (species_id, check_min_age, check_max_age)
+                )
+                
+                if overlap_check and overlap_check[0]['has_overlap']:
+                    overlap = overlap_check[0]
+                    max_age_str = str(overlap['overlapping_max_age']) if overlap['overlapping_max_age'] else '∞'
+                    
+                    st.error(f"""
+                    ❌ **Обнаружено пересечение!**
+                    
+                    Диапазон {check_min_age}-{check_max_age if check_max_age else '∞'} месяцев 
+                    пересекается с существующим режимом:
+                    - **ID режима:** {overlap['overlapping_regime_id']}
+                    - **Диапазон:** {overlap['overlapping_min_age']}-{max_age_str} месяцев
+                    
+                    Вы не сможете добавить режим с таким диапазоном.
+                    """)
+                    
+                    # Показываем все существующие режимы для этого вида
+                    st.markdown("**Существующие режимы для этого вида:**")
+                    existing_regimes = execute_query(
+                        "SELECT * FROM fn_get_all_watering_regimes() WHERE species_id = %s",
+                        (species_id,)
+                    )
+                    if existing_regimes:
+                        for r in existing_regimes:
+                            max_age_display = r['max_age_months'] if r['max_age_months'] else '∞'
+                            st.write(f"- ID={r['regime_id']}: {r['min_age_months']}-{max_age_display} месяцев")
+                else:
+                    st.success(f"""
+                    ✅ **Пересечений не обнаружено!**
+                    
+                    Диапазон {check_min_age}-{check_max_age if check_max_age else '∞'} месяцев 
+                    для вида "{selected_species}" можно использовать.
+                    
+                    Вы можете добавить режим с этим диапазоном.
+                    """)
+                    
+                    # Показываем визуализацию
+                    st.markdown("**Визуализация диапазонов:**")
+                    existing_regimes = execute_query(
+                        "SELECT * FROM fn_get_all_watering_regimes() WHERE species_id = %s ORDER BY min_age_months",
+                        (species_id,)
+                    )
+                    
+                    if existing_regimes:
+                        st.write("Существующие диапазоны:")
+                        for r in existing_regimes:
+                            max_age_display = r['max_age_months'] if r['max_age_months'] else '∞'
+                            st.write(f"  🟦 {r['min_age_months']}-{max_age_display} мес (ID={r['regime_id']})")
+                        
+                        st.write(f"Новый диапазон:")
+                        st.write(f"  🟩 {check_min_age}-{check_max_age if check_max_age else '∞'} мес (новый)")
+                    else:
+                        st.info("Для этого вида еще нет режимов полива")
+        else:
+            st.warning("Сначала добавьте виды растений")
+
 def page_reports():
     st.header("Отчеты")
     
@@ -834,45 +1203,6 @@ def page_species():
         else:
             st.info("Нет видов для удаления")
 
-def page_reference():
-    st.header("Справочники")
-    
-    st.subheader("Режимы полива")
-    
-    species = execute_query("SELECT * FROM fn_get_species_list()")
-    
-    if not species:
-        st.warning("Сначала добавьте вид растения")
-    else:
-        with st.expander("Добавить режим полива"):
-            species_options = {s['species_name']: s['species_id'] for s in species}
-            selected_species = st.selectbox("Выберите вид", list(species_options.keys()), key="add_regime_species")
-            
-            with st.form("add_regime"):
-                min_age = st.number_input("Минимальный возраст (месяцев) *", min_value=0, value=0, key="add_regime_min_age")
-                max_age = st.number_input("Максимальный возраст (месяцев)", min_value=0, value=None, key="add_regime_max_age")
-                periodicity = st.selectbox("Периодичность *", ["ежедневно", "раз в неделю", "раз в 2 недели", "раз в месяц"], key="add_regime_periodicity")
-                time_of_day = st.time_input("Время полива", value=None, key="add_regime_time")
-                water_liters = st.number_input("Норма воды (литры) *", min_value=0.01, value=1.0, step=0.1, key="add_regime_liters")
-                
-                if st.form_submit_button("Добавить режим"):
-                    result = call_procedure(
-                        "sp_add_watering_regime",
-                        (species_options[selected_species], min_age, max_age if max_age else None, 
-                         periodicity, time_of_day, water_liters),
-                        has_out_param=True
-                    )
-                    if result:
-                        st.success("Режим полива добавлен!")
-                        st.rerun()
-    
-    regimes = execute_query("SELECT * FROM fn_get_all_watering_regimes()")
-    
-    if regimes:
-        st.dataframe(regimes, use_container_width=True)
-    else:
-        st.info("Режимы полива не найдены")
-
 def page_main():
     st.title("Банк данных насаждений парков")
     st.markdown("---")
@@ -933,7 +1263,7 @@ def main():
         
         page = st.radio(
             "Выберите раздел:",
-            ["Главная", "Фирма", "Парки и зоны", "Растения", "Виды растений", "Персонал", "График работ", "Отчеты", "Справочники"]
+            ["Главная", "Фирма", "Парки и зоны", "Растения", "Виды растений", "Режимы полива", "Персонал", "График работ", "Отчеты"]
         )
     
     if page == "Главная":
@@ -946,14 +1276,14 @@ def main():
         page_plants()
     elif page == "Виды растений":
         page_species()
+    elif page == "Режимы полива":
+        page_watering_regimes()
     elif page == "Персонал":
         page_employees()
     elif page == "График работ":
         page_schedule()
     elif page == "Отчеты":
         page_reports()
-    elif page == "Справочники":
-        page_reference()
 
 if __name__ == "__main__":
     main()

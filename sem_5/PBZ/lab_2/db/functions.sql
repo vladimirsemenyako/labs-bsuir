@@ -1,3 +1,9 @@
+-- ПРИМЕР:
+-- + Допустимо: Клен 0-12 мес → режим 1, Клен 13-24 мес → режим 2
+-- - Недопустимо: Клен 0-12 мес → режим 1, Клен 10-20 мес → режим 2 (пересечение!)
+
+
+
 -- Функция: fn_get_plant_current_age - Расчет текущего возраста растения в месяцах
 CREATE OR REPLACE FUNCTION fn_get_plant_current_age(p_plant_id INT) 
 RETURNS INT AS $$
@@ -382,9 +388,9 @@ RETURNS TABLE (
 ) AS $$
 BEGIN
     RETURN QUERY
-    SELECT * FROM v_all_plants_info
-    WHERE species_name = p_species_name
-    ORDER BY plant_id;
+    SELECT * FROM v_all_plants_info v
+    WHERE v.species_name = p_species_name
+    ORDER BY v.plant_id;
 END;
 $$ LANGUAGE plpgsql;
 
@@ -681,13 +687,14 @@ RETURNS TABLE (
 ) AS $$
 BEGIN
     RETURN QUERY
-    SELECT * FROM v_plant_current_regimes
-    WHERE species_name = p_species_name
-    ORDER BY plant_id;
+    SELECT * FROM v_plant_current_regimes v
+    WHERE v.species_name = p_species_name
+    ORDER BY v.plant_id;
 END;
 $$ LANGUAGE plpgsql;
 
 -- Функция: sp_add_watering_regime - Добавить режим полива (возвращает ID режима)
+-- Проверяет, что для одного вида растения с одинаковым возрастом существует только один режим полива
 CREATE OR REPLACE FUNCTION sp_add_watering_regime(
     p_species_id INT,
     p_min_age_months INT,
@@ -698,13 +705,107 @@ CREATE OR REPLACE FUNCTION sp_add_watering_regime(
 ) RETURNS INT AS $$
 DECLARE
     v_regime_id INT;
+    v_overlap_check RECORD;
+    v_species_name VARCHAR(100);
 BEGIN
+    -- Получаем название вида для более информативных сообщений
+    SELECT species_name INTO v_species_name
+    FROM plant_species
+    WHERE species_id = p_species_id;
+    
+    IF NOT FOUND THEN
+        RAISE EXCEPTION 'Вид растения с ID=% не найден', p_species_id;
+    END IF;
+    
+    -- Проверяем пересечение с существующими режимами
+    SELECT * INTO v_overlap_check
+    FROM fn_check_watering_regime_overlap(p_species_id, p_min_age_months, p_max_age_months, NULL);
+    
+    IF v_overlap_check.has_overlap THEN
+        RAISE EXCEPTION 'Невозможно добавить режим полива для вида "%": возрастной диапазон %-% месяцев пересекается с существующим режимом (ID=%, диапазон %-% месяцев). Для растений одного вида с одинаковым возрастом может быть только один режим полива.',
+            v_species_name,
+            p_min_age_months,
+            COALESCE(p_max_age_months::TEXT, '∞'),
+            v_overlap_check.overlapping_regime_id,
+            v_overlap_check.overlapping_min_age,
+            COALESCE(v_overlap_check.overlapping_max_age::TEXT, '∞');
+    END IF;
+    
+    -- Если проверка прошла успешно, добавляем режим
     INSERT INTO watering_regimes (species_id, min_age_months, max_age_months, 
                                   periodicity, time_of_day, water_liters)
     VALUES (p_species_id, p_min_age_months, p_max_age_months, 
             p_periodicity, p_time_of_day, p_water_liters)
     RETURNING regime_id INTO v_regime_id;
     RETURN v_regime_id;
+END;
+$$ LANGUAGE plpgsql;
+
+
+-- Процедура: sp_update_watering_regime - Обновить режим полива
+-- Проверяет, что для одного вида растения с одинаковым возрастом существует только один режим полива
+CREATE OR REPLACE PROCEDURE sp_update_watering_regime(
+    p_regime_id INT,
+    p_species_id INT,
+    p_min_age_months INT,
+    p_max_age_months INT,
+    p_periodicity T_WATERING_PERIODICITY,
+    p_time_of_day TIME,
+    p_water_liters DECIMAL(5, 2)
+) AS $$
+DECLARE
+    v_overlap_check RECORD;
+    v_species_name VARCHAR(100);
+BEGIN
+    -- Проверяем существование режима
+    IF NOT EXISTS (SELECT 1 FROM watering_regimes WHERE regime_id = p_regime_id) THEN
+        RAISE EXCEPTION 'Режим полива с ID=% не найден', p_regime_id;
+    END IF;
+    
+    -- Получаем название вида для более информативных сообщений
+    SELECT species_name INTO v_species_name
+    FROM plant_species
+    WHERE species_id = p_species_id;
+    
+    IF NOT FOUND THEN
+        RAISE EXCEPTION 'Вид растения с ID=% не найден', p_species_id;
+    END IF;
+    
+    -- Проверяем пересечение с существующими режимами (исключая текущий)
+    SELECT * INTO v_overlap_check
+    FROM fn_check_watering_regime_overlap(p_species_id, p_min_age_months, p_max_age_months, p_regime_id);
+    
+    IF v_overlap_check.has_overlap THEN
+        RAISE EXCEPTION 'Невозможно обновить режим полива для вида "%": возрастной диапазон %-% месяцев пересекается с существующим режимом (ID=%, диапазон %-% месяцев). Для растений одного вида с одинаковым возрастом может быть только один режим полива.',
+            v_species_name,
+            p_min_age_months,
+            COALESCE(p_max_age_months::TEXT, '∞'),
+            v_overlap_check.overlapping_regime_id,
+            v_overlap_check.overlapping_min_age,
+            COALESCE(v_overlap_check.overlapping_max_age::TEXT, '∞');
+    END IF;
+    
+    -- Если проверка прошла успешно, обновляем режим
+    UPDATE watering_regimes
+    SET species_id = p_species_id,
+        min_age_months = p_min_age_months,
+        max_age_months = p_max_age_months,
+        periodicity = p_periodicity,
+        time_of_day = p_time_of_day,
+        water_liters = p_water_liters
+    WHERE regime_id = p_regime_id;
+END;
+$$ LANGUAGE plpgsql;
+
+
+-- Процедура: sp_delete_watering_regime - Удалить режим полива
+CREATE OR REPLACE PROCEDURE sp_delete_watering_regime(p_regime_id INT) AS $$
+BEGIN
+    DELETE FROM watering_regimes WHERE regime_id = p_regime_id;
+    
+    IF NOT FOUND THEN
+        RAISE EXCEPTION 'Режим полива с ID=% не найден', p_regime_id;
+    END IF;
 END;
 $$ LANGUAGE plpgsql;
 
@@ -854,6 +955,85 @@ BEGIN
     SELECT ps.species_name
     FROM plant_species ps
     ORDER BY ps.species_name;
+END;
+$$ LANGUAGE plpgsql;
+
+
+-- Функция: fn_get_watering_regime_for_plant - Получить режим полива для конкретного растения
+-- Возвращает режим полива, соответствующий текущему возрасту растения
+CREATE OR REPLACE FUNCTION fn_get_watering_regime_for_plant(p_plant_id INT)
+RETURNS TABLE (
+    regime_id INT,
+    species_id INT,
+    species_name VARCHAR(100),
+    plant_current_age_months INT,
+    min_age_months INT,
+    max_age_months INT,
+    periodicity T_WATERING_PERIODICITY,
+    time_of_day TIME,
+    water_liters DECIMAL(5, 2)
+) AS $$
+DECLARE
+    v_current_age INT;
+    v_species_id INT;
+BEGIN
+    -- Получаем текущий возраст растения и его вид
+    SELECT fn_get_plant_current_age(p_plant_id), p.species_id
+    INTO v_current_age, v_species_id
+    FROM plants p
+    WHERE p.plant_id = p_plant_id;
+    
+    IF NOT FOUND THEN
+        RAISE EXCEPTION 'Растение с ID=% не найдено', p_plant_id;
+    END IF;
+    
+    -- Возвращаем режим полива, соответствующий возрасту растения
+    RETURN QUERY
+    SELECT wr.regime_id, wr.species_id, ps.species_name, v_current_age,
+           wr.min_age_months, wr.max_age_months, wr.periodicity, 
+           wr.time_of_day, wr.water_liters
+    FROM watering_regimes wr
+    JOIN plant_species ps ON wr.species_id = ps.species_id
+    WHERE wr.species_id = v_species_id
+      AND v_current_age >= wr.min_age_months
+      AND (wr.max_age_months IS NULL OR v_current_age <= wr.max_age_months);
+END;
+$$ LANGUAGE plpgsql;
+
+
+-- Функция: fn_check_watering_regime_overlap - Проверить, пересекаются ли режимы полива
+-- Используется для валидации перед добавлением нового режима
+CREATE OR REPLACE FUNCTION fn_check_watering_regime_overlap(
+    p_species_id INT,
+    p_min_age_months INT,
+    p_max_age_months INT,
+    p_exclude_regime_id INT DEFAULT NULL
+)
+RETURNS TABLE (
+    has_overlap BOOLEAN,
+    overlapping_regime_id INT,
+    overlapping_min_age INT,
+    overlapping_max_age INT
+) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT 
+        TRUE as has_overlap,
+        wr.regime_id,
+        wr.min_age_months,
+        wr.max_age_months
+    FROM watering_regimes wr
+    WHERE wr.species_id = p_species_id
+      AND (p_exclude_regime_id IS NULL OR wr.regime_id != p_exclude_regime_id)
+      AND int4range(wr.min_age_months, COALESCE(wr.max_age_months, 999999), '[]') 
+          && 
+          int4range(p_min_age_months, COALESCE(p_max_age_months, 999999), '[]')
+    LIMIT 1;
+    
+    -- Если не найдено пересечений, возвращаем FALSE
+    IF NOT FOUND THEN
+        RETURN QUERY SELECT FALSE, NULL::INT, NULL::INT, NULL::INT;
+    END IF;
 END;
 $$ LANGUAGE plpgsql;
 

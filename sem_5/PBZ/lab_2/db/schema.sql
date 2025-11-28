@@ -66,7 +66,7 @@ CREATE TABLE watering_regimes (
     CHECK (water_liters > 0),
     CONSTRAINT prevent_overlapping_regimes EXCLUDE USING GIST (
         species_id WITH =,
-        int4range(min_age_months, COALESCE(max_age_months, 2147483647), '[]') WITH &&
+        int4range(min_age_months, COALESCE(max_age_months, 999999), '[]') WITH &&
     )
 );
 
