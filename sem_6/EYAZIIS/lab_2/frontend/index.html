@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EYAZIIS Lab 2 - Corpus Manager</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>Корпусный менеджер — Вариант 21 (English, Music)</h1>
+      <p class="muted">Frontend + Backend + MongoDB через Docker</p>
+
+      <input id="upload-files" type="file" multiple style="display:none" accept=".txt,.rtf,.pdf,.doc,.docx" />
+      <input id="load-corpus" type="file" style="display:none" accept="application/json,.json" />
+
+      <section class="card">
+        <div class="top-actions">
+          <button id="btn-add-docs">Добавить документы</button>
+          <button id="btn-save-corpus">Сохранить корпус</button>
+          <button id="btn-load-corpus">Загрузить корпус</button>
+          <button id="btn-help" class="ghost">Справка</button>
+        </div>
+        <div id="status" class="status">Готово. Добавьте документы или загрузите корпус.</div>
+      </section>
+
+      <section class="card">
+        <h2>Поиск в корпусе</h2>
+        <div class="row">
+          <input id="query" placeholder="Запрос (слово или фраза)" />
+          <label class="radio">
+            <input type="radio" name="search-by" value="lemma" checked />
+            По лемме
+          </label>
+          <label class="radio">
+            <input type="radio" name="search-by" value="word" />
+            По словоформе
+          </label>
+          <label>
+            Контекст (слов):
+            <input id="context-size" type="number" min="1" max="20" value="5" />
+          </label>
+          <button id="search-btn">Найти</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="docs">Документы корпуса</button>
+          <button class="tab-btn" data-tab="freq">Частотные характеристики</button>
+          <button class="tab-btn" data-tab="conc">Конкорданс</button>
+          <button class="tab-btn" data-tab="morph">Морфология леммы</button>
+          <button class="tab-btn" data-tab="lemmas">Скрытые леммы</button>
+          <button class="tab-btn" data-tab="meta">Метаданные документа</button>
+        </div>
+
+        <div id="tab-docs" class="tab-panel active">
+          <div class="row">
+            <button id="refresh-docs">Обновить список</button>
+            <button id="btn-use-filter">Использовать выбранные для фильтра</button>
+            <button id="btn-reset-filter" class="ghost">Сбросить фильтр (все документы)</button>
+            <button id="btn-delete-doc" class="danger">Удалить выбранный документ</button>
+          </div>
+
+          <div class="table-wrap">
+            <table id="docs-table">
+              <thead>
+                <tr>
+                  <th>Фильтр</th>
+                  <th>Название</th>
+                  <th>Автор</th>
+                  <th>Год</th>
+                  <th>Токенов</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div id="docs-total-tokens" class="total-tokens">Всего токенов в корпусе: 0</div>
+          <div class="hint">Двойной клик по строке: просмотр текста документа.</div>
+        </div>
+
+        <div id="tab-freq" class="tab-panel">
+          <p class="hint freq-hint">Словоформа — слово как в тексте (running, sang). Лемма — начальная форма (run, sing). Частоты по леммам объединяют все формы.</p>
+          <div class="row">
+            <button class="freq-tab-btn active" data-kind="word">Словоформы</button>
+            <button class="freq-tab-btn" data-kind="lemma">Леммы</button>
+            <button class="freq-tab-btn" data-kind="pos">Части речи (POS)</button>
+            <button id="btn-refresh-freq">Обновить частоты</button>
+            <button id="btn-delete-lemma" class="danger" style="display:none" title="Удалить выбранную лемму из корпуса (режим Леммы). Все вхождения будут удалены из документов.">Удалить лемму из корпуса</button>
+          </div>
+          <div id="freq-results"></div>
+        </div>
+
+        <div id="tab-conc" class="tab-panel">
+          <div id="concordance-results"></div>
+        </div>
+
+        <div id="tab-morph" class="tab-panel">
+          <div class="row">
+            <input id="lemma-input" placeholder="Введите лемму" />
+            <button id="morph-btn">Показать морфологию</button>
+          </div>
+          <div id="morph-results"></div>
+        </div>
+
+        <div id="tab-lemmas" class="tab-panel">
+          <h3 class="subsection">Добавить лемму</h3>
+          <div class="row">
+            <button id="btn-add-lemma">Добавить лемму</button>
+            <p class="hint">Пользовательский список лемм (словарь): слово в начальной форме и описание. Не меняет частоты в корпусе.</p>
+          </div>
+          <div class="table-wrap">
+            <table id="custom-lemmas-table">
+              <thead>
+                <tr>
+                  <th>Лемма</th>
+                  <th>Описание</th>
+                  <th>Действия</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div id="custom-lemmas-empty" class="hint">Нет добавленных лемм.</div>
+          <div class="row">
+            <button id="btn-refresh-lemmas">Обновить список</button>
+          </div>
+        </div>
+
+        <div id="tab-meta" class="tab-panel">
+          <div class="row">
+            <button id="btn-show-meta">Показать метаданные выбранного документа</button>
+          </div>
+          <pre id="meta-text" class="meta-pre">Выберите документ в списке «Документы корпуса».</pre>
+        </div>
+
+        <div class="pagination pagination-shared" id="pagination-bar">
+          <button id="pagination-prev" class="ghost">Назад</button>
+          <span id="pagination-indicator">—</span>
+          <button id="pagination-next" class="ghost">Вперёд</button>
+          <label class="page-size">
+            Размер страницы:
+            <select id="pagination-page-size">
+              <option value="10">10</option>
+              <option value="20" selected>20</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+            </select>
+          </label>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Замер времени (операции для отчёта)</h2>
+        <div class="row">
+          <button id="bench-search-music">Поиск по лемме 'music'</button>
+          <button id="bench-concord-concert">Конкорданс по 'concert'</button>
+          <button id="bench-freq-update">Обновить частоты (benchmark)</button>
+          <button id="bench-morph-instrument">Морфология леммы 'instrument'</button>
+        </div>
+      </section>
+
+      <div id="modal" class="modal" style="display:none">
+        <div class="modal-body">
+          <div class="modal-head">
+            <div id="modal-title" class="modal-title">Текст документа</div>
+            <button id="modal-close" class="ghost">Закрыть</button>
+          </div>
+          <textarea id="modal-text" class="modal-text" readonly></textarea>
+        </div>
+      </div>
+
+      <div id="lemma-modal" class="modal" style="display:none">
+        <div class="modal-body">
+          <div class="modal-head">
+            <div id="lemma-modal-title" class="modal-title">Добавить лемму</div>
+            <button id="lemma-modal-close" class="ghost">Закрыть</button>
+          </div>
+          <div class="lemma-form">
+            <label>Лемма (начальная форма): <input id="lemma-form-lemma" type="text" placeholder="например: run" /></label>
+            <label>Описание: <input id="lemma-form-desc" type="text" placeholder="необязательно" /></label>
+            <div class="row">
+              <button id="lemma-form-submit">Сохранить</button>
+              <button id="lemma-form-cancel" class="ghost">Отмена</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

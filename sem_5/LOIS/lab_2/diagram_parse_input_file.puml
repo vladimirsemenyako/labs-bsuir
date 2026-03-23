@@ -1,0 +1,79 @@
+@startuml parse_input_file
+!theme plain
+skinparam backgroundColor #FFFFFF
+skinparam activity {
+    BackgroundColor #E8F4F8
+    BorderColor #2E86AB
+    FontColor #000000
+    FontSize 12
+}
+
+title Блок-схема алгоритма: parse_input_file() - Парсинг входного файла
+
+start
+
+if (not os.path.exists(filename)?) then (да)
+    :print(f"ОШИБКА: Файл {filename} не найден!");
+    :sys.exit(1);
+    stop
+else (нет)
+endif
+
+:with open(filename, 'r', encoding='utf-8') as f:;
+:lines = f.readlines();
+:R_dict = {};
+:Y_dict = {};
+:row_vars = set();
+:i = 0;
+
+repeat
+    if (i < len(lines)?) then (да)
+        :line = lines[i].strip();
+        
+        if (line.startswith("R"?) then (да)
+            :matches = parse_r_line(line);
+            :j = 0;
+            
+            repeat
+                if (j < len(matches)?) then (да)
+                    :r_name, c_name, val = matches[j];
+                    
+                    if (c_name not in R_dict?) then (да)
+                        :R_dict[c_name] = {};
+                    else (нет)
+                    endif
+                    
+                    :R_dict[c_name][r_name] = float(val);
+                    :row_vars.add(r_name);
+                    :j++;
+                else (нет)
+                endif
+            repeat while (j < len(matches)?)
+        else (нет)
+            if (line.startswith("Y"?) then (да)
+                :matches = parse_y_line(line);
+                :k = 0;
+                
+                repeat
+                    if (k < len(matches)?) then (да)
+                        :c_name, val = matches[k];
+                        :Y_dict[c_name] = float(val);
+                        :k++;
+                    else (нет)
+                    endif
+                repeat while (k < len(matches)?)
+            else (нет)
+            endif
+        endif
+        
+        :i++;
+    else (нет)
+    endif
+repeat while (i < len(lines)?)
+
+:sorted_rows = sorted(list(row_vars));
+:return R_dict, Y_dict, sorted_rows;
+
+stop
+
+@enduml

@@ -1,0 +1,3 @@
+Short benchmark text 1: Music and daily listening.
+
+People listen to music in many situations during the day. A short playlist can accompany a bus ride or a walk to university. In this benchmark file the vocabulary is simple and the number of sentences is limited so that the document remains small. The aim is to simulate a tiny article about listening habits without overloading the corpus.

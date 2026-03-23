@@ -1,0 +1,188 @@
+@startuml main_function
+!theme plain
+skinparam backgroundColor #FFFFFF
+skinparam activity {
+    BackgroundColor #E8F4F8
+    BorderColor #2E86AB
+    FontColor #000000
+    FontSize 12
+}
+
+title Блок-схема алгоритма: main() - Главная функция координации
+
+start
+
+if (len(sys.argv) < 3?) then (да)
+    :print("Использование: python main.py <input_file> <output_file>");
+    :sys.exit(1);
+    stop
+else (нет)
+endif
+
+:input_file = sys.argv[1];
+:output_file = sys.argv[2];
+:print("--- Решение обратной задачи нечеткого вывода ---");
+:print(f"Чтение данных из {input_file}...");
+:R, Y, row_names = parse_input_file(input_file);
+:col_names = sorted(Y.keys());
+
+if (len(row_names) == 0?) then (да)
+    :print("Ошибка: Не найдено входных переменных.");
+    stop
+else (нет)
+endif
+
+:print(f"Переменные строк (входы): {row_names}");
+:print(f"Переменные столбцов (выходы): {col_names}");
+:column_solutions = [];
+:i = 0;
+
+repeat
+    if (i < len(col_names)?) then (да)
+        :col = col_names[i];
+        :target = Y[col];
+        :r_vals = R.get(col);
+        
+        if (not r_vals?) then (да)
+            :print(f"Предупреждение: для столбца {col} нет данных в R.");
+        else (нет)
+            :print(f"\nРешаем уравнение для выхода '{col}' (target={target}):");
+            :sols = solve_single_equation(r_vals, target, row_names);
+            :column_solutions.append(sols);
+            :j = 0;
+            
+            repeat
+                if (j < len(sols)?) then (да)
+                    :s = sols[j];
+                    :print(f"  Вариант {col}.{j+1}: {s}");
+                    :j++;
+                else (нет)
+                endif
+            repeat while (j < len(sols)?)
+        endif
+        
+        :i++;
+    else (нет)
+    endif
+repeat while (i < len(col_names)?)
+
+:print(f"\n--- Комбинирование решений (Пересечение) ---");
+
+if (len(column_solutions) == 0?) then (да)
+    :print("Нет уравнений для решения.");
+    stop
+else (нет)
+endif
+
+if (len(column_solutions) == 1?) then (да)
+    :final_solutions = column_solutions[0];
+else (нет)
+    :current_pool = column_solutions[0];
+    :k = 1;
+    
+    repeat
+        if (k < len(column_solutions)?) then (да)
+            :next_col_sols = column_solutions[k];
+            :next_pool = [];
+            :m = 0;
+            
+            repeat
+                if (m < len(current_pool)?) then (да)
+                    :sol1 = current_pool[m];
+                    :n = 0;
+                    
+                    repeat
+                        if (n < len(next_col_sols)?) then (да)
+                            :sol2 = next_col_sols[n];
+                            :res = intersect_solutions(sol1, sol2);
+                            
+                            if (res != None?) then (да)
+                                :next_pool.append(res);
+                                :print(f"  Пересечение найдено: {res}");
+                            else (нет)
+                            endif
+                            
+                            :n++;
+                        else (нет)
+                        endif
+                    repeat while (n < len(next_col_sols)?)
+                    
+                    :m++;
+                else (нет)
+                endif
+            repeat while (m < len(current_pool)?)
+            
+            :current_pool = next_pool;
+            :k++;
+        else (нет)
+        endif
+    repeat while (k < len(column_solutions)?)
+    
+    :final_solutions = current_pool;
+endif
+
+:print("\n" + "="*40);
+:print("ОТВЕТ (Объединение всех найденных пересечений):");
+
+if (not final_solutions?) then (да)
+    :answer = "Нет решений (Пустое множество)";
+    :print(answer);
+else (нет)
+    :parts = [];
+    :p = 0;
+    
+    repeat
+        if (p < len(final_solutions)?) then (да)
+            :sol = final_solutions[p];
+            :conditions = [];
+            
+            if (sol.type == 'line'?) then (да)
+                :var_names = sorted(sol.intervals.keys());
+                :sum_expr = "+".join(var_names);
+                :conditions.append(f"{sum_expr}={sol.sum_val}");
+            else (нет)
+            endif
+            
+            :v = 0;
+            :sorted_vars = sorted(sol.intervals.keys());
+            
+            repeat
+                if (v < len(sorted_vars)?) then (да)
+                    :var_name = sorted_vars[v];
+                    :interval = sol.intervals[var_name];
+                    
+                    if (abs(interval.low - interval.high) < 1e-9?) then (да)
+                        :conditions.append(f"{var_name}={round(interval.low, 2)}");
+                    else (нет)
+                        :conditions.append(f"{var_name}∈{interval}");
+                    endif
+                    
+                    :v++;
+                else (нет)
+                endif
+            repeat while (v < len(sorted_vars)?)
+            
+            :part = f"({' ∧ '.join(conditions)})";
+            :parts.append(part);
+            :p++;
+        else (нет)
+        endif
+    repeat while (p < len(final_solutions)?)
+    
+    :answer = " V ".join(parts);
+    :print(answer);
+endif
+
+:with open(output_file, 'w', encoding='utf-8') as f:;
+
+if (not final_solutions?) then (да)
+    :f.write("Нет решений (Пустое множество)");
+else (нет)
+    :f.write(answer);
+endif
+
+:print(f"\nИтоговый ответ записан в {output_file}");
+
+stop
+
+@enduml

@@ -1,0 +1,97 @@
+@startuml solve_single_equation
+!theme plain
+skinparam backgroundColor #FFFFFF
+skinparam activity {
+    BackgroundColor #E8F4F8
+    BorderColor #2E86AB
+    FontColor #000000
+    FontSize 12
+}
+
+title Блок-схема алгоритма: solve_single_equation() - Решение одного уравнения
+
+start
+
+:solutions = [];
+:n = len(row_names);
+
+if (n == 1?) then (да)
+    :var_name = row_names[0];
+    :r_val = r_vals.get(var_name, 0.0);
+    
+    if (target < r_val?) then (да)
+        :valid_a = Interval(target, target);
+        
+        if (valid_a.low <= r_val?) then (да)
+            :solutions.append(SolutionSet('box', {var_name: valid_a}));
+        else (нет)
+        endif
+    else (нет)
+        if (math.isclose(target, r_val, abs_tol=1e-9)?) then (да)
+            :valid_a = Interval(r_val, 1.0);
+            :solutions.append(SolutionSet('box', {var_name: valid_a}));
+        else (нет)
+            if (target > r_val AND not math.isclose(target, 1.0, abs_tol=1e-9)?) then (да)
+            else (нет)
+                if (math.isclose(target, 1.0, abs_tol=1e-9)?) then (да)
+                    if (math.isclose(r_val, 1.0, abs_tol=1e-9)?) then (да)
+                        :solutions.append(SolutionSet('box', {var_name: Interval(1.0, 1.0)}));
+                    else (нет)
+                    endif
+                else (нет)
+                endif
+            endif
+        endif
+    endif
+    
+    :return solutions;
+    stop
+else (нет)
+endif
+
+if (n == 2?) then (да)
+    :name_a = row_names[0];
+    :name_b = row_names[1];
+    :r_a = r_vals.get(name_a, 0.0);
+    :r_b = r_vals.get(name_b, 0.0);
+    
+    if (target < r_a + r_b?) then (да)
+        :valid_a = Interval(0, r_a);
+        :valid_b = Interval(0, r_b);
+        :sol = SolutionSet('line', {name_a: valid_a, name_b: valid_b}, sum_val=target);
+        :solutions.append(sol);
+    else (нет)
+    endif
+    
+    :val_a = target - r_b;
+    
+    if (0 <= val_a < r_a?) then (да)
+        :valid_a = Interval(val_a, val_a);
+        :valid_b = Interval(r_b, 1.0);
+        :solutions.append(SolutionSet('box', {name_a: valid_a, name_b: valid_b}));
+    else (нет)
+    endif
+    
+    :val_b = target - r_a;
+    
+    if (0 <= val_b < r_b?) then (да)
+        :valid_a = Interval(r_a, 1.0);
+        :valid_b = Interval(val_b, val_b);
+        :solutions.append(SolutionSet('box', {name_a: valid_a, name_b: valid_b}));
+    else (нет)
+    endif
+    
+    if (math.isclose(r_a + r_b, target, abs_tol=1e-9)?) then (да)
+        :valid_a = Interval(r_a, 1.0);
+        :valid_b = Interval(r_b, 1.0);
+        :solutions.append(SolutionSet('box', {name_a: valid_a, name_b: valid_b}));
+    else (нет)
+    endif
+else (нет)
+endif
+
+:return solutions;
+
+stop
+
+@enduml

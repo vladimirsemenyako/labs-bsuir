@@ -1,0 +1,2105 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.semanticweb.org/vivi/ontologies/2026/2/untitled-ontology-10"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.semanticweb.org/vivi/ontologies/2026/2/untitled-ontology-10">
+    <Prefix name="" IRI="http://www.semanticweb.org/vivi/ontologies/2026/2/untitled-ontology-10/"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Declaration>
+        <Class IRI="#AirPersonnel"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#AirTrafficController"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#AirTrafficManagementSystem"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#AirTransportSystem"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Aircraft"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#AircraftMechanic"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Airline"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Airport"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#AirportInfrastructure"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#AttackHelicopter"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Cargo"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CargoAircraft"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CargoAirline"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CargoDrone"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CargoFlight"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CargoTerminal"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CharterAirline"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CharterFlight"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CoPilot"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CombatDrone"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ControlTower"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#DangerousGoods"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#DomesticFlight"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#FixedWingAircraft"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#FlightAttendant"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#FlightOperation"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#FuelStation"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#GeneralCargo"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#GroundCrew"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Hangar"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#HeavyCargoAircraft"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#InstrumentLandingSystem"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#InternationalFlight"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#LowCostAirline"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#MediumCargoAircraft"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#NarrowBodyAircraft"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#NavigationSystem"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OversizedCargo"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PassengerAircraft"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PassengerAirline"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PassengerTerminal"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PerishableCargo"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Pilot"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PrivateAircraft"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RadarSystem"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RegionalAircraft"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RescueHelicopter"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RotorCraft"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Runway"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#SatelliteNavigation"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ScheduledFlight"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#SulveillanсeDrone"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Taxiway"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Terminal"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#TransportHelicopter"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#TransportSystem"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#UnmannedAircraft"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#WideBodyAircraft"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#arrivesAt"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#carriesCargo"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#departsFrom"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasCrew"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#locatedAt"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#operatedBy"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#usesAircraft"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#worksFor"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasCapacity"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasRange"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasRunwayLength"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasSpeed"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#AirbusA320neo"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#AirbusA330Freighter"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#AirbusA380"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#AntonovAn124"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#AntonovAn225"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#AthensAirport"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#AttendantMariaGarcia"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#AttendantSaraNguyen"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#BA15_LHR_JFK"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#BA2905_LHR_MAN"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#BA5_LHR_SIN"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#BangkokAirport"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#BayraktarTB2"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Bell412EP"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Boeing737MAX8"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Boeing767Freighter"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Boeing787Dreamliner"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#BoeingAH64Apache"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#BombardierCRJ900"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#BombardierGlobal7500"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#BerlinAirport"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#BritishAirways"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#BritishAirwaysHangar"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CH47Chinook"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CaptainMichaelSchmidt"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CaptainSarahWilson"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CargoCenter_FRA"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CargoCity_LHR"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#ChemicalDrumSet"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#ControllerDavidFischer"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#ControllerEmmaBrown"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#DHL991_FRA_BKK"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#DHLExpress"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#EK202_NYC_DXB"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Emirates"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#EasyJet"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#ElectronicsShipment2026"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#EmbraerE190"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#EurocontrolATM"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#EurocopterEC145"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#FRAFuelDepot"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#FRA_MainRadar"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#FX502_FRA_MEM"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#FedExExpress"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#FirstOfficerAnnaKeller"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#FirstOfficerJamesLee"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#FrankfurtAirport"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#FrankfurtControlTower"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#FreshFlowersLoad"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#GALILEO_System"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#GPSSystem"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#GlobalHawkRQ4"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#GulfstreamG700"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#HeathrowAirport"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#HeathrowControlTower"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#HoustonAirport"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#ILS_09L_LHR"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#ILS_25R_FRA"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#IndustrialTurbineLoad"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#JFKAirport"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#LH123_FRA_BER"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#LH440_FRA_HOU"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#LHRFuelFarm"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#LHR_PrimaryRadar"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#LithiumBatteryContainer"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Lufthansa"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#LufthansaMaintenanceHangar"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#ManchesterAirport"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#MQ9Reaper"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#MQ9ReaperStrike"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#MechanicOlafBrandt"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#MechanicSophieMartinez"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#MemphisAirport"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#MilMi28Havoc"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#NewYorkAirport"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#NATS_ATMS"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#NJ700_FRA_NCE"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#NatCorderOne"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#NetJets"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#NiceAirport"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#PerishableFoodShipment"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Runway09L_LHR"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Runway25R_FRA"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Ryanair"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#SabreWingRhaegal"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#SikorskyUH60BlackHawk"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#SingaporeAirport"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TaxiwayAlpha_LHR"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TaxiwayMike_FRA"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TechnicianAhmedKhan"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TechnicianLuisMuller"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Terminal1_FRA"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Terminal5_LHR"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TextileGoodsBatch"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#VJ501_LHR_ATH"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#DubaiAirport"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#VistaJet"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#WindBladeShipment"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="#AirPersonnel"/>
+        <Class IRI="#AirTransportSystem"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#AirTrafficController"/>
+        <Class IRI="#AirPersonnel"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#AirTrafficManagementSystem"/>
+        <Class IRI="#NavigationSystem"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#AirTransportSystem"/>
+        <Class IRI="#TransportSystem"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Aircraft"/>
+        <Class IRI="#AirTransportSystem"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#AircraftMechanic"/>
+        <Class IRI="#AirPersonnel"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Airline"/>
+        <Class IRI="#AirTransportSystem"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Airport"/>
+        <Class IRI="#AirportInfrastructure"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#AirportInfrastructure"/>
+        <Class IRI="#AirTransportSystem"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#AttackHelicopter"/>
+        <Class IRI="#RotorCraft"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Cargo"/>
+        <Class IRI="#AirTransportSystem"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#CargoAircraft"/>
+        <Class IRI="#FixedWingAircraft"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#CargoAirline"/>
+        <Class IRI="#Airline"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#CargoDrone"/>
+        <Class IRI="#UnmannedAircraft"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#CargoFlight"/>
+        <Class IRI="#FlightOperation"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#CargoTerminal"/>
+        <Class IRI="#Terminal"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#CharterAirline"/>
+        <Class IRI="#Airline"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#CharterFlight"/>
+        <Class IRI="#FlightOperation"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#CoPilot"/>
+        <Class IRI="#AirPersonnel"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#CombatDrone"/>
+        <Class IRI="#UnmannedAircraft"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ControlTower"/>
+        <Class IRI="#AirportInfrastructure"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#DangerousGoods"/>
+        <Class IRI="#Cargo"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#DomesticFlight"/>
+        <Class IRI="#FlightOperation"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#FixedWingAircraft"/>
+        <Class IRI="#Aircraft"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#FlightAttendant"/>
+        <Class IRI="#AirPersonnel"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#FlightOperation"/>
+        <Class IRI="#AirTransportSystem"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#FuelStation"/>
+        <Class IRI="#AirportInfrastructure"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#GeneralCargo"/>
+        <Class IRI="#Cargo"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#GroundCrew"/>
+        <Class IRI="#AirPersonnel"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Hangar"/>
+        <Class IRI="#AirportInfrastructure"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#HeavyCargoAircraft"/>
+        <Class IRI="#CargoAircraft"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#InstrumentLandingSystem"/>
+        <Class IRI="#NavigationSystem"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#InternationalFlight"/>
+        <Class IRI="#FlightOperation"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#LowCostAirline"/>
+        <Class IRI="#Airline"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#MediumCargoAircraft"/>
+        <Class IRI="#CargoAircraft"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#NarrowBodyAircraft"/>
+        <Class IRI="#PassengerAircraft"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#NavigationSystem"/>
+        <Class IRI="#AirTransportSystem"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OversizedCargo"/>
+        <Class IRI="#Cargo"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PassengerAircraft"/>
+        <Class IRI="#FixedWingAircraft"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PassengerAirline"/>
+        <Class IRI="#Airline"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PassengerTerminal"/>
+        <Class IRI="#Terminal"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PerishableCargo"/>
+        <Class IRI="#Cargo"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Pilot"/>
+        <Class IRI="#AirPersonnel"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PrivateAircraft"/>
+        <Class IRI="#FixedWingAircraft"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#RadarSystem"/>
+        <Class IRI="#NavigationSystem"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#RegionalAircraft"/>
+        <Class IRI="#FixedWingAircraft"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#RescueHelicopter"/>
+        <Class IRI="#RotorCraft"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#RotorCraft"/>
+        <Class IRI="#Aircraft"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Runway"/>
+        <Class IRI="#AirportInfrastructure"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#SatelliteNavigation"/>
+        <Class IRI="#NavigationSystem"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ScheduledFlight"/>
+        <Class IRI="#FlightOperation"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#SulveillanсeDrone"/>
+        <Class IRI="#UnmannedAircraft"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Taxiway"/>
+        <Class IRI="#AirportInfrastructure"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Terminal"/>
+        <Class IRI="#AirportInfrastructure"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#TransportHelicopter"/>
+        <Class IRI="#RotorCraft"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#UnmannedAircraft"/>
+        <Class IRI="#Aircraft"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#WideBodyAircraft"/>
+        <Class IRI="#PassengerAircraft"/>
+    </SubClassOf>
+    <ClassAssertion>
+        <Class IRI="#NarrowBodyAircraft"/>
+        <NamedIndividual IRI="#AirbusA320neo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#MediumCargoAircraft"/>
+        <NamedIndividual IRI="#AirbusA330Freighter"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#WideBodyAircraft"/>
+        <NamedIndividual IRI="#AirbusA380"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#HeavyCargoAircraft"/>
+        <NamedIndividual IRI="#AntonovAn124"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#HeavyCargoAircraft"/>
+        <NamedIndividual IRI="#AntonovAn225"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Airport"/>
+        <NamedIndividual IRI="#AthensAirport"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#FlightAttendant"/>
+        <NamedIndividual IRI="#AttendantMariaGarcia"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#FlightAttendant"/>
+        <NamedIndividual IRI="#AttendantSaraNguyen"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ScheduledFlight"/>
+        <NamedIndividual IRI="#BA15_LHR_JFK"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#DomesticFlight"/>
+        <NamedIndividual IRI="#BA2905_LHR_MAN"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#InternationalFlight"/>
+        <NamedIndividual IRI="#BA5_LHR_SIN"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Airport"/>
+        <NamedIndividual IRI="#BangkokAirport"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CombatDrone"/>
+        <NamedIndividual IRI="#BayraktarTB2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RescueHelicopter"/>
+        <NamedIndividual IRI="#Bell412EP"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#NarrowBodyAircraft"/>
+        <NamedIndividual IRI="#Boeing737MAX8"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#MediumCargoAircraft"/>
+        <NamedIndividual IRI="#Boeing767Freighter"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#WideBodyAircraft"/>
+        <NamedIndividual IRI="#Boeing787Dreamliner"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#AttackHelicopter"/>
+        <NamedIndividual IRI="#BoeingAH64Apache"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RegionalAircraft"/>
+        <NamedIndividual IRI="#BombardierCRJ900"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Airport"/>
+        <NamedIndividual IRI="#BerlinAirport"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#PrivateAircraft"/>
+        <NamedIndividual IRI="#BombardierGlobal7500"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#PassengerAirline"/>
+        <NamedIndividual IRI="#BritishAirways"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Hangar"/>
+        <NamedIndividual IRI="#BritishAirwaysHangar"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TransportHelicopter"/>
+        <NamedIndividual IRI="#CH47Chinook"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Pilot"/>
+        <NamedIndividual IRI="#CaptainMichaelSchmidt"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Pilot"/>
+        <NamedIndividual IRI="#CaptainSarahWilson"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CargoTerminal"/>
+        <NamedIndividual IRI="#CargoCenter_FRA"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CargoTerminal"/>
+        <NamedIndividual IRI="#CargoCity_LHR"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#DangerousGoods"/>
+        <NamedIndividual IRI="#ChemicalDrumSet"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#AirTrafficController"/>
+        <NamedIndividual IRI="#ControllerDavidFischer"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#AirTrafficController"/>
+        <NamedIndividual IRI="#ControllerEmmaBrown"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CargoFlight"/>
+        <NamedIndividual IRI="#DHL991_FRA_BKK"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CargoAirline"/>
+        <NamedIndividual IRI="#DHLExpress"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#InternationalFlight"/>
+        <NamedIndividual IRI="#EK202_NYC_DXB"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#PassengerAirline"/>
+        <NamedIndividual IRI="#Emirates"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#LowCostAirline"/>
+        <NamedIndividual IRI="#EasyJet"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#GeneralCargo"/>
+        <NamedIndividual IRI="#ElectronicsShipment2026"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RegionalAircraft"/>
+        <NamedIndividual IRI="#EmbraerE190"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#AirTrafficManagementSystem"/>
+        <NamedIndividual IRI="#EurocontrolATM"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RescueHelicopter"/>
+        <NamedIndividual IRI="#EurocopterEC145"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#FuelStation"/>
+        <NamedIndividual IRI="#FRAFuelDepot"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RadarSystem"/>
+        <NamedIndividual IRI="#FRA_MainRadar"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CargoFlight"/>
+        <NamedIndividual IRI="#FX502_FRA_MEM"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CargoAirline"/>
+        <NamedIndividual IRI="#FedExExpress"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CoPilot"/>
+        <NamedIndividual IRI="#FirstOfficerAnnaKeller"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CoPilot"/>
+        <NamedIndividual IRI="#FirstOfficerJamesLee"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Airport"/>
+        <NamedIndividual IRI="#FrankfurtAirport"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ControlTower"/>
+        <NamedIndividual IRI="#FrankfurtControlTower"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#PerishableCargo"/>
+        <NamedIndividual IRI="#FreshFlowersLoad"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#SatelliteNavigation"/>
+        <NamedIndividual IRI="#GALILEO_System"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#SatelliteNavigation"/>
+        <NamedIndividual IRI="#GPSSystem"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#SulveillanсeDrone"/>
+        <NamedIndividual IRI="#GlobalHawkRQ4"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#PrivateAircraft"/>
+        <NamedIndividual IRI="#GulfstreamG700"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Airport"/>
+        <NamedIndividual IRI="#HeathrowAirport"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ControlTower"/>
+        <NamedIndividual IRI="#HeathrowControlTower"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Airport"/>
+        <NamedIndividual IRI="#HoustonAirport"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#InstrumentLandingSystem"/>
+        <NamedIndividual IRI="#ILS_09L_LHR"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#InstrumentLandingSystem"/>
+        <NamedIndividual IRI="#ILS_25R_FRA"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Airport"/>
+        <NamedIndividual IRI="#JFKAirport"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OversizedCargo"/>
+        <NamedIndividual IRI="#IndustrialTurbineLoad"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#DomesticFlight"/>
+        <NamedIndividual IRI="#LH123_FRA_BER"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ScheduledFlight"/>
+        <NamedIndividual IRI="#LH440_FRA_HOU"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#FuelStation"/>
+        <NamedIndividual IRI="#LHRFuelFarm"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RadarSystem"/>
+        <NamedIndividual IRI="#LHR_PrimaryRadar"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#DangerousGoods"/>
+        <NamedIndividual IRI="#LithiumBatteryContainer"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#PassengerAirline"/>
+        <NamedIndividual IRI="#Lufthansa"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Hangar"/>
+        <NamedIndividual IRI="#LufthansaMaintenanceHangar"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Airport"/>
+        <NamedIndividual IRI="#ManchesterAirport"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Airport"/>
+        <NamedIndividual IRI="#MemphisAirport"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#SulveillanсeDrone"/>
+        <NamedIndividual IRI="#MQ9Reaper"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CombatDrone"/>
+        <NamedIndividual IRI="#MQ9ReaperStrike"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#AircraftMechanic"/>
+        <NamedIndividual IRI="#MechanicOlafBrandt"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#AircraftMechanic"/>
+        <NamedIndividual IRI="#MechanicSophieMartinez"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#AttackHelicopter"/>
+        <NamedIndividual IRI="#MilMi28Havoc"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Airport"/>
+        <NamedIndividual IRI="#NewYorkAirport"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#AirTrafficManagementSystem"/>
+        <NamedIndividual IRI="#NATS_ATMS"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CharterFlight"/>
+        <NamedIndividual IRI="#NJ700_FRA_NCE"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CargoDrone"/>
+        <NamedIndividual IRI="#NatCorderOne"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CharterAirline"/>
+        <NamedIndividual IRI="#NetJets"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Airport"/>
+        <NamedIndividual IRI="#NiceAirport"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#PerishableCargo"/>
+        <NamedIndividual IRI="#PerishableFoodShipment"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Runway"/>
+        <NamedIndividual IRI="#Runway09L_LHR"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Runway"/>
+        <NamedIndividual IRI="#Runway25R_FRA"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#LowCostAirline"/>
+        <NamedIndividual IRI="#Ryanair"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CargoDrone"/>
+        <NamedIndividual IRI="#SabreWingRhaegal"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TransportHelicopter"/>
+        <NamedIndividual IRI="#SikorskyUH60BlackHawk"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Airport"/>
+        <NamedIndividual IRI="#SingaporeAirport"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Taxiway"/>
+        <NamedIndividual IRI="#TaxiwayAlpha_LHR"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Taxiway"/>
+        <NamedIndividual IRI="#TaxiwayMike_FRA"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#GroundCrew"/>
+        <NamedIndividual IRI="#TechnicianAhmedKhan"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#GroundCrew"/>
+        <NamedIndividual IRI="#TechnicianLuisMuller"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#PassengerTerminal"/>
+        <NamedIndividual IRI="#Terminal1_FRA"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#PassengerTerminal"/>
+        <NamedIndividual IRI="#Terminal5_LHR"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#GeneralCargo"/>
+        <NamedIndividual IRI="#TextileGoodsBatch"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CharterFlight"/>
+        <NamedIndividual IRI="#VJ501_LHR_ATH"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Airport"/>
+        <NamedIndividual IRI="#DubaiAirport"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CharterAirline"/>
+        <NamedIndividual IRI="#VistaJet"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OversizedCargo"/>
+        <NamedIndividual IRI="#WindBladeShipment"/>
+    </ClassAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedAt"/>
+        <NamedIndividual IRI="#AirbusA320neo"/>
+        <NamedIndividual IRI="#FrankfurtAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedAt"/>
+        <NamedIndividual IRI="#AirbusA330Freighter"/>
+        <NamedIndividual IRI="#FrankfurtAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedAt"/>
+        <NamedIndividual IRI="#AirbusA380"/>
+        <NamedIndividual IRI="#HeathrowAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedAt"/>
+        <NamedIndividual IRI="#AntonovAn124"/>
+        <NamedIndividual IRI="#FrankfurtAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedAt"/>
+        <NamedIndividual IRI="#AntonovAn225"/>
+        <NamedIndividual IRI="#FrankfurtAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedAt"/>
+        <NamedIndividual IRI="#Boeing737MAX8"/>
+        <NamedIndividual IRI="#FrankfurtAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedAt"/>
+        <NamedIndividual IRI="#Boeing767Freighter"/>
+        <NamedIndividual IRI="#FrankfurtAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedAt"/>
+        <NamedIndividual IRI="#Boeing787Dreamliner"/>
+        <NamedIndividual IRI="#HeathrowAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedAt"/>
+        <NamedIndividual IRI="#BombardierCRJ900"/>
+        <NamedIndividual IRI="#FrankfurtAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedAt"/>
+        <NamedIndividual IRI="#BombardierGlobal7500"/>
+        <NamedIndividual IRI="#FrankfurtAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedAt"/>
+        <NamedIndividual IRI="#CH47Chinook"/>
+        <NamedIndividual IRI="#FrankfurtAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedAt"/>
+        <NamedIndividual IRI="#BayraktarTB2"/>
+        <NamedIndividual IRI="#FrankfurtAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedAt"/>
+        <NamedIndividual IRI="#Bell412EP"/>
+        <NamedIndividual IRI="#FrankfurtAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedAt"/>
+        <NamedIndividual IRI="#BoeingAH64Apache"/>
+        <NamedIndividual IRI="#FrankfurtAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedAt"/>
+        <NamedIndividual IRI="#EmbraerE190"/>
+        <NamedIndividual IRI="#FrankfurtAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedAt"/>
+        <NamedIndividual IRI="#EurocopterEC145"/>
+        <NamedIndividual IRI="#FrankfurtAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedAt"/>
+        <NamedIndividual IRI="#GlobalHawkRQ4"/>
+        <NamedIndividual IRI="#FrankfurtAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedAt"/>
+        <NamedIndividual IRI="#GulfstreamG700"/>
+        <NamedIndividual IRI="#FrankfurtAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedAt"/>
+        <NamedIndividual IRI="#MQ9Reaper"/>
+        <NamedIndividual IRI="#FrankfurtAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedAt"/>
+        <NamedIndividual IRI="#MQ9ReaperStrike"/>
+        <NamedIndividual IRI="#FrankfurtAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedAt"/>
+        <NamedIndividual IRI="#MilMi28Havoc"/>
+        <NamedIndividual IRI="#FrankfurtAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedAt"/>
+        <NamedIndividual IRI="#NatCorderOne"/>
+        <NamedIndividual IRI="#FrankfurtAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedAt"/>
+        <NamedIndividual IRI="#SabreWingRhaegal"/>
+        <NamedIndividual IRI="#FrankfurtAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#operatedBy"/>
+        <NamedIndividual IRI="#LH440_FRA_HOU"/>
+        <NamedIndividual IRI="#Lufthansa"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#operatedBy"/>
+        <NamedIndividual IRI="#BA2905_LHR_MAN"/>
+        <NamedIndividual IRI="#BritishAirways"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#usesAircraft"/>
+        <NamedIndividual IRI="#BA2905_LHR_MAN"/>
+        <NamedIndividual IRI="#EmbraerE190"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#departsFrom"/>
+        <NamedIndividual IRI="#BA2905_LHR_MAN"/>
+        <NamedIndividual IRI="#HeathrowAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#arrivesAt"/>
+        <NamedIndividual IRI="#BA2905_LHR_MAN"/>
+        <NamedIndividual IRI="#ManchesterAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCrew"/>
+        <NamedIndividual IRI="#BA2905_LHR_MAN"/>
+        <NamedIndividual IRI="#CaptainSarahWilson"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCrew"/>
+        <NamedIndividual IRI="#BA2905_LHR_MAN"/>
+        <NamedIndividual IRI="#FirstOfficerJamesLee"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCrew"/>
+        <NamedIndividual IRI="#BA2905_LHR_MAN"/>
+        <NamedIndividual IRI="#AttendantSaraNguyen"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#operatedBy"/>
+        <NamedIndividual IRI="#BA5_LHR_SIN"/>
+        <NamedIndividual IRI="#BritishAirways"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#usesAircraft"/>
+        <NamedIndividual IRI="#BA5_LHR_SIN"/>
+        <NamedIndividual IRI="#AirbusA380"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#departsFrom"/>
+        <NamedIndividual IRI="#BA5_LHR_SIN"/>
+        <NamedIndividual IRI="#HeathrowAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#arrivesAt"/>
+        <NamedIndividual IRI="#BA5_LHR_SIN"/>
+        <NamedIndividual IRI="#SingaporeAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCrew"/>
+        <NamedIndividual IRI="#BA5_LHR_SIN"/>
+        <NamedIndividual IRI="#CaptainSarahWilson"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCrew"/>
+        <NamedIndividual IRI="#BA5_LHR_SIN"/>
+        <NamedIndividual IRI="#FirstOfficerJamesLee"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCrew"/>
+        <NamedIndividual IRI="#BA5_LHR_SIN"/>
+        <NamedIndividual IRI="#AttendantSaraNguyen"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#operatedBy"/>
+        <NamedIndividual IRI="#LH123_FRA_BER"/>
+        <NamedIndividual IRI="#Lufthansa"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#usesAircraft"/>
+        <NamedIndividual IRI="#LH123_FRA_BER"/>
+        <NamedIndividual IRI="#AirbusA320neo"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#departsFrom"/>
+        <NamedIndividual IRI="#LH123_FRA_BER"/>
+        <NamedIndividual IRI="#FrankfurtAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#arrivesAt"/>
+        <NamedIndividual IRI="#LH123_FRA_BER"/>
+        <NamedIndividual IRI="#BerlinAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCrew"/>
+        <NamedIndividual IRI="#LH123_FRA_BER"/>
+        <NamedIndividual IRI="#CaptainMichaelSchmidt"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCrew"/>
+        <NamedIndividual IRI="#LH123_FRA_BER"/>
+        <NamedIndividual IRI="#FirstOfficerAnnaKeller"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCrew"/>
+        <NamedIndividual IRI="#LH123_FRA_BER"/>
+        <NamedIndividual IRI="#AttendantMariaGarcia"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#operatedBy"/>
+        <NamedIndividual IRI="#EK202_NYC_DXB"/>
+        <NamedIndividual IRI="#Emirates"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#usesAircraft"/>
+        <NamedIndividual IRI="#EK202_NYC_DXB"/>
+        <NamedIndividual IRI="#AirbusA380"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#departsFrom"/>
+        <NamedIndividual IRI="#EK202_NYC_DXB"/>
+        <NamedIndividual IRI="#NewYorkAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#arrivesAt"/>
+        <NamedIndividual IRI="#EK202_NYC_DXB"/>
+        <NamedIndividual IRI="#DubaiAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCrew"/>
+        <NamedIndividual IRI="#EK202_NYC_DXB"/>
+        <NamedIndividual IRI="#CaptainSarahWilson"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCrew"/>
+        <NamedIndividual IRI="#EK202_NYC_DXB"/>
+        <NamedIndividual IRI="#FirstOfficerJamesLee"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#departsFrom"/>
+        <NamedIndividual IRI="#LH440_FRA_HOU"/>
+        <NamedIndividual IRI="#FrankfurtAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#arrivesAt"/>
+        <NamedIndividual IRI="#LH440_FRA_HOU"/>
+        <NamedIndividual IRI="#HoustonAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#usesAircraft"/>
+        <NamedIndividual IRI="#LH440_FRA_HOU"/>
+        <NamedIndividual IRI="#Boeing737MAX8"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCrew"/>
+        <NamedIndividual IRI="#LH440_FRA_HOU"/>
+        <NamedIndividual IRI="#CaptainMichaelSchmidt"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#operatedBy"/>
+        <NamedIndividual IRI="#BA15_LHR_JFK"/>
+        <NamedIndividual IRI="#BritishAirways"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#usesAircraft"/>
+        <NamedIndividual IRI="#BA15_LHR_JFK"/>
+        <NamedIndividual IRI="#Boeing787Dreamliner"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#departsFrom"/>
+        <NamedIndividual IRI="#BA15_LHR_JFK"/>
+        <NamedIndividual IRI="#HeathrowAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#arrivesAt"/>
+        <NamedIndividual IRI="#BA15_LHR_JFK"/>
+        <NamedIndividual IRI="#JFKAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCrew"/>
+        <NamedIndividual IRI="#BA15_LHR_JFK"/>
+        <NamedIndividual IRI="#CaptainSarahWilson"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#operatedBy"/>
+        <NamedIndividual IRI="#NJ700_FRA_NCE"/>
+        <NamedIndividual IRI="#NetJets"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#usesAircraft"/>
+        <NamedIndividual IRI="#NJ700_FRA_NCE"/>
+        <NamedIndividual IRI="#GulfstreamG700"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#departsFrom"/>
+        <NamedIndividual IRI="#NJ700_FRA_NCE"/>
+        <NamedIndividual IRI="#FrankfurtAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#arrivesAt"/>
+        <NamedIndividual IRI="#NJ700_FRA_NCE"/>
+        <NamedIndividual IRI="#NiceAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCrew"/>
+        <NamedIndividual IRI="#NJ700_FRA_NCE"/>
+        <NamedIndividual IRI="#MechanicOlafBrandt"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#operatedBy"/>
+        <NamedIndividual IRI="#VJ501_LHR_ATH"/>
+        <NamedIndividual IRI="#VistaJet"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#usesAircraft"/>
+        <NamedIndividual IRI="#VJ501_LHR_ATH"/>
+        <NamedIndividual IRI="#BombardierGlobal7500"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#departsFrom"/>
+        <NamedIndividual IRI="#VJ501_LHR_ATH"/>
+        <NamedIndividual IRI="#HeathrowAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#arrivesAt"/>
+        <NamedIndividual IRI="#VJ501_LHR_ATH"/>
+        <NamedIndividual IRI="#AthensAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCrew"/>
+        <NamedIndividual IRI="#VJ501_LHR_ATH"/>
+        <NamedIndividual IRI="#MechanicSophieMartinez"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#operatedBy"/>
+        <NamedIndividual IRI="#FX502_FRA_MEM"/>
+        <NamedIndividual IRI="#FedExExpress"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#usesAircraft"/>
+        <NamedIndividual IRI="#FX502_FRA_MEM"/>
+        <NamedIndividual IRI="#Boeing767Freighter"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#departsFrom"/>
+        <NamedIndividual IRI="#FX502_FRA_MEM"/>
+        <NamedIndividual IRI="#FrankfurtAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#arrivesAt"/>
+        <NamedIndividual IRI="#FX502_FRA_MEM"/>
+        <NamedIndividual IRI="#MemphisAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#carriesCargo"/>
+        <NamedIndividual IRI="#FX502_FRA_MEM"/>
+        <NamedIndividual IRI="#PerishableFoodShipment"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#carriesCargo"/>
+        <NamedIndividual IRI="#FX502_FRA_MEM"/>
+        <NamedIndividual IRI="#FreshFlowersLoad"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#carriesCargo"/>
+        <NamedIndividual IRI="#FX502_FRA_MEM"/>
+        <NamedIndividual IRI="#TextileGoodsBatch"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#carriesCargo"/>
+        <NamedIndividual IRI="#FX502_FRA_MEM"/>
+        <NamedIndividual IRI="#WindBladeShipment"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCrew"/>
+        <NamedIndividual IRI="#FX502_FRA_MEM"/>
+        <NamedIndividual IRI="#TechnicianLuisMuller"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#operatedBy"/>
+        <NamedIndividual IRI="#DHL991_FRA_BKK"/>
+        <NamedIndividual IRI="#DHLExpress"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#usesAircraft"/>
+        <NamedIndividual IRI="#DHL991_FRA_BKK"/>
+        <NamedIndividual IRI="#AirbusA330Freighter"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#departsFrom"/>
+        <NamedIndividual IRI="#DHL991_FRA_BKK"/>
+        <NamedIndividual IRI="#FrankfurtAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#arrivesAt"/>
+        <NamedIndividual IRI="#DHL991_FRA_BKK"/>
+        <NamedIndividual IRI="#BangkokAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#carriesCargo"/>
+        <NamedIndividual IRI="#DHL991_FRA_BKK"/>
+        <NamedIndividual IRI="#ElectronicsShipment2026"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#carriesCargo"/>
+        <NamedIndividual IRI="#DHL991_FRA_BKK"/>
+        <NamedIndividual IRI="#ChemicalDrumSet"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#carriesCargo"/>
+        <NamedIndividual IRI="#DHL991_FRA_BKK"/>
+        <NamedIndividual IRI="#LithiumBatteryContainer"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#carriesCargo"/>
+        <NamedIndividual IRI="#DHL991_FRA_BKK"/>
+        <NamedIndividual IRI="#IndustrialTurbineLoad"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCrew"/>
+        <NamedIndividual IRI="#DHL991_FRA_BKK"/>
+        <NamedIndividual IRI="#TechnicianAhmedKhan"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#worksFor"/>
+        <NamedIndividual IRI="#CaptainMichaelSchmidt"/>
+        <NamedIndividual IRI="#Lufthansa"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#worksFor"/>
+        <NamedIndividual IRI="#CaptainSarahWilson"/>
+        <NamedIndividual IRI="#BritishAirways"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#worksFor"/>
+        <NamedIndividual IRI="#FirstOfficerAnnaKeller"/>
+        <NamedIndividual IRI="#Lufthansa"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#worksFor"/>
+        <NamedIndividual IRI="#FirstOfficerJamesLee"/>
+        <NamedIndividual IRI="#BritishAirways"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#worksFor"/>
+        <NamedIndividual IRI="#AttendantMariaGarcia"/>
+        <NamedIndividual IRI="#Lufthansa"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#worksFor"/>
+        <NamedIndividual IRI="#AttendantSaraNguyen"/>
+        <NamedIndividual IRI="#BritishAirways"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#worksFor"/>
+        <NamedIndividual IRI="#MechanicOlafBrandt"/>
+        <NamedIndividual IRI="#NetJets"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#worksFor"/>
+        <NamedIndividual IRI="#MechanicSophieMartinez"/>
+        <NamedIndividual IRI="#VistaJet"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#worksFor"/>
+        <NamedIndividual IRI="#TechnicianLuisMuller"/>
+        <NamedIndividual IRI="#FedExExpress"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#worksFor"/>
+        <NamedIndividual IRI="#TechnicianAhmedKhan"/>
+        <NamedIndividual IRI="#DHLExpress"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedAt"/>
+        <NamedIndividual IRI="#SikorskyUH60BlackHawk"/>
+        <NamedIndividual IRI="#FrankfurtAirport"/>
+    </ObjectPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#AirbusA320neo"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">194</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasRange"/>
+        <NamedIndividual IRI="#AirbusA320neo"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">6500</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasSpeed"/>
+        <NamedIndividual IRI="#AirbusA320neo"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">900</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#AirbusA330Freighter"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">70000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasRange"/>
+        <NamedIndividual IRI="#AirbusA330Freighter"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">7400</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasSpeed"/>
+        <NamedIndividual IRI="#AirbusA330Freighter"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">871</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#AirbusA380"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">853</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasRange"/>
+        <NamedIndividual IRI="#AirbusA380"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">15200</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasSpeed"/>
+        <NamedIndividual IRI="#AirbusA380"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">950</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#AntonovAn124"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">150000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasRange"/>
+        <NamedIndividual IRI="#AntonovAn124"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">14000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasSpeed"/>
+        <NamedIndividual IRI="#AntonovAn124"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">865</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#AntonovAn225"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">250000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasRange"/>
+        <NamedIndividual IRI="#AntonovAn225"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">15000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasSpeed"/>
+        <NamedIndividual IRI="#AntonovAn225"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">850</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#BayraktarTB2"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">150</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasRange"/>
+        <NamedIndividual IRI="#BayraktarTB2"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">3000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasSpeed"/>
+        <NamedIndividual IRI="#BayraktarTB2"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">220</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#Bell412EP"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">13</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasRange"/>
+        <NamedIndividual IRI="#Bell412EP"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">735</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasSpeed"/>
+        <NamedIndividual IRI="#Bell412EP"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">256</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#Boeing737MAX8"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">210</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasRange"/>
+        <NamedIndividual IRI="#Boeing737MAX8"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">6500</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasSpeed"/>
+        <NamedIndividual IRI="#Boeing737MAX8"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">921</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#Boeing767Freighter"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">52000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasRange"/>
+        <NamedIndividual IRI="#Boeing767Freighter"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">6000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasSpeed"/>
+        <NamedIndividual IRI="#Boeing767Freighter"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">915</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#Boeing787Dreamliner"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">336</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasRange"/>
+        <NamedIndividual IRI="#Boeing787Dreamliner"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">14600</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasSpeed"/>
+        <NamedIndividual IRI="#Boeing787Dreamliner"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">956</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#BoeingAH64Apache"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">2</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasRange"/>
+        <NamedIndividual IRI="#BoeingAH64Apache"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">476</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasSpeed"/>
+        <NamedIndividual IRI="#BoeingAH64Apache"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">293</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#BombardierCRJ900"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">90</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasRange"/>
+        <NamedIndividual IRI="#BombardierCRJ900"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">3600</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasSpeed"/>
+        <NamedIndividual IRI="#BombardierCRJ900"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">872</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#BombardierGlobal7500"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">19</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasRange"/>
+        <NamedIndividual IRI="#BombardierGlobal7500"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">14100</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasSpeed"/>
+        <NamedIndividual IRI="#BombardierGlobal7500"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">1114</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#CH47Chinook"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">44</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasRange"/>
+        <NamedIndividual IRI="#CH47Chinook"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">741</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasSpeed"/>
+        <NamedIndividual IRI="#CH47Chinook"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">315</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#EmbraerE190"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">114</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasRange"/>
+        <NamedIndividual IRI="#EmbraerE190"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">4600</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasSpeed"/>
+        <NamedIndividual IRI="#EmbraerE190"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">890</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#EurocopterEC145"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">9</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasRange"/>
+        <NamedIndividual IRI="#EurocopterEC145"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">695</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasSpeed"/>
+        <NamedIndividual IRI="#EurocopterEC145"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">244</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#GlobalHawkRQ4"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">900</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasRange"/>
+        <NamedIndividual IRI="#GlobalHawkRQ4"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">22200</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasSpeed"/>
+        <NamedIndividual IRI="#GlobalHawkRQ4"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">635</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#GulfstreamG700"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">19</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasRange"/>
+        <NamedIndividual IRI="#GulfstreamG700"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">13800</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasSpeed"/>
+        <NamedIndividual IRI="#GulfstreamG700"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">1110</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#MQ9Reaper"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">1700</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasRange"/>
+        <NamedIndividual IRI="#MQ9Reaper"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">1850</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasSpeed"/>
+        <NamedIndividual IRI="#MQ9Reaper"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">370</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#MQ9ReaperStrike"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">1700</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasRange"/>
+        <NamedIndividual IRI="#MQ9ReaperStrike"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">1850</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasSpeed"/>
+        <NamedIndividual IRI="#MQ9ReaperStrike"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">370</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#MilMi28Havoc"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">2</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasRange"/>
+        <NamedIndividual IRI="#MilMi28Havoc"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">460</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasSpeed"/>
+        <NamedIndividual IRI="#MilMi28Havoc"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">320</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#NatCorderOne"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">500</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasRange"/>
+        <NamedIndividual IRI="#NatCorderOne"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">800</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasSpeed"/>
+        <NamedIndividual IRI="#NatCorderOne"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">200</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasRunwayLength"/>
+        <NamedIndividual IRI="#Runway09L_LHR"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">3660</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasRunwayLength"/>
+        <NamedIndividual IRI="#Runway25R_FRA"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">4000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#SabreWingRhaegal"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">1000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasRange"/>
+        <NamedIndividual IRI="#SabreWingRhaegal"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">1000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasSpeed"/>
+        <NamedIndividual IRI="#SabreWingRhaegal"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">160</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#SikorskyUH60BlackHawk"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">14</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasRange"/>
+        <NamedIndividual IRI="#SikorskyUH60BlackHawk"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">590</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasSpeed"/>
+        <NamedIndividual IRI="#SikorskyUH60BlackHawk"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">295</Literal>
+    </DataPropertyAssertion>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#arrivesAt"/>
+        <Class IRI="#FlightOperation"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#carriesCargo"/>
+        <Class IRI="#CargoFlight"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#departsFrom"/>
+        <Class IRI="#FlightOperation"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasCrew"/>
+        <Class IRI="#FlightOperation"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#locatedAt"/>
+        <Class IRI="#Aircraft"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#operatedBy"/>
+        <Class IRI="#FlightOperation"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#usesAircraft"/>
+        <Class IRI="#FlightOperation"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#worksFor"/>
+        <Class IRI="#AirPersonnel"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#arrivesAt"/>
+        <Class IRI="#Airport"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#carriesCargo"/>
+        <Class IRI="#Cargo"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#departsFrom"/>
+        <Class IRI="#Airport"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasCrew"/>
+        <Class IRI="#AirPersonnel"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#locatedAt"/>
+        <Class IRI="#Airport"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#operatedBy"/>
+        <Class IRI="#Airline"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#usesAircraft"/>
+        <Class IRI="#Aircraft"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#worksFor"/>
+        <Class IRI="#Airline"/>
+    </ObjectPropertyRange>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasCapacity"/>
+        <Class IRI="#Aircraft"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasRange"/>
+        <Class IRI="#Aircraft"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasRunwayLength"/>
+        <Class IRI="#Runway"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasSpeed"/>
+        <Class IRI="#Aircraft"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasCapacity"/>
+        <Datatype abbreviatedIRI="xsd:decimal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasRange"/>
+        <Datatype abbreviatedIRI="xsd:decimal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasRunwayLength"/>
+        <Datatype abbreviatedIRI="xsd:decimal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasSpeed"/>
+        <Datatype abbreviatedIRI="xsd:decimal"/>
+    </DataPropertyRange>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
+

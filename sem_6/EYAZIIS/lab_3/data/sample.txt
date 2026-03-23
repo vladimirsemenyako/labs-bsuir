@@ -1,0 +1,5 @@
+The quick brown fox jumps over the lazy dog.
+
+Natural language processing is a subfield of linguistics, computer science, and artificial intelligence.
+
+Syntactic analysis involves identifying the grammatical structure of sentences.

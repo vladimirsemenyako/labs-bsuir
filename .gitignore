@@ -40,6 +40,9 @@ frontend/.env.production.local
 
 # OS
 .DS_Store
-Thumbs.db
-
-resources/*
+.idea/
+.venv/
+.env
+.cursor
+_pycache_/
+venv/

@@ -1,0 +1,3 @@
+Short benchmark text 2: Portable speakers.
+
+Portable Bluetooth speakers have changed how people share music in parks and student dormitories. The sound quality of a small speaker is lower than that of a professional sound system, but the device is easy to carry and quick to connect to a smartphone. This document is also short and is intended to slightly increase the size of the experimental corpus.

@@ -1,0 +1,55 @@
+@startuml parse_y_line
+!theme plain
+skinparam backgroundColor #FFFFFF
+skinparam activity {
+    BackgroundColor #E8F4F8
+    BorderColor #2E86AB
+    FontColor #000000
+    FontSize 12
+}
+
+title Блок-схема алгоритма: parse_y_line() - Парсинг строки Y без регулярных выражений
+
+start
+
+:matches = [];
+:i = 0;
+
+repeat
+    if (i < len(line)?) then (да)
+        if (line[i] == '<'?) then (да)
+            :comma_pos = line.find(',', i + 1);
+            
+            if (comma_pos != -1?) then (да)
+                :c_name = line[i+1:comma_pos].strip();
+                :bracket_pos = line.find('>', comma_pos + 1);
+                
+                if (bracket_pos != -1?) then (да)
+                    :val_str = line[comma_pos+1:bracket_pos].strip();
+                    
+                    if (c_name AND val_str?) then (да)
+                        :try:;
+                        :val = float(val_str);
+                        :matches.append((c_name, val));
+                        :i = bracket_pos + 1;
+                    else (нет)
+                        :i++;
+                    endif
+                else (нет)
+                    :i++;
+                endif
+            else (нет)
+                :i++;
+            endif
+        else (нет)
+            :i++;
+        endif
+    else (нет)
+    endif
+repeat while (i < len(line)?)
+
+:return matches;
+
+stop
+
+@enduml

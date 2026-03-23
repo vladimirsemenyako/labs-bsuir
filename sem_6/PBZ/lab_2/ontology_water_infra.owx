@@ -1,0 +1,463 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.semanticweb.org/vivi/ontologies/2026/2/ontology-water-infra"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.semanticweb.org/vivi/ontologies/2026/2/ontology-water-infra">
+    <Prefix name="" IRI="http://www.semanticweb.org/vivi/ontologies/2026/2/ontology-water-infra#"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="core" IRI="http://www.semanticweb.org/vivi/ontologies/2026/2/transport-core#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Declaration>
+        <Class IRI="#CargoVessel"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PassengerVessel"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PortInfrastructure"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RiverRoute"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RiverVessel"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#SeaRoute"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#SeaVessel"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#WaterOperator"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#WaterVehicle"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="core:Cargo"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="core:Infrastructure"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="core:Operator"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="core:Route"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="core:TransportVehicle"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty abbreviatedIRI="core:carriesCargo"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty abbreviatedIRI="core:locatedAt"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty abbreviatedIRI="core:operatedBy"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty abbreviatedIRI="core:servesRoute"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#deadweightTons"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#draftMeters"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty abbreviatedIRI="core:capacityUnits"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty abbreviatedIRI="core:entityName"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty abbreviatedIRI="core:fuelType"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty abbreviatedIRI="core:maxSpeedKmh"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty abbreviatedIRI="core:rangeKm"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty abbreviatedIRI="core:routeLengthKm"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty abbreviatedIRI="core:stopsCount"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#BargePripyat_07"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#BlueSeaLines"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CargoGrainBatch_B"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CargoOilBatch_A"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#FerryBaltic_01"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#PortGdansk"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#RiverCargoCo"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#RiverTerminalMinsk"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#RouteBalticLine"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#RoutePripyatLine"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TankerNorthStar_5"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="#CargoVessel"/>
+        <Class IRI="#WaterVehicle"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PassengerVessel"/>
+        <Class IRI="#WaterVehicle"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PortInfrastructure"/>
+        <Class abbreviatedIRI="core:Infrastructure"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#RiverRoute"/>
+        <Class abbreviatedIRI="core:Route"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#RiverVessel"/>
+        <Class IRI="#WaterVehicle"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#SeaRoute"/>
+        <Class abbreviatedIRI="core:Route"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#SeaVessel"/>
+        <Class IRI="#WaterVehicle"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#WaterOperator"/>
+        <Class abbreviatedIRI="core:Operator"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#WaterVehicle"/>
+        <Class abbreviatedIRI="core:TransportVehicle"/>
+    </SubClassOf>
+    <DisjointClasses>
+        <Class IRI="#CargoVessel"/>
+        <Class IRI="#PassengerVessel"/>
+    </DisjointClasses>
+    <ClassAssertion>
+        <Class IRI="#RiverVessel"/>
+        <NamedIndividual IRI="#BargePripyat_07"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#WaterOperator"/>
+        <NamedIndividual IRI="#BlueSeaLines"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="core:Cargo"/>
+        <NamedIndividual IRI="#CargoGrainBatch_B"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="core:Cargo"/>
+        <NamedIndividual IRI="#CargoOilBatch_A"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#PassengerVessel"/>
+        <NamedIndividual IRI="#FerryBaltic_01"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#PortInfrastructure"/>
+        <NamedIndividual IRI="#PortGdansk"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#WaterOperator"/>
+        <NamedIndividual IRI="#RiverCargoCo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#PortInfrastructure"/>
+        <NamedIndividual IRI="#RiverTerminalMinsk"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#SeaRoute"/>
+        <NamedIndividual IRI="#RouteBalticLine"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RiverRoute"/>
+        <NamedIndividual IRI="#RoutePripyatLine"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CargoVessel"/>
+        <NamedIndividual IRI="#TankerNorthStar_5"/>
+    </ClassAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="core:carriesCargo"/>
+        <NamedIndividual IRI="#BargePripyat_07"/>
+        <NamedIndividual IRI="#CargoGrainBatch_B"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="core:locatedAt"/>
+        <NamedIndividual IRI="#BargePripyat_07"/>
+        <NamedIndividual IRI="#RiverTerminalMinsk"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="core:operatedBy"/>
+        <NamedIndividual IRI="#BargePripyat_07"/>
+        <NamedIndividual IRI="#RiverCargoCo"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="core:servesRoute"/>
+        <NamedIndividual IRI="#BargePripyat_07"/>
+        <NamedIndividual IRI="#RoutePripyatLine"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="core:locatedAt"/>
+        <NamedIndividual IRI="#FerryBaltic_01"/>
+        <NamedIndividual IRI="#PortGdansk"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="core:operatedBy"/>
+        <NamedIndividual IRI="#FerryBaltic_01"/>
+        <NamedIndividual IRI="#BlueSeaLines"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="core:servesRoute"/>
+        <NamedIndividual IRI="#FerryBaltic_01"/>
+        <NamedIndividual IRI="#RouteBalticLine"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="core:carriesCargo"/>
+        <NamedIndividual IRI="#TankerNorthStar_5"/>
+        <NamedIndividual IRI="#CargoOilBatch_A"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="core:locatedAt"/>
+        <NamedIndividual IRI="#TankerNorthStar_5"/>
+        <NamedIndividual IRI="#PortGdansk"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="core:operatedBy"/>
+        <NamedIndividual IRI="#TankerNorthStar_5"/>
+        <NamedIndividual IRI="#BlueSeaLines"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="core:servesRoute"/>
+        <NamedIndividual IRI="#TankerNorthStar_5"/>
+        <NamedIndividual IRI="#RouteBalticLine"/>
+    </ObjectPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#draftMeters"/>
+        <NamedIndividual IRI="#FerryBaltic_01"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">6.8</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="core:capacityUnits"/>
+        <NamedIndividual IRI="#FerryBaltic_01"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">1200</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="core:entityName"/>
+        <NamedIndividual IRI="#FerryBaltic_01"/>
+        <Literal>Baltic Ferry 01</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="core:fuelType"/>
+        <NamedIndividual IRI="#FerryBaltic_01"/>
+        <Literal>marine-diesel</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="core:maxSpeedKmh"/>
+        <NamedIndividual IRI="#FerryBaltic_01"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">32</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="core:rangeKm"/>
+        <NamedIndividual IRI="#FerryBaltic_01"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">1400</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="core:routeLengthKm"/>
+        <NamedIndividual IRI="#RouteBalticLine"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">980</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="core:stopsCount"/>
+        <NamedIndividual IRI="#RouteBalticLine"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">3</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="core:routeLengthKm"/>
+        <NamedIndividual IRI="#RoutePripyatLine"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">460</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="core:stopsCount"/>
+        <NamedIndividual IRI="#RoutePripyatLine"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">6</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#deadweightTons"/>
+        <NamedIndividual IRI="#TankerNorthStar_5"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">75000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#draftMeters"/>
+        <NamedIndividual IRI="#TankerNorthStar_5"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">14.2</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="core:capacityUnits"/>
+        <NamedIndividual IRI="#TankerNorthStar_5"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">90000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="core:entityName"/>
+        <NamedIndividual IRI="#TankerNorthStar_5"/>
+        <Literal>Tanker NorthStar 5</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="core:fuelType"/>
+        <NamedIndividual IRI="#TankerNorthStar_5"/>
+        <Literal>heavy-fuel-oil</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="core:maxSpeedKmh"/>
+        <NamedIndividual IRI="#TankerNorthStar_5"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">28</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="core:rangeKm"/>
+        <NamedIndividual IRI="#TankerNorthStar_5"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">12000</Literal>
+    </DataPropertyAssertion>
+    <ObjectPropertyDomain>
+        <ObjectProperty abbreviatedIRI="core:carriesCargo"/>
+        <Class abbreviatedIRI="core:TransportVehicle"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty abbreviatedIRI="core:locatedAt"/>
+        <Class abbreviatedIRI="core:TransportVehicle"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty abbreviatedIRI="core:operatedBy"/>
+        <Class abbreviatedIRI="core:TransportVehicle"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty abbreviatedIRI="core:servesRoute"/>
+        <Class abbreviatedIRI="core:TransportVehicle"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty abbreviatedIRI="core:carriesCargo"/>
+        <Class abbreviatedIRI="core:Cargo"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty abbreviatedIRI="core:locatedAt"/>
+        <Class abbreviatedIRI="core:Infrastructure"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty abbreviatedIRI="core:operatedBy"/>
+        <Class abbreviatedIRI="core:Operator"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty abbreviatedIRI="core:servesRoute"/>
+        <Class abbreviatedIRI="core:Route"/>
+    </ObjectPropertyRange>
+    <DataPropertyDomain>
+        <DataProperty IRI="#deadweightTons"/>
+        <Class IRI="#CargoVessel"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#draftMeters"/>
+        <Class IRI="#WaterVehicle"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty abbreviatedIRI="core:capacityUnits"/>
+        <Class abbreviatedIRI="core:TransportVehicle"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty abbreviatedIRI="core:entityName"/>
+        <Class abbreviatedIRI="core:TransportVehicle"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty abbreviatedIRI="core:fuelType"/>
+        <Class abbreviatedIRI="core:TransportVehicle"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty abbreviatedIRI="core:maxSpeedKmh"/>
+        <Class abbreviatedIRI="core:TransportVehicle"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty abbreviatedIRI="core:rangeKm"/>
+        <Class abbreviatedIRI="core:TransportVehicle"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty abbreviatedIRI="core:routeLengthKm"/>
+        <Class abbreviatedIRI="core:Route"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty abbreviatedIRI="core:stopsCount"/>
+        <Class abbreviatedIRI="core:Route"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#deadweightTons"/>
+        <Datatype abbreviatedIRI="xsd:decimal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#draftMeters"/>
+        <Datatype abbreviatedIRI="xsd:decimal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty abbreviatedIRI="core:capacityUnits"/>
+        <Datatype abbreviatedIRI="xsd:decimal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty abbreviatedIRI="core:entityName"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty abbreviatedIRI="core:fuelType"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty abbreviatedIRI="core:maxSpeedKmh"/>
+        <Datatype abbreviatedIRI="xsd:decimal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty abbreviatedIRI="core:rangeKm"/>
+        <Datatype abbreviatedIRI="xsd:decimal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty abbreviatedIRI="core:routeLengthKm"/>
+        <Datatype abbreviatedIRI="xsd:decimal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty abbreviatedIRI="core:stopsCount"/>
+        <Datatype abbreviatedIRI="xsd:integer"/>
+    </DataPropertyRange>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
+

@@ -1,0 +1,12 @@
+Программа включает в себя следующие функции:
+
+\begin{itemize}
+    \item \texttt{parse\_vector(s)} --- проверка и разбор входных чисел разрядности $p=4$ (0--15);
+    \item \texttt{to\_bin\_str(value, bits, group\_sep)} --- форматирование числа в двоичный вид группами по 4 символа;
+    \item \texttt{mul\_4bit\_lsb\_right\_shift(a, b)} --- вычисляет произведение пары 4-разрядных чисел (алгоритм с младших разрядов со сдвигом частичной суммы вправо);
+    \item \texttt{pipeline\_stage\_step(partial, a, b, bit\_index)} --- выполняет один шаг конвейера (обработка одного разряда множителя);
+    \item \texttt{get\_stage\_display\_at\_tact(vectors\_a, vectors\_b, tact, stage, n\_stages, m)} --- возвращает данные для отображения состояния стадии в заданный такт;
+    \item \texttt{print\_pipeline\_state\_at\_tact(tact, vectors\_a, vectors\_b, n\_stages, m, stage\_time)} --- выводит информацию каждого такта;
+    \item \texttt{compute\_result\_vector(vectors\_a, vectors\_b)} --- вычисляет результирующий вектор $C$ попарных произведений;
+    \item \texttt{main()} --- функция, запускающая программу.
+\end{itemize}

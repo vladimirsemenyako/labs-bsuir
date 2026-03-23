@@ -1,0 +1,436 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.semanticweb.org/vivi/ontologies/2026/2/ontology-land-air"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.semanticweb.org/vivi/ontologies/2026/2/ontology-land-air">
+    <Prefix name="" IRI="http://www.semanticweb.org/vivi/ontologies/2026/2/ontology-land-air#"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="core" IRI="http://www.semanticweb.org/vivi/ontologies/2026/2/transport-core#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Declaration>
+        <Class IRI="#IntercityRoute"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#LandInfrastructure"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#LandOperator"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#LandVehicle"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RailVehicle"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RoadVehicle"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#UrbanPublicTransport"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#UrbanRoute"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="core:Cargo"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="core:Infrastructure"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="core:Operator"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="core:Route"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="core:TransportVehicle"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty abbreviatedIRI="core:carriesCargo"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty abbreviatedIRI="core:locatedAt"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty abbreviatedIRI="core:operatedBy"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty abbreviatedIRI="core:servesRoute"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty abbreviatedIRI="core:capacityUnits"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty abbreviatedIRI="core:entityName"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty abbreviatedIRI="core:fuelType"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty abbreviatedIRI="core:maxSpeedKmh"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty abbreviatedIRI="core:rangeKm"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty abbreviatedIRI="core:routeLengthKm"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty abbreviatedIRI="core:stopsCount"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#BelRail"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#BusM1_102"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CargoMachinery_B"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CargoPallets_A"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CentralStationMinsk"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#DepotEastMinsk"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#MinskTransit"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#RouteM1CenterAirport"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#RouteMinskGomel"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TrainRegional_032"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TramT3_14"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TruckBelaz_75131"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="#IntercityRoute"/>
+        <Class abbreviatedIRI="core:Route"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#LandInfrastructure"/>
+        <Class abbreviatedIRI="core:Infrastructure"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#LandOperator"/>
+        <Class abbreviatedIRI="core:Operator"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#LandVehicle"/>
+        <Class abbreviatedIRI="core:TransportVehicle"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#RailVehicle"/>
+        <Class IRI="#LandVehicle"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#RoadVehicle"/>
+        <Class IRI="#LandVehicle"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#UrbanPublicTransport"/>
+        <Class IRI="#RoadVehicle"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#UrbanRoute"/>
+        <Class abbreviatedIRI="core:Route"/>
+    </SubClassOf>
+    <DisjointClasses>
+        <Class IRI="#RailVehicle"/>
+        <Class IRI="#RoadVehicle"/>
+    </DisjointClasses>
+    <ClassAssertion>
+        <Class IRI="#LandOperator"/>
+        <NamedIndividual IRI="#BelRail"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#UrbanPublicTransport"/>
+        <NamedIndividual IRI="#BusM1_102"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="core:Cargo"/>
+        <NamedIndividual IRI="#CargoMachinery_B"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="core:Cargo"/>
+        <NamedIndividual IRI="#CargoPallets_A"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#LandInfrastructure"/>
+        <NamedIndividual IRI="#CentralStationMinsk"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#LandInfrastructure"/>
+        <NamedIndividual IRI="#DepotEastMinsk"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#LandOperator"/>
+        <NamedIndividual IRI="#MinskTransit"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#UrbanRoute"/>
+        <NamedIndividual IRI="#RouteM1CenterAirport"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#IntercityRoute"/>
+        <NamedIndividual IRI="#RouteMinskGomel"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RailVehicle"/>
+        <NamedIndividual IRI="#TrainRegional_032"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#UrbanPublicTransport"/>
+        <NamedIndividual IRI="#TramT3_14"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RoadVehicle"/>
+        <NamedIndividual IRI="#TruckBelaz_75131"/>
+    </ClassAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="core:locatedAt"/>
+        <NamedIndividual IRI="#BusM1_102"/>
+        <NamedIndividual IRI="#CentralStationMinsk"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="core:operatedBy"/>
+        <NamedIndividual IRI="#BusM1_102"/>
+        <NamedIndividual IRI="#MinskTransit"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="core:servesRoute"/>
+        <NamedIndividual IRI="#BusM1_102"/>
+        <NamedIndividual IRI="#RouteM1CenterAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="core:carriesCargo"/>
+        <NamedIndividual IRI="#TrainRegional_032"/>
+        <NamedIndividual IRI="#CargoPallets_A"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="core:locatedAt"/>
+        <NamedIndividual IRI="#TrainRegional_032"/>
+        <NamedIndividual IRI="#CentralStationMinsk"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="core:operatedBy"/>
+        <NamedIndividual IRI="#TrainRegional_032"/>
+        <NamedIndividual IRI="#BelRail"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="core:servesRoute"/>
+        <NamedIndividual IRI="#TrainRegional_032"/>
+        <NamedIndividual IRI="#RouteMinskGomel"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="core:locatedAt"/>
+        <NamedIndividual IRI="#TramT3_14"/>
+        <NamedIndividual IRI="#DepotEastMinsk"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="core:operatedBy"/>
+        <NamedIndividual IRI="#TramT3_14"/>
+        <NamedIndividual IRI="#MinskTransit"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="core:servesRoute"/>
+        <NamedIndividual IRI="#TramT3_14"/>
+        <NamedIndividual IRI="#RouteM1CenterAirport"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="core:carriesCargo"/>
+        <NamedIndividual IRI="#TruckBelaz_75131"/>
+        <NamedIndividual IRI="#CargoMachinery_B"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="core:locatedAt"/>
+        <NamedIndividual IRI="#TruckBelaz_75131"/>
+        <NamedIndividual IRI="#DepotEastMinsk"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="core:operatedBy"/>
+        <NamedIndividual IRI="#TruckBelaz_75131"/>
+        <NamedIndividual IRI="#MinskTransit"/>
+    </ObjectPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="core:capacityUnits"/>
+        <NamedIndividual IRI="#BusM1_102"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">85</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="core:entityName"/>
+        <NamedIndividual IRI="#BusM1_102"/>
+        <Literal>City Bus M1 #102</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="core:fuelType"/>
+        <NamedIndividual IRI="#BusM1_102"/>
+        <Literal>diesel</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="core:maxSpeedKmh"/>
+        <NamedIndividual IRI="#BusM1_102"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">90</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="core:rangeKm"/>
+        <NamedIndividual IRI="#BusM1_102"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">420</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="core:routeLengthKm"/>
+        <NamedIndividual IRI="#RouteM1CenterAirport"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">38</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="core:stopsCount"/>
+        <NamedIndividual IRI="#RouteM1CenterAirport"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">21</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="core:routeLengthKm"/>
+        <NamedIndividual IRI="#RouteMinskGomel"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">310</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="core:stopsCount"/>
+        <NamedIndividual IRI="#RouteMinskGomel"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">8</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="core:capacityUnits"/>
+        <NamedIndividual IRI="#TrainRegional_032"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">420</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="core:entityName"/>
+        <NamedIndividual IRI="#TrainRegional_032"/>
+        <Literal>Regional Train 032</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="core:fuelType"/>
+        <NamedIndividual IRI="#TrainRegional_032"/>
+        <Literal>electric</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="core:maxSpeedKmh"/>
+        <NamedIndividual IRI="#TrainRegional_032"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">160</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="core:rangeKm"/>
+        <NamedIndividual IRI="#TrainRegional_032"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">700</Literal>
+    </DataPropertyAssertion>
+    <ObjectPropertyDomain>
+        <ObjectProperty abbreviatedIRI="core:carriesCargo"/>
+        <Class abbreviatedIRI="core:TransportVehicle"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty abbreviatedIRI="core:locatedAt"/>
+        <Class abbreviatedIRI="core:TransportVehicle"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty abbreviatedIRI="core:operatedBy"/>
+        <Class abbreviatedIRI="core:TransportVehicle"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty abbreviatedIRI="core:servesRoute"/>
+        <Class abbreviatedIRI="core:TransportVehicle"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty abbreviatedIRI="core:carriesCargo"/>
+        <Class abbreviatedIRI="core:Cargo"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty abbreviatedIRI="core:locatedAt"/>
+        <Class abbreviatedIRI="core:Infrastructure"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty abbreviatedIRI="core:operatedBy"/>
+        <Class abbreviatedIRI="core:Operator"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty abbreviatedIRI="core:servesRoute"/>
+        <Class abbreviatedIRI="core:Route"/>
+    </ObjectPropertyRange>
+    <DataPropertyDomain>
+        <DataProperty abbreviatedIRI="core:capacityUnits"/>
+        <Class abbreviatedIRI="core:TransportVehicle"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty abbreviatedIRI="core:entityName"/>
+        <Class abbreviatedIRI="core:TransportVehicle"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty abbreviatedIRI="core:fuelType"/>
+        <Class abbreviatedIRI="core:TransportVehicle"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty abbreviatedIRI="core:maxSpeedKmh"/>
+        <Class abbreviatedIRI="core:TransportVehicle"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty abbreviatedIRI="core:rangeKm"/>
+        <Class abbreviatedIRI="core:TransportVehicle"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty abbreviatedIRI="core:routeLengthKm"/>
+        <Class abbreviatedIRI="core:Route"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty abbreviatedIRI="core:stopsCount"/>
+        <Class abbreviatedIRI="core:Route"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty abbreviatedIRI="core:capacityUnits"/>
+        <Datatype abbreviatedIRI="xsd:decimal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty abbreviatedIRI="core:entityName"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty abbreviatedIRI="core:fuelType"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty abbreviatedIRI="core:maxSpeedKmh"/>
+        <Datatype abbreviatedIRI="xsd:decimal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty abbreviatedIRI="core:rangeKm"/>
+        <Datatype abbreviatedIRI="xsd:decimal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty abbreviatedIRI="core:routeLengthKm"/>
+        <Datatype abbreviatedIRI="xsd:decimal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty abbreviatedIRI="core:stopsCount"/>
+        <Datatype abbreviatedIRI="xsd:integer"/>
+    </DataPropertyRange>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
+

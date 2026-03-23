@@ -1,0 +1,28 @@
+@startuml interval_intersect
+!theme plain
+skinparam backgroundColor #FFFFFF
+skinparam activity {
+    BackgroundColor #E8F4F8
+    BorderColor #2E86AB
+    FontColor #000000
+    FontSize 12
+}
+
+title Блок-схема алгоритма: Interval.intersect() - Пересечение интервалов
+
+start
+
+:new_low = max(self.low, other.low);
+:new_high = min(self.high, other.high);
+
+if (new_low > new_high + 1e-9?) then (да)
+    :return None;
+    stop
+else (нет)
+    :return Interval(new_low, new_high);
+    stop
+endif
+
+stop
+
+@enduml

@@ -1,0 +1,98 @@
+@startuml intersect_solutions
+!theme plain
+skinparam backgroundColor #FFFFFF
+skinparam activity {
+    BackgroundColor #E8F4F8
+    BorderColor #2E86AB
+    FontColor #000000
+    FontSize 12
+}
+
+title Блок-схема алгоритма: intersect_solutions() - Пересечение множеств решений
+
+start
+
+:all_vars = set(sol1.intervals.keys()) | set(sol2.intervals.keys());
+:new_intervals = {};
+:var_list = list(all_vars);
+:i = 0;
+
+repeat
+    if (i < len(var_list)?) then (да)
+        :var = var_list[i];
+        :int1 = sol1.intervals.get(var);
+        :int2 = sol2.intervals.get(var);
+        
+        if (int1 is None?) then (да)
+            :new_intervals[var] = int2;
+        else (нет)
+            if (int2 is None?) then (да)
+                :new_intervals[var] = int1;
+            else (нет)
+                :intersected = int1.intersect(int2);
+                
+                if (intersected is None?) then (да)
+                    :return None;
+                    stop
+                else (нет)
+                    :new_intervals[var] = intersected;
+                endif
+            endif
+        endif
+        
+        :i++;
+    else (нет)
+    endif
+repeat while (i < len(var_list)?)
+
+if (sol1.type == 'box' AND sol2.type == 'box'?) then (да)
+    :return SolutionSet('box', new_intervals);
+    stop
+else (нет)
+endif
+
+if (sol1.type == 'line' AND sol2.type == 'line'?) then (да)
+    if (math.isclose(sol1.sum_val, sol2.sum_val, abs_tol=1e-9)?) then (да)
+        :return SolutionSet('line', new_intervals, sum_val=sol1.sum_val);
+        stop
+    else (нет)
+        :return None;
+        stop
+    endif
+else (нет)
+endif
+
+if (sol1.type == 'line'?) then (да)
+    :line_sol = sol1;
+    :box_sol = sol2;
+else (нет)
+    :line_sol = sol2;
+    :box_sol = sol1;
+endif
+
+if (len(new_intervals) == 2?) then (да)
+    :var_names = sorted(new_intervals.keys());
+    :var_a = var_names[0];
+    :var_b = var_names[1];
+    :int_a = new_intervals[var_a];
+    :int_b = new_intervals[var_b];
+    :derived_a = Interval(line_sol.sum_val - int_b.high, line_sol.sum_val - int_b.low);
+    :final_a = int_a.intersect(derived_a);
+    :derived_b = Interval(line_sol.sum_val - int_a.high, line_sol.sum_val - int_a.low);
+    :final_b = int_b.intersect(derived_b);
+    
+    if (final_a is None OR final_b is None?) then (да)
+        :return None;
+        stop
+    else (нет)
+        :return SolutionSet('line', {var_a: final_a, var_b: final_b}, sum_val=line_sol.sum_val);
+        stop
+    endif
+else (нет)
+    :return SolutionSet('line', new_intervals, sum_val=line_sol.sum_val);
+    stop
+endif
+
+stop
+
+@enduml

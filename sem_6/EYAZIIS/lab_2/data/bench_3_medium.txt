@@ -1,0 +1,5 @@
+Medium benchmark text 3: Streaming services and playlists.
+
+Streaming platforms allow listeners to access millions of tracks without buying physical albums. A user can create personal playlists for study, sport, or relaxation. Recommendation algorithms analyse previous listening sessions and suggest new songs with a similar tempo or mood. Some people enjoy this assistance, while others prefer to search for music manually and keep full control over their library.
+
+From the point of view of data analysis, streaming logs are an interesting source of information. They describe which song was played, at what time, from which device, and for how long. By grouping this information, researchers can discover patterns in listening habits across countries and age groups. However, such data is rarely available for public research because it belongs to commercial companies.

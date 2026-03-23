@@ -1,0 +1,68 @@
+@startuml parse_r_line
+!theme plain
+skinparam backgroundColor #FFFFFF
+skinparam activity {
+    BackgroundColor #E8F4F8
+    BorderColor #2E86AB
+    FontColor #000000
+    FontSize 12
+}
+
+title Блок-схема алгоритма: parse_r_line() - Парсинг строки R без регулярных выражений
+
+start
+
+:matches = [];
+:i = 0;
+
+repeat
+    if (i < len(line)?) then (да)
+        if (i < len(line) - 1 AND line[i:i+2] == "<<") then (да)
+            :comma1_pos = line.find(',', i + 2);
+            
+            if (comma1_pos != -1?) then (да)
+                :r_name = line[i+2:comma1_pos].strip();
+                :bracket1_pos = line.find('>', comma1_pos + 1);
+                
+                if (bracket1_pos != -1?) then (да)
+                    :c_name = line[comma1_pos+1:bracket1_pos].strip();
+                    :comma2_pos = line.find(',', bracket1_pos + 1);
+                    
+                    if (comma2_pos != -1?) then (да)
+                        :bracket2_pos = line.find('>', comma2_pos + 1);
+                        
+                        if (bracket2_pos != -1?) then (да)
+                            :val_str = line[comma2_pos+1:bracket2_pos].strip();
+                            
+                            if (r_name AND c_name AND val_str?) then (да)
+                                :try:;
+                                :val = float(val_str);
+                                :matches.append((r_name, c_name, val));
+                                :i = bracket2_pos + 1;
+                            else (нет)
+                                :i++;
+                            endif
+                        else (нет)
+                            :i++;
+                        endif
+                    else (нет)
+                        :i++;
+                    endif
+                else (нет)
+                    :i++;
+                endif
+            else (нет)
+                :i++;
+            endif
+        else (нет)
+            :i++;
+        endif
+    else (нет)
+    endif
+repeat while (i < len(line)?)
+
+:return matches;
+
+stop
+
+@enduml

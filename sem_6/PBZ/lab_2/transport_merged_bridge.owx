@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.semanticweb.org/vivi/ontologies/2026/2/transport-merged-bridge"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.semanticweb.org/vivi/ontologies/2026/2/transport-merged-bridge">
+    <Prefix name="" IRI="http://www.semanticweb.org/vivi/ontologies/2026/2/transport-merged-bridge#"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Prefix name="tm" IRI="http://www.semanticweb.org/vivi/ontologies/2026/2/transport-merge#"/>
+    <Prefix name="air" IRI="http://www.semanticweb.org/vivi/ontologies/2026/2/untitled-ontology-10#"/>
+
+    <Import>http://www.semanticweb.org/vivi/ontologies/2026/2/ontology-land-air</Import>
+    <Import>http://www.semanticweb.org/vivi/ontologies/2026/2/ontology-water-infra</Import>
+    <Import>http://www.semanticweb.org/vivi/ontologies/2026/2/untitled-ontology-10</Import>
+
+    <!-- Class alignment -->
+    <EquivalentClasses>
+        <Class abbreviatedIRI="tm:Cargo"/>
+        <Class abbreviatedIRI="air:Cargo"/>
+    </EquivalentClasses>
+    <SubClassOf>
+        <Class abbreviatedIRI="tm:AirTransport"/>
+        <Class abbreviatedIRI="air:Aircraft"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class abbreviatedIRI="tm:Infrastructure"/>
+        <Class abbreviatedIRI="air:AirportInfrastructure"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class abbreviatedIRI="tm:Operator"/>
+        <Class abbreviatedIRI="air:Airline"/>
+    </SubClassOf>
+
+    <!-- Object property alignment -->
+    <EquivalentObjectProperties>
+        <ObjectProperty abbreviatedIRI="tm:locatedAt"/>
+        <ObjectProperty abbreviatedIRI="air:locatedAt"/>
+    </EquivalentObjectProperties>
+    <SubObjectPropertyOf>
+        <ObjectProperty abbreviatedIRI="tm:carries"/>
+        <ObjectProperty abbreviatedIRI="air:carriesCargo"/>
+    </SubObjectPropertyOf>
+
+    <!-- Data property alignment -->
+    <EquivalentDataProperties>
+        <DataProperty abbreviatedIRI="tm:hasCapacity"/>
+        <DataProperty abbreviatedIRI="air:hasCapacity"/>
+    </EquivalentDataProperties>
+    <EquivalentDataProperties>
+        <DataProperty abbreviatedIRI="tm:hasRange"/>
+        <DataProperty abbreviatedIRI="air:hasRange"/>
+    </EquivalentDataProperties>
+    <SubDataPropertyOf>
+        <DataProperty abbreviatedIRI="tm:hasMaxSpeed"/>
+        <DataProperty abbreviatedIRI="air:hasSpeed"/>
+    </SubDataPropertyOf>
+</Ontology>

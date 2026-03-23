@@ -1,0 +1,49 @@
+services:
+  mongodb:
+    image: mongo:7
+    container_name: eyaziis_lab2_mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: corpus_db
+    volumes:
+      - mongo_data:/data/db
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    restart: unless-stopped
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: adminpass
+      ME_CONFIG_MONGODB_URL: localhost:27017//admin:adminpass@mongodb:27017/
+      ME_CONFIG_BASICAUTH: "false"
+    ports:
+      - "8081:8081"
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: eyaziis_lab2_backend
+    restart: unless-stopped
+    environment:
+      MONGO_URI: mongodb://mongodb:27017
+      MONGO_DB_NAME: corpus_db
+      APP_HOST: 0.0.0.0
+      APP_PORT: 8000
+    depends_on:
+      - mongodb
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: eyaziis_lab2_frontend
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+
+volumes:
+  mongo_data:

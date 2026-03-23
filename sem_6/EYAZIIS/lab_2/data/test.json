@@ -1,0 +1,1298 @@
+{
+  "name": "Music Corpus (Variant 21)",
+  "next_doc_id": 3,
+  "documents": [
+    {
+      "id": 1,
+      "filepath": "/Users/vivi/LabsBSUIR/sem_6/EYAZIIS/lab_2/data/concert_life.txt",
+      "title": "concert_life",
+      "author": "",
+      "year": "",
+      "source": "",
+      "text": "Concert Life and Music Performance\n\nAttending a live concert is a different experience from listening to recordings. The audience hears the sound directly from the stage and feels the energy of the performers. Many concert halls are designed for acoustic clarity so that every note reaches the listener. Festivals bring together artists and fans for several days of music. Ticket sales help to fund the events and pay the musicians. Rehearsals are essential before a performance so that the orchestra or band can coordinate tempo and dynamics. Conductors lead the ensemble and interpret the score. Soloists often perform concertos with orchestral accompaniment. Applause and encores are part of the tradition. Streaming services have changed how people discover and listen to music, but live performance remains important for both classical and popular music.\n",
+      "tokens": [
+        {
+          "word": "concert",
+          "lemma": "concert",
+          "pos": "JJ"
+        },
+        {
+          "word": "life",
+          "lemma": "life",
+          "pos": "NN"
+        },
+        {
+          "word": "and",
+          "lemma": "and",
+          "pos": "CC"
+        },
+        {
+          "word": "music",
+          "lemma": "music",
+          "pos": "NN"
+        },
+        {
+          "word": "performance",
+          "lemma": "performance",
+          "pos": "NN"
+        },
+        {
+          "word": "attending",
+          "lemma": "attend",
+          "pos": "VBG"
+        },
+        {
+          "word": "live",
+          "lemma": "live",
+          "pos": "JJ"
+        },
+        {
+          "word": "concert",
+          "lemma": "concert",
+          "pos": "NN"
+        },
+        {
+          "word": "is",
+          "lemma": "be",
+          "pos": "VBZ"
+        },
+        {
+          "word": "different",
+          "lemma": "different",
+          "pos": "JJ"
+        },
+        {
+          "word": "experience",
+          "lemma": "experience",
+          "pos": "NN"
+        },
+        {
+          "word": "from",
+          "lemma": "from",
+          "pos": "IN"
+        },
+        {
+          "word": "listening",
+          "lemma": "listen",
+          "pos": "VBG"
+        },
+        {
+          "word": "to",
+          "lemma": "to",
+          "pos": "TO"
+        },
+        {
+          "word": "recordings",
+          "lemma": "recordings",
+          "pos": "VB"
+        },
+        {
+          "word": "the",
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "word": "audience",
+          "lemma": "audience",
+          "pos": "NN"
+        },
+        {
+          "word": "hears",
+          "lemma": "hear",
+          "pos": "VBZ"
+        },
+        {
+          "word": "the",
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "word": "sound",
+          "lemma": "sound",
+          "pos": "NN"
+        },
+        {
+          "word": "directly",
+          "lemma": "directly",
+          "pos": "RB"
+        },
+        {
+          "word": "from",
+          "lemma": "from",
+          "pos": "IN"
+        },
+        {
+          "word": "the",
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "word": "stage",
+          "lemma": "stage",
+          "pos": "NN"
+        },
+        {
+          "word": "and",
+          "lemma": "and",
+          "pos": "CC"
+        },
+        {
+          "word": "feels",
+          "lemma": "feel",
+          "pos": "VBZ"
+        },
+        {
+          "word": "the",
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "word": "energy",
+          "lemma": "energy",
+          "pos": "NN"
+        },
+        {
+          "word": "of",
+          "lemma": "of",
+          "pos": "IN"
+        },
+        {
+          "word": "the",
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "word": "performers",
+          "lemma": "performer",
+          "pos": "NNS"
+        },
+        {
+          "word": "many",
+          "lemma": "many",
+          "pos": "JJ"
+        },
+        {
+          "word": "concert",
+          "lemma": "concert",
+          "pos": "VBP"
+        },
+        {
+          "word": "halls",
+          "lemma": "hall",
+          "pos": "NNS"
+        },
+        {
+          "word": "are",
+          "lemma": "be",
+          "pos": "VBP"
+        },
+        {
+          "word": "designed",
+          "lemma": "design",
+          "pos": "VBN"
+        },
+        {
+          "word": "for",
+          "lemma": "for",
+          "pos": "IN"
+        },
+        {
+          "word": "acoustic",
+          "lemma": "acoustic",
+          "pos": "JJ"
+        },
+        {
+          "word": "clarity",
+          "lemma": "clarity",
+          "pos": "NN"
+        },
+        {
+          "word": "so",
+          "lemma": "so",
+          "pos": "RB"
+        },
+        {
+          "word": "that",
+          "lemma": "that",
+          "pos": "IN"
+        },
+        {
+          "word": "every",
+          "lemma": "every",
+          "pos": "DT"
+        },
+        {
+          "word": "note",
+          "lemma": "note",
+          "pos": "NN"
+        },
+        {
+          "word": "reaches",
+          "lemma": "reach",
+          "pos": "VBZ"
+        },
+        {
+          "word": "the",
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "word": "listener",
+          "lemma": "listener",
+          "pos": "NN"
+        },
+        {
+          "word": "festivals",
+          "lemma": "festival",
+          "pos": "NNS"
+        },
+        {
+          "word": "bring",
+          "lemma": "bring",
+          "pos": "VBP"
+        },
+        {
+          "word": "together",
+          "lemma": "together",
+          "pos": "RB"
+        },
+        {
+          "word": "artists",
+          "lemma": "artist",
+          "pos": "NNS"
+        },
+        {
+          "word": "and",
+          "lemma": "and",
+          "pos": "CC"
+        },
+        {
+          "word": "fans",
+          "lemma": "fan",
+          "pos": "NNS"
+        },
+        {
+          "word": "for",
+          "lemma": "for",
+          "pos": "IN"
+        },
+        {
+          "word": "several",
+          "lemma": "several",
+          "pos": "JJ"
+        },
+        {
+          "word": "days",
+          "lemma": "day",
+          "pos": "NNS"
+        },
+        {
+          "word": "of",
+          "lemma": "of",
+          "pos": "IN"
+        },
+        {
+          "word": "music",
+          "lemma": "music",
+          "pos": "NN"
+        },
+        {
+          "word": "ticket",
+          "lemma": "ticket",
+          "pos": "NN"
+        },
+        {
+          "word": "sales",
+          "lemma": "sale",
+          "pos": "NNS"
+        },
+        {
+          "word": "help",
+          "lemma": "help",
+          "pos": "VBP"
+        },
+        {
+          "word": "to",
+          "lemma": "to",
+          "pos": "TO"
+        },
+        {
+          "word": "fund",
+          "lemma": "fund",
+          "pos": "VB"
+        },
+        {
+          "word": "the",
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "word": "events",
+          "lemma": "event",
+          "pos": "NNS"
+        },
+        {
+          "word": "and",
+          "lemma": "and",
+          "pos": "CC"
+        },
+        {
+          "word": "pay",
+          "lemma": "pay",
+          "pos": "VB"
+        },
+        {
+          "word": "the",
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "word": "musicians",
+          "lemma": "musician",
+          "pos": "NNS"
+        },
+        {
+          "word": "rehearsals",
+          "lemma": "rehearsal",
+          "pos": "NNS"
+        },
+        {
+          "word": "are",
+          "lemma": "be",
+          "pos": "VBP"
+        },
+        {
+          "word": "essential",
+          "lemma": "essential",
+          "pos": "JJ"
+        },
+        {
+          "word": "before",
+          "lemma": "before",
+          "pos": "IN"
+        },
+        {
+          "word": "performance",
+          "lemma": "performance",
+          "pos": "NN"
+        },
+        {
+          "word": "so",
+          "lemma": "so",
+          "pos": "IN"
+        },
+        {
+          "word": "that",
+          "lemma": "that",
+          "pos": "IN"
+        },
+        {
+          "word": "the",
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "word": "orchestra",
+          "lemma": "orchestra",
+          "pos": "NN"
+        },
+        {
+          "word": "or",
+          "lemma": "or",
+          "pos": "CC"
+        },
+        {
+          "word": "band",
+          "lemma": "band",
+          "pos": "NN"
+        },
+        {
+          "word": "can",
+          "lemma": "can",
+          "pos": "MD"
+        },
+        {
+          "word": "coordinate",
+          "lemma": "coordinate",
+          "pos": "VB"
+        },
+        {
+          "word": "tempo",
+          "lemma": "tempo",
+          "pos": "NNS"
+        },
+        {
+          "word": "and",
+          "lemma": "and",
+          "pos": "CC"
+        },
+        {
+          "word": "dynamics",
+          "lemma": "dynamic",
+          "pos": "NNS"
+        },
+        {
+          "word": "conductors",
+          "lemma": "conductor",
+          "pos": "NNS"
+        },
+        {
+          "word": "lead",
+          "lemma": "lead",
+          "pos": "VBP"
+        },
+        {
+          "word": "the",
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "word": "ensemble",
+          "lemma": "ensemble",
+          "pos": "JJ"
+        },
+        {
+          "word": "and",
+          "lemma": "and",
+          "pos": "CC"
+        },
+        {
+          "word": "interpret",
+          "lemma": "interpret",
+          "pos": "VB"
+        },
+        {
+          "word": "the",
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "word": "score",
+          "lemma": "score",
+          "pos": "NN"
+        },
+        {
+          "word": "soloists",
+          "lemma": "soloist",
+          "pos": "NNS"
+        },
+        {
+          "word": "often",
+          "lemma": "often",
+          "pos": "RB"
+        },
+        {
+          "word": "perform",
+          "lemma": "perform",
+          "pos": "VBP"
+        },
+        {
+          "word": "concertos",
+          "lemma": "concerto",
+          "pos": "NNS"
+        },
+        {
+          "word": "with",
+          "lemma": "with",
+          "pos": "IN"
+        },
+        {
+          "word": "orchestral",
+          "lemma": "orchestral",
+          "pos": "JJ"
+        },
+        {
+          "word": "accompaniment",
+          "lemma": "accompaniment",
+          "pos": "NN"
+        },
+        {
+          "word": "applause",
+          "lemma": "applause",
+          "pos": "NN"
+        },
+        {
+          "word": "and",
+          "lemma": "and",
+          "pos": "CC"
+        },
+        {
+          "word": "encores",
+          "lemma": "encore",
+          "pos": "NNS"
+        },
+        {
+          "word": "are",
+          "lemma": "be",
+          "pos": "VBP"
+        },
+        {
+          "word": "part",
+          "lemma": "part",
+          "pos": "NN"
+        },
+        {
+          "word": "of",
+          "lemma": "of",
+          "pos": "IN"
+        },
+        {
+          "word": "the",
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "word": "tradition",
+          "lemma": "tradition",
+          "pos": "NN"
+        },
+        {
+          "word": "streaming",
+          "lemma": "stream",
+          "pos": "VBG"
+        },
+        {
+          "word": "services",
+          "lemma": "service",
+          "pos": "NNS"
+        },
+        {
+          "word": "have",
+          "lemma": "have",
+          "pos": "VBP"
+        },
+        {
+          "word": "changed",
+          "lemma": "change",
+          "pos": "VBN"
+        },
+        {
+          "word": "how",
+          "lemma": "how",
+          "pos": "WRB"
+        },
+        {
+          "word": "people",
+          "lemma": "people",
+          "pos": "NNS"
+        },
+        {
+          "word": "discover",
+          "lemma": "discover",
+          "pos": "RB"
+        },
+        {
+          "word": "and",
+          "lemma": "and",
+          "pos": "CC"
+        },
+        {
+          "word": "listen",
+          "lemma": "listen",
+          "pos": "VB"
+        },
+        {
+          "word": "to",
+          "lemma": "to",
+          "pos": "TO"
+        },
+        {
+          "word": "music",
+          "lemma": "music",
+          "pos": "NN"
+        },
+        {
+          "word": "but",
+          "lemma": "but",
+          "pos": "CC"
+        },
+        {
+          "word": "live",
+          "lemma": "live",
+          "pos": "JJ"
+        },
+        {
+          "word": "performance",
+          "lemma": "performance",
+          "pos": "NN"
+        },
+        {
+          "word": "remains",
+          "lemma": "remain",
+          "pos": "VBZ"
+        },
+        {
+          "word": "important",
+          "lemma": "important",
+          "pos": "JJ"
+        },
+        {
+          "word": "for",
+          "lemma": "for",
+          "pos": "IN"
+        },
+        {
+          "word": "both",
+          "lemma": "both",
+          "pos": "DT"
+        },
+        {
+          "word": "classical",
+          "lemma": "classical",
+          "pos": "JJ"
+        },
+        {
+          "word": "and",
+          "lemma": "and",
+          "pos": "CC"
+        },
+        {
+          "word": "popular",
+          "lemma": "popular",
+          "pos": "JJ"
+        },
+        {
+          "word": "music",
+          "lemma": "music",
+          "pos": "NN"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "filepath": "/Users/vivi/LabsBSUIR/sem_6/EYAZIIS/lab_2/data/instruments.txt",
+      "title": "instruments",
+      "author": "",
+      "year": "",
+      "source": "",
+      "text": "Musical Instruments and Ensembles\n\nOrchestral instruments are divided into families. The string section includes violins, violas, cellos, and double basses. Musicians play these instruments with a bow or by plucking the strings. The woodwind section contains flutes, oboes, clarinets, and bassoons. Brass instruments include trumpets, trombones, French horns, and tubas. The percussion section provides rhythm and colour with drums, cymbals, and timpani. A full orchestra may have over ninety musicians. A chamber ensemble is smaller and might feature a string quartet or a piano trio. In jazz bands, the saxophone and trumpet often play the melody while the piano and double bass provide harmony and rhythm. The guitar is central to rock and folk music. Digital instruments and software have expanded the range of sounds available to composers and performers.\n",
+      "tokens": [
+        {
+          "word": "musical",
+          "lemma": "musical",
+          "pos": "JJ"
+        },
+        {
+          "word": "instruments",
+          "lemma": "instrument",
+          "pos": "NNS"
+        },
+        {
+          "word": "and",
+          "lemma": "and",
+          "pos": "CC"
+        },
+        {
+          "word": "ensembles",
+          "lemma": "ensembles",
+          "pos": "VBZ"
+        },
+        {
+          "word": "orchestral",
+          "lemma": "orchestral",
+          "pos": "JJ"
+        },
+        {
+          "word": "instruments",
+          "lemma": "instrument",
+          "pos": "NNS"
+        },
+        {
+          "word": "are",
+          "lemma": "be",
+          "pos": "VBP"
+        },
+        {
+          "word": "divided",
+          "lemma": "divide",
+          "pos": "VBN"
+        },
+        {
+          "word": "into",
+          "lemma": "into",
+          "pos": "IN"
+        },
+        {
+          "word": "families",
+          "lemma": "family",
+          "pos": "NNS"
+        },
+        {
+          "word": "the",
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "word": "string",
+          "lemma": "string",
+          "pos": "NN"
+        },
+        {
+          "word": "section",
+          "lemma": "section",
+          "pos": "NN"
+        },
+        {
+          "word": "includes",
+          "lemma": "include",
+          "pos": "VBZ"
+        },
+        {
+          "word": "violins",
+          "lemma": "violin",
+          "pos": "NNS"
+        },
+        {
+          "word": "violas",
+          "lemma": "viola",
+          "pos": "NNS"
+        },
+        {
+          "word": "cellos",
+          "lemma": "cello",
+          "pos": "NN"
+        },
+        {
+          "word": "and",
+          "lemma": "and",
+          "pos": "CC"
+        },
+        {
+          "word": "double",
+          "lemma": "double",
+          "pos": "JJ"
+        },
+        {
+          "word": "basses",
+          "lemma": "bass",
+          "pos": "NNS"
+        },
+        {
+          "word": "musicians",
+          "lemma": "musician",
+          "pos": "NNS"
+        },
+        {
+          "word": "play",
+          "lemma": "play",
+          "pos": "VBP"
+        },
+        {
+          "word": "these",
+          "lemma": "these",
+          "pos": "DT"
+        },
+        {
+          "word": "instruments",
+          "lemma": "instrument",
+          "pos": "NNS"
+        },
+        {
+          "word": "with",
+          "lemma": "with",
+          "pos": "IN"
+        },
+        {
+          "word": "bow",
+          "lemma": "bow",
+          "pos": "NN"
+        },
+        {
+          "word": "or",
+          "lemma": "or",
+          "pos": "CC"
+        },
+        {
+          "word": "by",
+          "lemma": "by",
+          "pos": "IN"
+        },
+        {
+          "word": "plucking",
+          "lemma": "pluck",
+          "pos": "VBG"
+        },
+        {
+          "word": "the",
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "word": "strings",
+          "lemma": "string",
+          "pos": "NNS"
+        },
+        {
+          "word": "the",
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "word": "woodwind",
+          "lemma": "woodwind",
+          "pos": "NN"
+        },
+        {
+          "word": "section",
+          "lemma": "section",
+          "pos": "NN"
+        },
+        {
+          "word": "contains",
+          "lemma": "contain",
+          "pos": "VBZ"
+        },
+        {
+          "word": "flutes",
+          "lemma": "flute",
+          "pos": "NNS"
+        },
+        {
+          "word": "oboes",
+          "lemma": "oboe",
+          "pos": "NNS"
+        },
+        {
+          "word": "clarinets",
+          "lemma": "clarinet",
+          "pos": "NNS"
+        },
+        {
+          "word": "and",
+          "lemma": "and",
+          "pos": "CC"
+        },
+        {
+          "word": "bassoons",
+          "lemma": "bassoon",
+          "pos": "NNS"
+        },
+        {
+          "word": "brass",
+          "lemma": "brass",
+          "pos": "NN"
+        },
+        {
+          "word": "instruments",
+          "lemma": "instrument",
+          "pos": "NNS"
+        },
+        {
+          "word": "include",
+          "lemma": "include",
+          "pos": "VBP"
+        },
+        {
+          "word": "trumpets",
+          "lemma": "trumpet",
+          "pos": "NNS"
+        },
+        {
+          "word": "trombones",
+          "lemma": "trombone",
+          "pos": "NNS"
+        },
+        {
+          "word": "french",
+          "lemma": "french",
+          "pos": "JJ"
+        },
+        {
+          "word": "horns",
+          "lemma": "horn",
+          "pos": "NNS"
+        },
+        {
+          "word": "and",
+          "lemma": "and",
+          "pos": "CC"
+        },
+        {
+          "word": "tubas",
+          "lemma": "tubas",
+          "pos": "VB"
+        },
+        {
+          "word": "the",
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "word": "percussion",
+          "lemma": "percussion",
+          "pos": "NN"
+        },
+        {
+          "word": "section",
+          "lemma": "section",
+          "pos": "NN"
+        },
+        {
+          "word": "provides",
+          "lemma": "provide",
+          "pos": "VBZ"
+        },
+        {
+          "word": "rhythm",
+          "lemma": "rhythm",
+          "pos": "NN"
+        },
+        {
+          "word": "and",
+          "lemma": "and",
+          "pos": "CC"
+        },
+        {
+          "word": "colour",
+          "lemma": "colour",
+          "pos": "NN"
+        },
+        {
+          "word": "with",
+          "lemma": "with",
+          "pos": "IN"
+        },
+        {
+          "word": "drums",
+          "lemma": "drums",
+          "pos": "JJ"
+        },
+        {
+          "word": "cymbals",
+          "lemma": "cymbal",
+          "pos": "NNS"
+        },
+        {
+          "word": "and",
+          "lemma": "and",
+          "pos": "CC"
+        },
+        {
+          "word": "timpani",
+          "lemma": "timpani",
+          "pos": "VB"
+        },
+        {
+          "word": "full",
+          "lemma": "full",
+          "pos": "JJ"
+        },
+        {
+          "word": "orchestra",
+          "lemma": "orchestra",
+          "pos": "NN"
+        },
+        {
+          "word": "may",
+          "lemma": "may",
+          "pos": "MD"
+        },
+        {
+          "word": "have",
+          "lemma": "have",
+          "pos": "VB"
+        },
+        {
+          "word": "over",
+          "lemma": "over",
+          "pos": "RP"
+        },
+        {
+          "word": "ninety",
+          "lemma": "ninety",
+          "pos": "DT"
+        },
+        {
+          "word": "musicians",
+          "lemma": "musician",
+          "pos": "NNS"
+        },
+        {
+          "word": "chamber",
+          "lemma": "chamber",
+          "pos": "VBP"
+        },
+        {
+          "word": "ensemble",
+          "lemma": "ensemble",
+          "pos": "JJ"
+        },
+        {
+          "word": "is",
+          "lemma": "be",
+          "pos": "VBZ"
+        },
+        {
+          "word": "smaller",
+          "lemma": "small",
+          "pos": "JJR"
+        },
+        {
+          "word": "and",
+          "lemma": "and",
+          "pos": "CC"
+        },
+        {
+          "word": "might",
+          "lemma": "might",
+          "pos": "MD"
+        },
+        {
+          "word": "feature",
+          "lemma": "feature",
+          "pos": "VB"
+        },
+        {
+          "word": "string",
+          "lemma": "string",
+          "pos": "VBG"
+        },
+        {
+          "word": "quartet",
+          "lemma": "quartet",
+          "pos": "NN"
+        },
+        {
+          "word": "or",
+          "lemma": "or",
+          "pos": "CC"
+        },
+        {
+          "word": "piano",
+          "lemma": "piano",
+          "pos": "NN"
+        },
+        {
+          "word": "trio",
+          "lemma": "trio",
+          "pos": "NN"
+        },
+        {
+          "word": "in",
+          "lemma": "in",
+          "pos": "IN"
+        },
+        {
+          "word": "jazz",
+          "lemma": "jazz",
+          "pos": "NN"
+        },
+        {
+          "word": "bands",
+          "lemma": "band",
+          "pos": "VBZ"
+        },
+        {
+          "word": "the",
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "word": "saxophone",
+          "lemma": "saxophone",
+          "pos": "NN"
+        },
+        {
+          "word": "and",
+          "lemma": "and",
+          "pos": "CC"
+        },
+        {
+          "word": "trumpet",
+          "lemma": "trumpet",
+          "pos": "NN"
+        },
+        {
+          "word": "often",
+          "lemma": "often",
+          "pos": "RB"
+        },
+        {
+          "word": "play",
+          "lemma": "play",
+          "pos": "VBZ"
+        },
+        {
+          "word": "the",
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "word": "melody",
+          "lemma": "melody",
+          "pos": "NN"
+        },
+        {
+          "word": "while",
+          "lemma": "while",
+          "pos": "IN"
+        },
+        {
+          "word": "the",
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "word": "piano",
+          "lemma": "piano",
+          "pos": "NN"
+        },
+        {
+          "word": "and",
+          "lemma": "and",
+          "pos": "CC"
+        },
+        {
+          "word": "double",
+          "lemma": "double",
+          "pos": "JJ"
+        },
+        {
+          "word": "bass",
+          "lemma": "bass",
+          "pos": "NN"
+        },
+        {
+          "word": "provide",
+          "lemma": "provide",
+          "pos": "NN"
+        },
+        {
+          "word": "harmony",
+          "lemma": "harmony",
+          "pos": "NN"
+        },
+        {
+          "word": "and",
+          "lemma": "and",
+          "pos": "CC"
+        },
+        {
+          "word": "rhythm",
+          "lemma": "rhythm",
+          "pos": "VB"
+        },
+        {
+          "word": "the",
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "word": "guitar",
+          "lemma": "guitar",
+          "pos": "NN"
+        },
+        {
+          "word": "is",
+          "lemma": "be",
+          "pos": "VBZ"
+        },
+        {
+          "word": "central",
+          "lemma": "central",
+          "pos": "JJ"
+        },
+        {
+          "word": "to",
+          "lemma": "to",
+          "pos": "TO"
+        },
+        {
+          "word": "rock",
+          "lemma": "rock",
+          "pos": "VB"
+        },
+        {
+          "word": "and",
+          "lemma": "and",
+          "pos": "CC"
+        },
+        {
+          "word": "folk",
+          "lemma": "folk",
+          "pos": "VB"
+        },
+        {
+          "word": "music",
+          "lemma": "music",
+          "pos": "NN"
+        },
+        {
+          "word": "digital",
+          "lemma": "digital",
+          "pos": "JJ"
+        },
+        {
+          "word": "instruments",
+          "lemma": "instrument",
+          "pos": "NNS"
+        },
+        {
+          "word": "and",
+          "lemma": "and",
+          "pos": "CC"
+        },
+        {
+          "word": "software",
+          "lemma": "software",
+          "pos": "NN"
+        },
+        {
+          "word": "have",
+          "lemma": "have",
+          "pos": "VBP"
+        },
+        {
+          "word": "expanded",
+          "lemma": "expand",
+          "pos": "VBN"
+        },
+        {
+          "word": "the",
+          "lemma": "the",
+          "pos": "DT"
+        },
+        {
+          "word": "range",
+          "lemma": "range",
+          "pos": "NN"
+        },
+        {
+          "word": "of",
+          "lemma": "of",
+          "pos": "IN"
+        },
+        {
+          "word": "sounds",
+          "lemma": "sound",
+          "pos": "NNS"
+        },
+        {
+          "word": "available",
+          "lemma": "available",
+          "pos": "JJ"
+        },
+        {
+          "word": "to",
+          "lemma": "to",
+          "pos": "TO"
+        },
+        {
+          "word": "composers",
+          "lemma": "composer",
+          "pos": "NNS"
+        },
+        {
+          "word": "and",
+          "lemma": "and",
+          "pos": "CC"
+        },
+        {
+          "word": "performers",
+          "lemma": "performer",
+          "pos": "NNS"
+        }
+      ]
+    }
+  ]
+}

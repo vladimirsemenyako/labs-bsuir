@@ -1,0 +1,89 @@
+1) Все транспортные средства из разных онтологий (авиа + наземный/водный)
+DL:
+air:Aircraft or core:TransportVehicle
+SPARQL:
+SELECT DISTINCT ?v WHERE {
+  { ?v rdf:type air:Aircraft . }
+  UNION
+  { ?v rdf:type core:TransportVehicle . }
+}
+ORDER BY ?v
+
+---
+
+2) ТС (слой core): только те, у кого скорость не ниже 80 км/ч (один числовой FILTER)
+DL:
+core:TransportVehicle and (core:maxSpeedKmh some xsd:decimal[>= 80])
+SPARQL:
+SELECT ?v ?sp WHERE {
+  ?v rdf:type core:TransportVehicle ;
+     core:maxSpeedKmh ?sp .
+  FILTER(xsd:decimal(?sp) >= 80)
+}
+ORDER BY DESC(xsd:decimal(?sp))
+
+---
+
+3) Грузы из разных онтологий, отфильтрованные по числам: авиа — только груз с рейса-грузовика; наземно-водные — груз на ТС с грузоподъёмностью ≥ 1000 (условных единиц)
+DL:
+(air:Cargo and (inverse air:carriesCargo some air:CargoFlight))
+or
+(core:Cargo and (inverse core:carriesCargo some (core:TransportVehicle and (core:capacityUnits some xsd:decimal[>= 1000]))))
+SPARQL:
+SELECT DISTINCT ?cargo ?source ?capOrDummy WHERE {
+  {
+    ?f rdf:type air:CargoFlight ;
+       air:carriesCargo ?cargo .
+    ?cargo rdf:type air:Cargo .
+    BIND("air_cargo_flight" AS ?source)
+    BIND(0 AS ?capOrDummy)
+  }
+  UNION
+  {
+    ?v core:carriesCargo ?cargo ;
+       core:capacityUnits ?cap .
+    ?cargo rdf:type core:Cargo .
+    FILTER(xsd:decimal(?cap) >= 1000)
+    BIND("land_water_heavy_carrier" AS ?source)
+    BIND(xsd:decimal(?cap) AS ?capOrDummy)
+  }
+}
+ORDER BY ?source ?cargo
+
+---
+
+4) Объекты с привязкой к месту (аэропорт или инфраструктура)
+DL:
+(air:locatedAt some air:Airport) or (core:locatedAt some core:Infrastructure)
+SPARQL:
+SELECT DISTINCT ?x ?place WHERE {
+  { ?x air:locatedAt ?place . }
+  UNION
+  { ?x core:locatedAt ?place . }
+}
+ORDER BY ?x
+
+---
+
+5) Маршруты (core): только длиннее 200 км 
+core:Route and (core:routeLengthKm some xsd:decimal[> 200])
+SPARQL:
+SELECT ?r ?len WHERE {
+  ?r rdf:type core:Route ;
+     core:routeLengthKm ?len .
+  FILTER(xsd:decimal(?len) > 200)
+}
+ORDER BY DESC(xsd:decimal(?len))
+
+---
+
+6) Воздушные суда (air:Aircraft): дальность полёта не меньше 5000 км 
+DL:
+air:Aircraft and (air:hasRange some xsd:decimal[>= 5000])
+SPARQL:
+SELECT ?a ?range WHERE {
+  ?a rdf:type air:Aircraft ;
+     air:hasRange ?range .
+  FILTER(xsd:decimal(?range) >= 5000)
+}
+ORDER BY DESC(xsd:decimal(?range))

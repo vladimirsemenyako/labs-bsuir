@@ -1,0 +1,37 @@
+2026-03-05 13:17:54 [INFO] Benchmark: concordance lemma 'concert': 0.00003 c, lines=0
+2026-03-05 13:18:05 [INFO] Benchmark: freq update (word/lemma/POS): 0.00292 c, uniq_word=96, uniq_lemma=92, uniq_pos=18
+2026-03-05 13:18:07 [INFO] Benchmark: search lemma 'music': 0.00001 c, hits=8
+2026-03-05 13:18:10 [INFO] Benchmark: morphology for lemma 'instrument': 0.00005 c, rows=1
+2026-03-05 13:18:57 [INFO] Benchmark: concordance lemma 'concert': 0.00018 c, lines=3
+2026-03-05 13:21:45 [INFO] Benchmark: freq update (word/lemma/POS): 0.00792 c, uniq_word=411, uniq_lemma=377, uniq_pos=23
+2026-03-05 13:26:03 [INFO] Benchmark: search lemma 'music': 0.00002 c, hits=8
+2026-03-05 13:26:13 [INFO] Benchmark: concordance lemma 'concert': 0.00004 c, lines=0
+2026-03-05 13:26:19 [INFO] Benchmark: freq update (word/lemma/POS): 0.00194 c, uniq_word=96, uniq_lemma=92, uniq_pos=18
+2026-03-05 13:26:35 [INFO] Benchmark: morphology for lemma 'instrument': 0.00012 c, rows=1
+2026-03-05 13:26:56 [INFO] Benchmark: search lemma 'music': 0.00002 c, hits=13
+2026-03-05 13:27:13 [INFO] Benchmark: concordance lemma 'concert': 0.00073 c, lines=3
+2026-03-05 13:27:24 [INFO] Benchmark: concordance lemma 'concert': 0.00009 c, lines=3
+2026-03-05 13:27:27 [INFO] Benchmark: concordance lemma 'concert': 0.00004 c, lines=3
+2026-03-05 13:27:30 [INFO] Benchmark: freq update (word/lemma/POS): 0.00419 c, uniq_word=229, uniq_lemma=213, uniq_pos=20
+2026-03-05 13:27:39 [INFO] Benchmark: morphology for lemma 'instrument': 0.00014 c, rows=1
+2026-03-05 13:28:23 [INFO] Benchmark: search lemma 'music': 0.00003 c, hits=15
+2026-03-05 13:28:37 [INFO] Benchmark: concordance lemma 'concert': 0.00050 c, lines=3
+2026-03-05 13:28:52 [INFO] Benchmark: freq update (word/lemma/POS): 0.00537 c, uniq_word=260, uniq_lemma=242, uniq_pos=20
+2026-03-05 13:29:01 [INFO] Benchmark: morphology for lemma 'instrument': 0.00019 c, rows=1
+2026-03-05 13:29:32 [INFO] Benchmark: search lemma 'music': 0.00001 c, hits=17
+2026-03-05 13:29:43 [INFO] Benchmark: search lemma 'music': 0.00018 c, hits=17
+2026-03-05 13:29:50 [INFO] Benchmark: search lemma 'music': 0.00039 c, hits=17
+2026-03-05 13:29:52 [INFO] Benchmark: search lemma 'music': 0.00001 c, hits=17
+2026-03-05 13:29:54 [INFO] Benchmark: concordance lemma 'concert': 0.00017 c, lines=3
+2026-03-05 13:30:00 [INFO] Benchmark: concordance lemma 'concert': 0.00016 c, lines=3
+2026-03-05 13:30:01 [INFO] Benchmark: concordance lemma 'concert': 0.00004 c, lines=3
+2026-03-05 13:30:03 [INFO] Benchmark: concordance lemma 'concert': 0.00006 c, lines=3
+2026-03-05 13:30:04 [INFO] Benchmark: concordance lemma 'concert': 0.00004 c, lines=3
+2026-03-05 13:30:14 [INFO] Benchmark: freq update (word/lemma/POS): 0.00886 c, uniq_word=356, uniq_lemma=331, uniq_pos=22
+2026-03-05 13:30:24 [INFO] Benchmark: morphology for lemma 'instrument': 0.00014 c, rows=1
+2026-03-05 13:30:53 [INFO] Benchmark: search lemma 'music': 0.00002 c, hits=25
+2026-03-05 13:31:09 [INFO] Benchmark: concordance lemma 'concert': 0.00029 c, lines=4
+2026-03-05 13:31:20 [INFO] Benchmark: freq update (word/lemma/POS): 0.00797 c, uniq_word=521, uniq_lemma=467, uniq_pos=23
+2026-03-05 13:31:35 [INFO] Benchmark: freq update (word/lemma/POS): 0.01002 c, uniq_word=521, uniq_lemma=467, uniq_pos=23
+2026-03-05 13:31:45 [INFO] Benchmark: morphology for lemma 'instrument': 0.00055 c, rows=2
+2026-03-05 19:22:31 [INFO] Benchmark: search lemma 'music': 0.00026 c, hits=33

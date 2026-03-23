@@ -1,0 +1,6 @@
+Collecting striprtf
+  Obtaining dependency information for striprtf from https://files.pythonhosted.org/packages/08/3e/1418afacc4aae04690cff282078f22620c89a99490499878ececc3021654/striprtf-0.0.29-py3-none-any.whl.metadata
+  Downloading striprtf-0.0.29-py3-none-any.whl.metadata (2.3 kB)
+Downloading striprtf-0.0.29-py3-none-any.whl (7.9 kB)
+Installing collected packages: striprtf
+Successfully installed striprtf-0.0.29

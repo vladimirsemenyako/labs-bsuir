@@ -1,0 +1,914 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.semanticweb.org/vivi/ontologies/2026/2/untitled-ontology-6"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.semanticweb.org/vivi/ontologies/2026/2/untitled-ontology-6">
+    <Prefix name="" IRI="http://www.semanticweb.org/vivi/ontologies/2026/2/untitled-ontology-6/"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Declaration>
+        <Class IRI="#AirTransport"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Cargo"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Infrastructure"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#LandTransport"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Operator"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PublicTransport"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RailTransport"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Route"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#TransportVehicle"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#WaterTransport"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#carries"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#locatedAt"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#operates"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#servesRoute"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasCapacity"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasCarCount"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasDisplacement"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasLength"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasLicenseNumber"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasLocation"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasMaxAltitude"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasMaxSpeed"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasName"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasRange"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasRouteNumber"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasStopsCount"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasTrackGauge"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasType"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasWeight"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasWheelCount"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#isSeaGoing"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#usesFuelType"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Автобус_99"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Автобус_Минск"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Белавиа"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Вертолет_МИ8"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Вокзал_Центральный"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Грузовик_БелАЗ"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Контейнер_40ft"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Легковой_автомобиль"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Магистральный_тепловоз_2М62-0535"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Маршрутное_такси_2002"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Минск_Гомель"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Минск_Москва"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Минсктранс"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Навалочный_груз"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Паром_Неман"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Порт_Гданьск"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Самолет_Белавиа"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Танкер_Припять"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Трамвай_1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Электропоезд_ЭПр"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="#AirTransport"/>
+        <Class IRI="#TransportVehicle"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#LandTransport"/>
+        <Class IRI="#TransportVehicle"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PublicTransport"/>
+        <Class IRI="#LandTransport"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#RailTransport"/>
+        <Class IRI="#LandTransport"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#WaterTransport"/>
+        <Class IRI="#TransportVehicle"/>
+    </SubClassOf>
+    <ClassAssertion>
+        <Class IRI="#PublicTransport"/>
+        <NamedIndividual IRI="#Автобус_99"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TransportVehicle"/>
+        <NamedIndividual IRI="#Автобус_Минск"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Operator"/>
+        <NamedIndividual IRI="#Белавиа"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#AirTransport"/>
+        <NamedIndividual IRI="#Вертолет_МИ8"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Infrastructure"/>
+        <NamedIndividual IRI="#Вокзал_Центральный"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#LandTransport"/>
+        <NamedIndividual IRI="#Грузовик_БелАЗ"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Cargo"/>
+        <NamedIndividual IRI="#Контейнер_40ft"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#LandTransport"/>
+        <NamedIndividual IRI="#Легковой_автомобиль"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RailTransport"/>
+        <NamedIndividual IRI="#Магистральный_тепловоз_2М62-0535"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#PublicTransport"/>
+        <NamedIndividual IRI="#Маршрутное_такси_2002"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Route"/>
+        <NamedIndividual IRI="#Минск_Гомель"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Route"/>
+        <NamedIndividual IRI="#Минск_Москва"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Operator"/>
+        <NamedIndividual IRI="#Минсктранс"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Cargo"/>
+        <NamedIndividual IRI="#Навалочный_груз"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#WaterTransport"/>
+        <NamedIndividual IRI="#Паром_Неман"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Infrastructure"/>
+        <NamedIndividual IRI="#Порт_Гданьск"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#AirTransport"/>
+        <NamedIndividual IRI="#Самолет_Белавиа"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#WaterTransport"/>
+        <NamedIndividual IRI="#Танкер_Припять"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TransportVehicle"/>
+        <NamedIndividual IRI="#Трамвай_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#RailTransport"/>
+        <NamedIndividual IRI="#Электропоезд_ЭПр"/>
+    </ClassAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedAt"/>
+        <NamedIndividual IRI="#Автобус_Минск"/>
+        <NamedIndividual IRI="#Вокзал_Центральный"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#servesRoute"/>
+        <NamedIndividual IRI="#Автобус_Минск"/>
+        <NamedIndividual IRI="#Минск_Гомель"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#operates"/>
+        <NamedIndividual IRI="#Белавиа"/>
+        <NamedIndividual IRI="#Самолет_Белавиа"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedAt"/>
+        <NamedIndividual IRI="#Вертолет_МИ8"/>
+        <NamedIndividual IRI="#Вокзал_Центральный"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#carries"/>
+        <NamedIndividual IRI="#Грузовик_БелАЗ"/>
+        <NamedIndividual IRI="#Контейнер_40ft"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedAt"/>
+        <NamedIndividual IRI="#Грузовик_БелАЗ"/>
+        <NamedIndividual IRI="#Вокзал_Центральный"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedAt"/>
+        <NamedIndividual IRI="#Легковой_автомобиль"/>
+        <NamedIndividual IRI="#Вокзал_Центральный"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedAt"/>
+        <NamedIndividual IRI="#Паром_Неман"/>
+        <NamedIndividual IRI="#Порт_Гданьск"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#servesRoute"/>
+        <NamedIndividual IRI="#Паром_Неман"/>
+        <NamedIndividual IRI="#Минск_Гомель"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedAt"/>
+        <NamedIndividual IRI="#Самолет_Белавиа"/>
+        <NamedIndividual IRI="#Вокзал_Центральный"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#servesRoute"/>
+        <NamedIndividual IRI="#Самолет_Белавиа"/>
+        <NamedIndividual IRI="#Минск_Москва"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#carries"/>
+        <NamedIndividual IRI="#Танкер_Припять"/>
+        <NamedIndividual IRI="#Навалочный_груз"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedAt"/>
+        <NamedIndividual IRI="#Танкер_Припять"/>
+        <NamedIndividual IRI="#Порт_Гданьск"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedAt"/>
+        <NamedIndividual IRI="#Трамвай_1"/>
+        <NamedIndividual IRI="#Вокзал_Центральный"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedAt"/>
+        <NamedIndividual IRI="#Электропоезд_ЭПр"/>
+        <NamedIndividual IRI="#Вокзал_Центральный"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#servesRoute"/>
+        <NamedIndividual IRI="#Электропоезд_ЭПр"/>
+        <NamedIndividual IRI="#Минск_Москва"/>
+    </ObjectPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#Автобус_99"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">60</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasMaxSpeed"/>
+        <NamedIndividual IRI="#Автобус_99"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">90</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasRouteNumber"/>
+        <NamedIndividual IRI="#Автобус_99"/>
+        <Literal>M1</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasStopsCount"/>
+        <NamedIndividual IRI="#Автобус_99"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">16</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasWheelCount"/>
+        <NamedIndividual IRI="#Автобус_99"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">8</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#usesFuelType"/>
+        <NamedIndividual IRI="#Автобус_99"/>
+        <Literal>electric</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#Автобус_Минск"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#int">50</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasMaxSpeed"/>
+        <NamedIndividual IRI="#Автобус_Минск"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#int">60</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasRouteNumber"/>
+        <NamedIndividual IRI="#Автобус_Минск"/>
+        <Literal>100</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasStopsCount"/>
+        <NamedIndividual IRI="#Автобус_Минск"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#int">15</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasWheelCount"/>
+        <NamedIndividual IRI="#Автобус_Минск"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#int">6</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#usesFuelType"/>
+        <NamedIndividual IRI="#Автобус_Минск"/>
+        <Literal>diesel</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasLicenseNumber"/>
+        <NamedIndividual IRI="#Белавиа"/>
+        <Literal>BY-AV-001</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasName"/>
+        <NamedIndividual IRI="#Белавиа"/>
+        <Literal>Белавиа</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#Вертолет_МИ8"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">24</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasMaxAltitude"/>
+        <NamedIndividual IRI="#Вертолет_МИ8"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">4500</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasMaxSpeed"/>
+        <NamedIndividual IRI="#Вертолет_МИ8"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">250</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasRange"/>
+        <NamedIndividual IRI="#Вертолет_МИ8"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">600</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#usesFuelType"/>
+        <NamedIndividual IRI="#Вертолет_МИ8"/>
+        <Literal>kerosine</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#Вокзал_Центральный"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">5000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasLocation"/>
+        <NamedIndividual IRI="#Вокзал_Центральный"/>
+        <Literal>Минск</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasName"/>
+        <NamedIndividual IRI="#Вокзал_Центральный"/>
+        <Literal>Вокзал Центральный</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#Грузовик_БелАЗ"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#int">1</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasMaxSpeed"/>
+        <NamedIndividual IRI="#Грузовик_БелАЗ"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#int">40</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasWheelCount"/>
+        <NamedIndividual IRI="#Грузовик_БелАЗ"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#int">8</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#usesFuelType"/>
+        <NamedIndividual IRI="#Грузовик_БелАЗ"/>
+        <Literal>diesel</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#Легковой_автомобиль"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#int">5</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasMaxSpeed"/>
+        <NamedIndividual IRI="#Легковой_автомобиль"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#int">180</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasWheelCount"/>
+        <NamedIndividual IRI="#Легковой_автомобиль"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#int">4</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#usesFuelType"/>
+        <NamedIndividual IRI="#Легковой_автомобиль"/>
+        <Literal>petrol</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasLength"/>
+        <NamedIndividual IRI="#Минск_Гомель"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">10</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasLength"/>
+        <NamedIndividual IRI="#Минск_Гомель"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">310</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasName"/>
+        <NamedIndividual IRI="#Минск_Гомель"/>
+        <Literal>Минск-Гомель</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasLength"/>
+        <NamedIndividual IRI="#Минск_Москва"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">700</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasLocation"/>
+        <NamedIndividual IRI="#Минск_Москва"/>
+        <Literal>Минск-Москва</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasStopsCount"/>
+        <NamedIndividual IRI="#Минск_Москва"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">8</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasLicenseNumber"/>
+        <NamedIndividual IRI="#Минсктранс"/>
+        <Literal>BY-PT-010</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasName"/>
+        <NamedIndividual IRI="#Минсктранс"/>
+        <Literal>Минсктранс</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#Паром_Неман"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">80</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasDisplacement"/>
+        <NamedIndividual IRI="#Паром_Неман"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">3500</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasMaxSpeed"/>
+        <NamedIndividual IRI="#Паром_Неман"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">15</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#isSeaGoing"/>
+        <NamedIndividual IRI="#Паром_Неман"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">false</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#usesFuelType"/>
+        <NamedIndividual IRI="#Паром_Неман"/>
+        <Literal>diesel</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#Порт_Гданьск"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">50000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasLocation"/>
+        <NamedIndividual IRI="#Порт_Гданьск"/>
+        <Literal>Гданьск</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasName"/>
+        <NamedIndividual IRI="#Порт_Гданьск"/>
+        <Literal>Порт Гданьск</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#Самолет_Белавиа"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">180</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasMaxAltitude"/>
+        <NamedIndividual IRI="#Самолет_Белавиа"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">11000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasMaxSpeed"/>
+        <NamedIndividual IRI="#Самолет_Белавиа"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">800</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasRange"/>
+        <NamedIndividual IRI="#Самолет_Белавиа"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">5000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#usesFuelType"/>
+        <NamedIndividual IRI="#Самолет_Белавиа"/>
+        <Literal>kerosine</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#Танкер_Припять"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">0</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasDisplacement"/>
+        <NamedIndividual IRI="#Танкер_Припять"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">12000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasMaxSpeed"/>
+        <NamedIndividual IRI="#Танкер_Припять"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">18</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#isSeaGoing"/>
+        <NamedIndividual IRI="#Танкер_Припять"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#usesFuelType"/>
+        <NamedIndividual IRI="#Танкер_Припять"/>
+        <Literal>heavy fuel</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#Трамвай_1"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#int">120</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasMaxSpeed"/>
+        <NamedIndividual IRI="#Трамвай_1"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#int">50</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasRouteNumber"/>
+        <NamedIndividual IRI="#Трамвай_1"/>
+        <Literal>3</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasStopsCount"/>
+        <NamedIndividual IRI="#Трамвай_1"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#int">20</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasWheelCount"/>
+        <NamedIndividual IRI="#Трамвай_1"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#int">8</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#usesFuelType"/>
+        <NamedIndividual IRI="#Трамвай_1"/>
+        <Literal>electric</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCapacity"/>
+        <NamedIndividual IRI="#Электропоезд_ЭПр"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">400</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasCarCount"/>
+        <NamedIndividual IRI="#Электропоезд_ЭПр"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">8</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasMaxSpeed"/>
+        <NamedIndividual IRI="#Электропоезд_ЭПр"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">160</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasTrackGauge"/>
+        <NamedIndividual IRI="#Электропоезд_ЭПр"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">1.52</Literal>
+    </DataPropertyAssertion>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#carries"/>
+        <Class IRI="#TransportVehicle"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#locatedAt"/>
+        <Class IRI="#Cargo"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#locatedAt"/>
+        <Class IRI="#Operator"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#locatedAt"/>
+        <Class IRI="#TransportVehicle"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#operates"/>
+        <Class IRI="#Operator"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#servesRoute"/>
+        <Class IRI="#PublicTransport"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#servesRoute"/>
+        <Class IRI="#TransportVehicle"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#carries"/>
+        <Class IRI="#Cargo"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#locatedAt"/>
+        <Class IRI="#Infrastructure"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#operates"/>
+        <Class IRI="#TransportVehicle"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#servesRoute"/>
+        <Class IRI="#Route"/>
+    </ObjectPropertyRange>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasCapacity"/>
+        <Class IRI="#Infrastructure"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasCapacity"/>
+        <Class IRI="#TransportVehicle"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasCarCount"/>
+        <Class IRI="#RailTransport"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasDisplacement"/>
+        <Class IRI="#WaterTransport"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasLength"/>
+        <Class IRI="#Route"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasLicenseNumber"/>
+        <Class IRI="#Operator"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasLocation"/>
+        <Class IRI="#Infrastructure"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasLocation"/>
+        <Class IRI="#Route"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasMaxAltitude"/>
+        <Class IRI="#AirTransport"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasMaxSpeed"/>
+        <Class IRI="#AirTransport"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasMaxSpeed"/>
+        <Class IRI="#LandTransport"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasMaxSpeed"/>
+        <Class IRI="#TransportVehicle"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasName"/>
+        <Class IRI="#Infrastructure"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasName"/>
+        <Class IRI="#Operator"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasRange"/>
+        <Class IRI="#AirTransport"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasRange"/>
+        <Class IRI="#TransportVehicle"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasRouteNumber"/>
+        <Class IRI="#PublicTransport"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasRouteNumber"/>
+        <Class IRI="#Route"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasStopsCount"/>
+        <Class IRI="#PublicTransport"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasStopsCount"/>
+        <Class IRI="#Route"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasTrackGauge"/>
+        <Class IRI="#RailTransport"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasType"/>
+        <Class IRI="#Cargo"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasType"/>
+        <Class IRI="#TransportVehicle"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasWeight"/>
+        <Class IRI="#Cargo"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasWheelCount"/>
+        <Class IRI="#LandTransport"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#isSeaGoing"/>
+        <Class IRI="#WaterTransport"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#usesFuelType"/>
+        <Class IRI="#AirTransport"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#usesFuelType"/>
+        <Class IRI="#LandTransport"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#usesFuelType"/>
+        <Class IRI="#WaterTransport"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasCapacity"/>
+        <Datatype abbreviatedIRI="xsd:decimal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasDisplacement"/>
+        <Datatype abbreviatedIRI="xsd:decimal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasLength"/>
+        <Datatype abbreviatedIRI="xsd:decimal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasLicenseNumber"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasLocation"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasMaxAltitude"/>
+        <Datatype abbreviatedIRI="xsd:decimal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasMaxSpeed"/>
+        <Datatype abbreviatedIRI="xsd:decimal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasName"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasRange"/>
+        <Datatype abbreviatedIRI="xsd:decimal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasRouteNumber"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasStopsCount"/>
+        <Datatype abbreviatedIRI="xsd:decimal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasTrackGauge"/>
+        <Datatype abbreviatedIRI="xsd:decimal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasType"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasWeight"/>
+        <Datatype abbreviatedIRI="xsd:decimal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasWheelCount"/>
+        <Datatype abbreviatedIRI="xsd:decimal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#isSeaGoing"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#usesFuelType"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
+
